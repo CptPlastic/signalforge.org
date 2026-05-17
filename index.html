@@ -73,6 +73,33 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 45% at 50% 28%, rgba(255,255,255,0.04) 0%, transparent 58%),
+        radial-gradient(ellipse 90% 55% at 50% 86%, rgba(0,255,65,0.045) 0%, transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%);
+    }
+    .storm-bg::before,
+    .storm-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .storm-bg::before {
+      z-index: 2;
+      background:
+        linear-gradient(115deg, transparent 0 46%, rgba(0,255,65,0.04) 47%, transparent 49% 100%),
+        repeating-linear-gradient(105deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 18px);
+      opacity: 0.28;
+      transform: translate3d(0, -8%, 0);
+      animation: rain-sheen 16s linear infinite;
+      mix-blend-mode: screen;
+    }
+    .storm-bg::after {
+      z-index: 4;
+      background:
+        radial-gradient(ellipse 65% 42% at 50% 45%, transparent 0%, rgba(0,0,0,0.12) 62%, rgba(0,0,0,0.58) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.28) 0%, transparent 34%, rgba(0,0,0,0.3) 100%);
     }
     .cloud {
       position: absolute;
@@ -81,6 +108,7 @@
       top: 0;
       left: 0;
       will-change: transform;
+      z-index: 1;
     }
     .cloud-1 {
       background:
@@ -117,8 +145,45 @@
     .storm-flash {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,255,65,0.03) 0%, transparent 70%);
+      z-index: 3;
+      background:
+        radial-gradient(ellipse 36% 28% at 68% 22%, rgba(0,255,65,0.12) 0%, transparent 72%),
+        radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,255,65,0.04) 0%, transparent 70%);
       animation: flicker 8s ease-in-out infinite;
+    }
+    .lightning {
+      position: absolute;
+      z-index: 3;
+      top: 0;
+      width: 120px;
+      height: 270px;
+      opacity: 0;
+      filter: drop-shadow(0 0 8px rgba(0,255,65,0.55)) drop-shadow(0 0 24px rgba(0,255,65,0.18));
+      transform-origin: top center;
+      animation: lightning-strike 8s ease-in-out infinite;
+    }
+    .lightning::before,
+    .lightning::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(0,255,65,0.8) 48%, rgba(0,255,65,0));
+      clip-path: polygon(52% 0, 46% 31%, 57% 31%, 39% 64%, 50% 50%, 43% 100%, 66% 43%, 55% 43%, 69% 0);
+    }
+    .lightning::after {
+      opacity: 0.35;
+      filter: blur(8px);
+      transform: scaleX(1.55);
+    }
+    .lightning-a {
+      right: 18%;
+      transform: rotate(9deg) scale(0.86);
+    }
+    .lightning-b {
+      left: 17%;
+      top: 12%;
+      transform: rotate(-12deg) scale(0.55);
+      animation-delay: 3.1s;
     }
 
     @keyframes drift-r {
@@ -129,6 +194,10 @@
       0%   { transform: translateX(-50%); }
       100% { transform: translateX(0); }
     }
+    @keyframes rain-sheen {
+      0%   { transform: translate3d(0, -8%, 0); }
+      100% { transform: translate3d(-6%, 8%, 0); }
+    }
     @keyframes flicker {
       0%, 100% { opacity: 0; }
       48%       { opacity: 0; }
@@ -137,6 +206,13 @@
       78%       { opacity: 0; }
       79%       { opacity: 0.6; }
       80%       { opacity: 0; }
+    }
+    @keyframes lightning-strike {
+      0%, 47%, 51%, 100% { opacity: 0; }
+      48% { opacity: 0.85; }
+      48.8% { opacity: 0.16; }
+      49.4% { opacity: 0.95; }
+      50.5% { opacity: 0; }
     }
 
     /* Hero content sits above cloud layers */
@@ -345,7 +421,8 @@
     .footer-brand { color: var(--green); font-weight: 700; margin-bottom: 0.4rem; font-size: 0.85rem; }
 
     @media (prefers-reduced-motion: reduce) {
-      .cloud, .storm-flash { animation: none; }
+      .cloud, .storm-flash, .storm-bg::before, .lightning { animation: none; }
+      .lightning { display: none; }
     }
     @media (max-width: 500px) {
       nav .nav-links { display: none; }
@@ -372,6 +449,8 @@
       <div class="cloud cloud-2"></div>
       <div class="cloud cloud-3"></div>
       <div class="cloud cloud-4"></div>
+      <div class="lightning lightning-a"></div>
+      <div class="lightning lightning-b"></div>
       <div class="storm-flash"></div>
     </div>
 
