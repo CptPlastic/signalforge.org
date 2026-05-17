@@ -147,9 +147,9 @@
       inset: 0;
       z-index: 3;
       background:
-        radial-gradient(ellipse 36% 28% at 68% 22%, rgba(0,255,65,0.075) 0%, transparent 72%),
-        radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,255,65,0.025) 0%, transparent 70%);
-      animation: flicker 8s ease-in-out infinite;
+        radial-gradient(ellipse 36% 22% at 72% 21%, rgba(0,255,65,0.055) 0%, transparent 72%),
+        radial-gradient(ellipse 44% 26% at 26% 25%, rgba(0,255,65,0.045) 0%, transparent 74%);
+      animation: flicker 12s ease-in-out infinite;
     }
     .electric-field {
       position: absolute;
@@ -159,61 +159,32 @@
       height: 100%;
       opacity: 0.9;
       mix-blend-mode: screen;
-      filter: drop-shadow(0 0 5px rgba(0,255,65,0.4)) drop-shadow(0 0 18px rgba(0,255,65,0.14));
+      filter: drop-shadow(0 0 3px rgba(255,255,255,0.42)) drop-shadow(0 0 14px rgba(0,255,65,0.32)) drop-shadow(0 0 32px rgba(0,255,65,0.12));
     }
     .electric-field path {
       fill: none;
-      stroke: rgba(0,255,65,0.78);
-      stroke-width: 1.25;
+      stroke: rgba(170,255,190,0.9);
+      stroke-width: 1.15;
       stroke-linecap: round;
       stroke-linejoin: round;
-      stroke-dasharray: 18 120;
-      stroke-dashoffset: 150;
+      stroke-dasharray: 0 920;
+      stroke-dashoffset: 0;
       opacity: 0;
-      animation: electric-arc 8s ease-in-out infinite;
+      animation: cloud-trace 12s ease-in-out infinite;
     }
-    .electric-field .arc-soft {
-      stroke: rgba(255,255,255,0.56);
-      stroke-width: 0.75;
+    .electric-field .trace-glow {
+      stroke: rgba(0,255,65,0.32);
+      stroke-width: 5;
+      filter: blur(4px);
     }
-    .electric-field .arc-2 { animation-delay: 0.08s; }
-    .electric-field .arc-3 { animation-delay: 3.08s; }
-    .electric-field .arc-4 { animation-delay: 3.16s; }
-    .lightning {
-      position: absolute;
-      z-index: 3;
-      top: 0;
-      width: 120px;
-      height: 270px;
-      opacity: 0;
-      filter: drop-shadow(0 0 8px rgba(0,255,65,0.55)) drop-shadow(0 0 24px rgba(0,255,65,0.18));
-      transform-origin: top center;
-      animation: lightning-strike 8s ease-in-out infinite;
+    .electric-field .trace-soft {
+      stroke: rgba(255,255,255,0.72);
+      stroke-width: 0.7;
     }
-    .lightning::before,
-    .lightning::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(0,255,65,0.8) 48%, rgba(0,255,65,0));
-      clip-path: polygon(52% 0, 46% 31%, 57% 31%, 39% 64%, 50% 50%, 43% 100%, 66% 43%, 55% 43%, 69% 0);
-    }
-    .lightning::after {
-      opacity: 0.35;
-      filter: blur(8px);
-      transform: scaleX(1.55);
-    }
-    .lightning-a {
-      right: 18%;
-      transform: rotate(9deg) scale(0.86);
-    }
-    .lightning-b {
-      left: 17%;
-      top: 12%;
-      transform: rotate(-12deg) scale(0.55);
-      animation-delay: 3.1s;
-    }
-
+    .electric-field .trace-2 { animation-delay: 0.18s; }
+    .electric-field .trace-3 { animation-delay: 5.7s; }
+    .electric-field .trace-4 { animation-delay: 5.86s; }
+    .electric-field .trace-5 { animation-delay: 8.4s; }
     @keyframes drift-r {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -228,28 +199,20 @@
     }
     @keyframes flicker {
       0%, 100% { opacity: 0; }
-      48%       { opacity: 0; }
-      50%       { opacity: 0.58; }
-      52%       { opacity: 0; }
-      78%       { opacity: 0; }
-      79%       { opacity: 0.34; }
-      80%       { opacity: 0; }
+      44%       { opacity: 0; }
+      48%       { opacity: 0.42; }
+      54%       { opacity: 0; }
+      71%       { opacity: 0; }
+      74%       { opacity: 0.28; }
+      77%       { opacity: 0; }
     }
-    @keyframes electric-arc {
-      0%, 46%, 51%, 100% { opacity: 0; stroke-dashoffset: 150; }
-      47.8% { opacity: 0.82; stroke-dashoffset: 92; }
-      48.7% { opacity: 0.18; stroke-dashoffset: 54; }
-      49.5% { opacity: 0.95; stroke-dashoffset: 18; }
-      50.5% { opacity: 0; stroke-dashoffset: -12; }
+    @keyframes cloud-trace {
+      0%, 39%, 58%, 100% { opacity: 0; stroke-dasharray: 0 920; }
+      43% { opacity: 0.1; stroke-dasharray: 28 920; }
+      47% { opacity: 0.9; stroke-dasharray: 220 920; }
+      52% { opacity: 0.72; stroke-dasharray: 390 920; }
+      56% { opacity: 0; stroke-dasharray: 470 920; }
     }
-    @keyframes lightning-strike {
-      0%, 47%, 51%, 100% { opacity: 0; }
-      48% { opacity: 0.85; }
-      48.8% { opacity: 0.16; }
-      49.4% { opacity: 0.95; }
-      50.5% { opacity: 0; }
-    }
-
     /* Hero content sits above cloud layers */
     .hero-content {
       position: relative;
@@ -456,8 +419,8 @@
     .footer-brand { color: var(--green); font-weight: 700; margin-bottom: 0.4rem; font-size: 0.85rem; }
 
     @media (prefers-reduced-motion: reduce) {
-      .cloud, .storm-flash, .storm-bg::before, .lightning, .electric-field path { animation: none; }
-      .lightning, .electric-field { display: none; }
+      .cloud, .storm-flash, .storm-bg::before, .electric-field path { animation: none; }
+      .electric-field { display: none; }
     }
     @media (max-width: 500px) {
       nav .nav-links { display: none; }
@@ -484,13 +447,12 @@
       <div class="cloud cloud-2"></div>
       <div class="cloud cloud-3"></div>
       <div class="cloud cloud-4"></div>
-      <div class="lightning lightning-a"></div>
-      <div class="lightning lightning-b"></div>
       <svg class="electric-field" viewBox="0 0 1200 700" preserveAspectRatio="none">
-        <path class="arc-1" d="M720 62 C742 86 772 70 792 96 S844 118 872 92"/>
-        <path class="arc-2 arc-soft" d="M774 132 C800 108 824 142 852 118 S906 104 932 130"/>
-        <path class="arc-3" d="M185 124 C215 92 244 126 272 96 S330 84 360 116"/>
-        <path class="arc-4 arc-soft" d="M128 212 C160 184 190 222 224 198 S286 178 318 204"/>
+        <path class="trace-1 trace-glow" d="M20 170 C52 124 102 150 132 96 C158 52 222 74 246 34 C270 -4 334 20 344 70 C352 112 410 94 430 132 C454 174 516 142 542 190 C568 236 628 198 656 238"/>
+        <path class="trace-2" d="M20 170 C52 124 102 150 132 96 C158 52 222 74 246 34 C270 -4 334 20 344 70 C352 112 410 94 430 132 C454 174 516 142 542 190 C568 236 628 198 656 238"/>
+        <path class="trace-3 trace-glow" d="M746 116 C792 74 838 114 864 58 C890 6 960 40 970 92 C978 132 1038 94 1060 144 C1076 184 1138 168 1166 216 C1188 254 1236 232 1264 272"/>
+        <path class="trace-4" d="M746 116 C792 74 838 114 864 58 C890 6 960 40 970 92 C978 132 1038 94 1060 144 C1076 184 1138 168 1166 216 C1188 254 1236 232 1264 272"/>
+        <path class="trace-5 trace-soft" d="M322 250 C366 208 408 244 450 210 C494 174 538 210 574 178 C618 138 674 162 706 120 C742 74 798 94 822 54"/>
       </svg>
       <div class="storm-flash"></div>
     </div>
