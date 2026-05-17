@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SignalForge — community-powered radio monitoring for Yukon, Oklahoma and beyond. No towers required. Just people." />
+  <title>SignalForge — Yukon's Voice in the Storm</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0b1a27;
+      --bg2:      #0f2135;
+      --cream:    #e4dcd0;
+      --cream-dim:#9a9080;
+      --cyan:     #3dcfcf;
+      --cyan-dim: #1e8888;
+      --border:   #1c3347;
+      --red:      #c44;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Courier New', Courier, monospace;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 26, 39, 0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.65rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    nav .nav-brand { color: var(--cyan); font-weight: 700; }
+    nav .nav-links { display: flex; gap: 1.5rem; }
+    nav a { color: var(--cream-dim); text-decoration: none; transition: color 0.15s; }
+    nav a:hover { color: var(--cream); }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-logo {
+      width: min(220px, 55vw);
+      height: auto;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+    .hero-logo-fallback {
+      width: min(180px, 50vw);
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 8vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.05;
+    }
+    .hero-sub {
+      margin-top: 0.6rem;
+      font-size: clamp(0.75rem, 2.5vw, 0.92rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+    .hero-desc {
+      margin-top: 1.6rem;
+      max-width: 540px;
+      font-size: 0.92rem;
+      color: var(--cream-dim);
+      line-height: 1.75;
+    }
+    .hero-cta {
+      margin-top: 2rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.4rem;
+      font-family: inherit;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .btn-primary {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: var(--bg);
+      font-weight: 700;
+    }
+    .btn-primary:hover { background: #5ee; border-color: #5ee; }
+    .btn-ghost {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--cream-dim);
+    }
+    .btn-ghost:hover { border-color: var(--cream-dim); color: var(--cream); }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cyan-dim);
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-size: clamp(1.3rem, 4vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 1.2rem;
+    }
+    p { color: var(--cream-dim); font-size: 0.92rem; margin-bottom: 0.9rem; }
+    p strong { color: var(--cream); }
+
+    /* ── MISSION CALLOUT ── */
+    .callout {
+      border-left: 3px solid var(--cyan);
+      padding: 1rem 1.25rem;
+      background: var(--bg2);
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+      color: var(--cream);
+      line-height: 1.7;
+    }
+
+    /* ── PILLARS ── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 1.5rem;
+    }
+    .pillar {
+      background: var(--bg2);
+      padding: 1.25rem 1rem;
+    }
+    .pillar-icon { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--cyan); }
+    .pillar-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+    .pillar p { font-size: 0.8rem; margin-bottom: 0; }
+
+    /* ── DOWNLOADS ── */
+    .dl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 0.5rem;
+      margin: 1.5rem 0 1rem;
+    }
+    .dl-btn {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1.1rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      text-decoration: none;
+      font-family: inherit;
+      transition: border-color 0.15s;
+      cursor: pointer;
+    }
+    .dl-btn:hover { border-color: var(--cyan); }
+    .dl-btn .dl-platform { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .dl-btn .dl-file { font-size: 0.75rem; color: var(--cream-dim); margin-top: 0.3rem; word-break: break-all; }
+    .dl-status { font-size: 0.78rem; color: var(--cream-dim); }
+    .dl-status.error { color: var(--red); }
+    .dl-version { font-size: 0.75rem; color: var(--cream-dim); }
+    .dl-version a { color: var(--cream-dim); text-decoration: underline; }
+    .dl-version a:hover { color: var(--cream); }
+
+    /* ── SETUP STEPS ── */
+    .steps { margin-top: 1.25rem; counter-reset: step; display: flex; flex-direction: column; gap: 0.5rem; }
+    .step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.85rem 1rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--cream-dim);
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--cyan-dim);
+      color: var(--cyan);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .step strong { color: var(--cream); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      color: var(--cream-dim);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--cream-dim); text-decoration: none; }
+    footer a:hover { color: var(--cream); }
+    .footer-brand { color: var(--cyan); font-weight: 700; margin-bottom: 0.4rem; font-size: 0.85rem; }
+
+    @media (max-width: 500px) {
+      nav .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-brand">SignalForge</span>
+    <div class="nav-links">
+      <a href="#mission">Mission</a>
+      <a href="#recorder">Recorder</a>
+      <a href="#network">Network</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img
+      src="logo.png"
+      alt="SignalForge Yukon badge"
+      class="hero-logo"
+      onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';"
+    />
+    <!-- SVG fallback if logo.png is missing -->
+    <svg id="logo-fallback" class="hero-logo-fallback" style="display:none;" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="58" stroke="#3dcfcf" stroke-width="1.5" fill="none"/>
+      <line x1="60" y1="20" x2="60" y2="80" stroke="#3dcfcf" stroke-width="1.5"/>
+      <line x1="60" y1="40" x2="40" y2="60" stroke="#3dcfcf" stroke-width="1.5"/>
+      <line x1="60" y1="40" x2="80" y2="60" stroke="#3dcfcf" stroke-width="1.5"/>
+      <line x1="60" y1="55" x2="45" y2="75" stroke="#3dcfcf" stroke-width="1.5"/>
+      <line x1="60" y1="55" x2="75" y2="75" stroke="#3dcfcf" stroke-width="1.5"/>
+      <line x1="45" y1="75" x2="75" y2="75" stroke="#3dcfcf" stroke-width="1"/>
+      <line x1="60" y1="75" x2="60" y2="90" stroke="#3dcfcf" stroke-width="1.5"/>
+      <path d="M46 28 Q60 18 74 28" stroke="#3dcfcf" stroke-width="1" fill="none" opacity="0.6"/>
+      <path d="M38 22 Q60 8 82 22" stroke="#3dcfcf" stroke-width="1" fill="none" opacity="0.35"/>
+    </svg>
+
+    <h1>SignalForge</h1>
+    <div class="hero-sub">Yukon's Voice in the Storm</div>
+    <p class="hero-desc">
+      Community-powered radio monitoring for Yukon, Oklahoma and beyond.
+      No towers. No licenses. No gatekeepers.
+      Just people keeping the signal alive.
+    </p>
+    <div class="hero-cta">
+      <a href="#recorder" class="btn btn-primary">Download P7 Recorder</a>
+      <a href="#mission" class="btn btn-ghost">Our Mission</a>
+    </div>
+  </div>
+
+  <!-- MISSION -->
+  <section id="mission">
+    <div class="section-label">// origin</div>
+    <h2>Why We're Here</h2>
+    <p>
+      This started with a simple idea: Yukon deserved a <strong>public GMRS repeater</strong>
+      — a reliable community radio hub that would keep neighborhoods connected when cell
+      towers go dark and power grids fail. We put together the proposal, found the tower,
+      reached out to the city.
+    </p>
+    <p>
+      The city didn't answer. The tower owner went quiet. The project stalled.
+    </p>
+    <div class="callout">
+      Getting ghosted didn't kill the idea. It sharpened it.
+      If we couldn't own the infrastructure, we'd build something that
+      didn't need it.
+    </div>
+    <p>
+      <strong>P7 Scanner</strong> is what came next — a software-defined radio monitoring
+      platform where community members contribute their own SDR hardware as ingestion
+      sources. No tower lease. No $5,800 equipment budget. No waiting on a committee.
+      Every person who runs a scanner node expands the network.
+    </p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">&#9650;</div>
+        <div class="pillar-title">No Infrastructure Required</div>
+        <p>Distributed architecture. If you have an SDR dongle, you're a node.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">&#9670;</div>
+        <div class="pillar-title">Community Owned</div>
+        <p>Every contributor shapes the network. No single point of control.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">&#9632;</div>
+        <div class="pillar-title">Always Resilient</div>
+        <p>Built for the moments when conventional systems go silent.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECORDER DOWNLOAD -->
+  <section id="recorder">
+    <div class="section-label">// download</div>
+    <h2>P7 Recorder</h2>
+    <p>
+      P7 Recorder is the desktop client that connects your local radio hardware to the
+      P7 Scanner network. Run it on any machine with an SDR device attached and start
+      contributing audio to your community's feed.
+    </p>
+
+    <div id="dl-grid" class="dl-grid">
+      <span class="dl-status">fetching latest release...</span>
+    </div>
+    <div class="dl-version" id="dl-version"></div>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <span>Download the installer for your platform above.</span>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <span>Connect your SDR hardware (RTL-SDR, HackRF, or compatible device).</span>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span>Configure your <strong>source key</strong> from your P7 Scanner instance and start scanning.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- NETWORK -->
+  <section id="network">
+    <div class="section-label">// the vision</div>
+    <h2>The Network</h2>
+    <p>
+      The original goal was a repeater at every Yukon landmark — a cohesive signal network
+      stitched across the city. The hardware approach hit walls. The software approach has no walls.
+    </p>
+    <p>
+      Every P7 Scanner instance is a node. Every recorder running is a signal source.
+      Contributors in Yukon, in OKC, anywhere — each one extends the reach of the network
+      without a single piece of shared infrastructure.
+    </p>
+    <div class="callout">
+      The city didn't give us the tower. So we built something that doesn't need one.
+    </div>
+    <p>
+      If you want to contribute a scanner node, run the recorder and reach out.
+      SignalForge is community infrastructure — and you're the infrastructure.
+    </p>
+    <div style="margin-top: 1.5rem;">
+      <a href="mailto:info@projectseven.us" class="btn btn-ghost">Get Involved</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">SignalForge</div>
+    <div>Yukon, Oklahoma &mdash; Project Seven</div>
+    <div style="margin-top: 0.5rem;">
+      <a href="mailto:info@projectseven.us">info@projectseven.us</a>
+    </div>
+  </footer>
+
+  <script>
+    const RELEASES_REPO = 'CptPlastic/signalforge.org';
+
+    const PLATFORMS = [
+      { key: 'windows', label: 'Windows', hint: '.zip' },
+      { key: 'macos',   label: 'macOS',   hint: '.zip' },
+      { key: 'linux',   label: 'Linux',   hint: '.tar.gz' },
+    ];
+
+    async function loadRelease() {
+      const grid = document.getElementById('dl-grid');
+      const ver  = document.getElementById('dl-version');
+      try {
+        const res = await fetch(
+          `https://api.github.com/repos/${RELEASES_REPO}/releases/latest`,
+          { headers: { Accept: 'application/vnd.github+json' } }
+        );
+        if (!res.ok) throw new Error(res.status);
+        const release = await res.json();
+
+        const btns = PLATFORMS.map(p => {
+          const asset = (release.assets || []).find(a => a.name.includes(p.key));
+          if (!asset) return '';
+          return `<a class="dl-btn" href="${asset.browser_download_url}" rel="noopener noreferrer">
+            <span class="dl-platform">${p.label}</span>
+            <span class="dl-file">${asset.name}</span>
+          </a>`;
+        }).filter(Boolean).join('');
+
+        grid.innerHTML = btns || `<span class="dl-status error">no assets found</span>`;
+        ver.innerHTML  = `latest &mdash; <a href="${release.html_url}" target="_blank" rel="noopener noreferrer">${release.tag_name}</a>`;
+      } catch {
+        grid.innerHTML = `<span class="dl-status error">could not load release info &mdash; check back soon</span>`;
+      }
+    }
+
+    loadRelease();
+  </script>
+
+</body>
+</html>
