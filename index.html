@@ -4,27 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="SignalForge — community-powered radio monitoring for Yukon, Oklahoma and beyond. No towers required. Just people." />
-  <title>SignalForge — Yukon's Voice in the Storm</title>
+  <title>SignalForge — Voice in the Storm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #0b1a27;
-      --bg2:      #0f2135;
-      --cream:    #e4dcd0;
-      --cream-dim:#9a9080;
-      --cyan:     #3dcfcf;
-      --cyan-dim: #1e8888;
-      --border:   #1c3347;
-      --red:      #c44;
+      --bg:        #0a0a0a;
+      --bg2:       #111111;
+      --text:      #c9c9c9;
+      --muted:     #555555;
+      --green:     #00ff41;
+      --green-dim: #006620;
+      --border:    #1f1f1f;
+      --red:       #ff4444;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
-      color: var(--cream);
-      font-family: 'Courier New', Courier, monospace;
+      color: var(--text);
+      font-family: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
       min-height: 100vh;
       line-height: 1.6;
     }
@@ -34,7 +37,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(11, 26, 39, 0.92);
+      background: rgba(10, 10, 10, 0.92);
       backdrop-filter: blur(6px);
       border-bottom: 1px solid var(--border);
       padding: 0.65rem 2rem;
@@ -45,13 +48,14 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
-    nav .nav-brand { color: var(--cyan); font-weight: 700; }
+    nav .nav-brand { color: var(--green); font-weight: 700; }
     nav .nav-links { display: flex; gap: 1.5rem; }
-    nav a { color: var(--cream-dim); text-decoration: none; transition: color 0.15s; }
-    nav a:hover { color: var(--cream); }
+    nav a { color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    nav a:hover { color: var(--text); }
 
     /* ── HERO ── */
     .hero {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -59,15 +63,100 @@
       text-align: center;
       padding: 5rem 1.5rem 4rem;
       border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      min-height: 75vh;
     }
+
+    /* Storm cloud layers */
+    .storm-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .cloud {
+      position: absolute;
+      width: 200%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      will-change: transform;
+    }
+    .cloud-1 {
+      background:
+        radial-gradient(ellipse 700px 320px at 15% 35%, #1c1c1c 0%, transparent 65%),
+        radial-gradient(ellipse 500px 240px at 60% 55%, #161616 0%, transparent 60%),
+        radial-gradient(ellipse 600px 280px at 88% 25%, #1a1a1a 0%, transparent 65%);
+      opacity: 0.85;
+      animation: drift-r 42s linear infinite;
+    }
+    .cloud-2 {
+      background:
+        radial-gradient(ellipse 800px 350px at 30% 60%, #222 0%, transparent 60%),
+        radial-gradient(ellipse 450px 200px at 75% 40%, #1e1e1e 0%, transparent 55%),
+        radial-gradient(ellipse 550px 260px at 5% 80%, #191919 0%, transparent 65%);
+      opacity: 0.7;
+      animation: drift-l 60s linear infinite;
+    }
+    .cloud-3 {
+      background:
+        radial-gradient(ellipse 900px 400px at 50% 30%, #181818 0%, transparent 55%),
+        radial-gradient(ellipse 400px 200px at 20% 70%, #202020 0%, transparent 60%),
+        radial-gradient(ellipse 600px 300px at 80% 65%, #1b1b1b 0%, transparent 60%);
+      opacity: 0.55;
+      animation: drift-r 80s linear infinite reverse;
+    }
+    .cloud-4 {
+      background:
+        radial-gradient(ellipse 1000px 450px at 40% 50%, #141414 0%, transparent 50%),
+        radial-gradient(ellipse 350px 180px at 85% 30%, #1d1d1d 0%, transparent 60%);
+      opacity: 0.4;
+      animation: drift-l 100s linear infinite;
+    }
+    /* Very subtle green-tinted lightning flash layer */
+    .storm-flash {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,255,65,0.03) 0%, transparent 70%);
+      animation: flicker 8s ease-in-out infinite;
+    }
+
+    @keyframes drift-r {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes drift-l {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 0; }
+      48%       { opacity: 0; }
+      50%       { opacity: 1; }
+      52%       { opacity: 0; }
+      78%       { opacity: 0; }
+      79%       { opacity: 0.6; }
+      80%       { opacity: 0; }
+    }
+
+    /* Hero content sits above cloud layers */
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .hero-logo {
-      width: min(220px, 55vw);
+      width: min(200px, 50vw);
       height: auto;
       margin-bottom: 2rem;
       opacity: 0.95;
+      filter: drop-shadow(0 0 18px rgba(0,255,65,0.15));
     }
     .hero-logo-fallback {
-      width: min(180px, 50vw);
+      width: min(160px, 45vw);
       margin-bottom: 2rem;
     }
     .hero h1 {
@@ -77,20 +166,21 @@
       text-transform: uppercase;
       color: #fff;
       line-height: 1.05;
+      text-shadow: 0 0 40px rgba(0,255,65,0.12);
     }
     .hero-sub {
       margin-top: 0.6rem;
-      font-size: clamp(0.75rem, 2.5vw, 0.92rem);
-      letter-spacing: 0.3em;
+      font-size: clamp(0.72rem, 2.2vw, 0.88rem);
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: var(--cyan);
+      color: var(--green);
     }
     .hero-desc {
       margin-top: 1.6rem;
-      max-width: 540px;
-      font-size: 0.92rem;
-      color: var(--cream-dim);
-      line-height: 1.75;
+      max-width: 520px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.8;
     }
     .hero-cta {
       margin-top: 2rem;
@@ -109,21 +199,25 @@
       text-decoration: none;
       cursor: pointer;
       border: 1px solid;
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
     }
     .btn-primary {
-      background: var(--cyan);
-      border-color: var(--cyan);
-      color: var(--bg);
+      background: var(--green);
+      border-color: var(--green);
+      color: #0a0a0a;
       font-weight: 700;
     }
-    .btn-primary:hover { background: #5ee; border-color: #5ee; }
+    .btn-primary:hover {
+      background: #33ff66;
+      border-color: #33ff66;
+      box-shadow: 0 0 16px rgba(0,255,65,0.3);
+    }
     .btn-ghost {
       background: transparent;
       border-color: var(--border);
-      color: var(--cream-dim);
+      color: var(--muted);
     }
-    .btn-ghost:hover { border-color: var(--cream-dim); color: var(--cream); }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
 
     /* ── SECTIONS ── */
     section {
@@ -138,7 +232,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--cyan-dim);
+      color: var(--green-dim);
       margin-bottom: 0.6rem;
     }
     h2 {
@@ -149,17 +243,17 @@
       color: #fff;
       margin-bottom: 1.2rem;
     }
-    p { color: var(--cream-dim); font-size: 0.92rem; margin-bottom: 0.9rem; }
-    p strong { color: var(--cream); }
+    p { color: var(--muted); font-size: 0.92rem; margin-bottom: 0.9rem; }
+    p strong { color: var(--text); }
 
     /* ── MISSION CALLOUT ── */
     .callout {
-      border-left: 3px solid var(--cyan);
+      border-left: 3px solid var(--green);
       padding: 1rem 1.25rem;
       background: var(--bg2);
       margin: 1.5rem 0;
       font-size: 0.9rem;
-      color: var(--cream);
+      color: var(--text);
       line-height: 1.7;
     }
 
@@ -176,13 +270,13 @@
       background: var(--bg2);
       padding: 1.25rem 1rem;
     }
-    .pillar-icon { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--cyan); }
+    .pillar-icon { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--green); }
     .pillar-title {
       font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--cream);
+      color: var(--text);
       margin-bottom: 0.4rem;
     }
     .pillar p { font-size: 0.8rem; margin-bottom: 0; }
@@ -200,23 +294,23 @@
       padding: 1rem 1.1rem;
       background: var(--bg2);
       border: 1px solid var(--border);
-      color: var(--cream);
+      color: var(--text);
       text-decoration: none;
       font-family: inherit;
-      transition: border-color 0.15s;
+      transition: border-color 0.15s, box-shadow 0.15s;
       cursor: pointer;
     }
-    .dl-btn:hover { border-color: var(--cyan); }
-    .dl-btn .dl-platform { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-    .dl-btn .dl-file { font-size: 0.75rem; color: var(--cream-dim); margin-top: 0.3rem; word-break: break-all; }
-    .dl-status { font-size: 0.78rem; color: var(--cream-dim); }
+    .dl-btn:hover { border-color: var(--green); box-shadow: 0 0 10px rgba(0,255,65,0.1); }
+    .dl-btn .dl-platform { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
+    .dl-btn .dl-file { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; word-break: break-all; }
+    .dl-status { font-size: 0.78rem; color: var(--muted); }
     .dl-status.error { color: var(--red); }
-    .dl-version { font-size: 0.75rem; color: var(--cream-dim); }
-    .dl-version a { color: var(--cream-dim); text-decoration: underline; }
-    .dl-version a:hover { color: var(--cream); }
+    .dl-version { font-size: 0.75rem; color: var(--muted); }
+    .dl-version a { color: var(--muted); text-decoration: underline; }
+    .dl-version a:hover { color: var(--text); }
 
     /* ── SETUP STEPS ── */
-    .steps { margin-top: 1.25rem; counter-reset: step; display: flex; flex-direction: column; gap: 0.5rem; }
+    .steps { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
     .step {
       display: flex;
       gap: 1rem;
@@ -225,7 +319,7 @@
       background: var(--bg2);
       border: 1px solid var(--border);
       font-size: 0.85rem;
-      color: var(--cream-dim);
+      color: var(--muted);
     }
     .step-num {
       flex-shrink: 0;
@@ -234,12 +328,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--cyan-dim);
-      color: var(--cyan);
+      border: 1px solid var(--green-dim);
+      color: var(--green);
       font-size: 0.75rem;
       font-weight: 700;
     }
-    .step strong { color: var(--cream); }
+    .step strong { color: var(--text); }
 
     /* ── FOOTER ── */
     footer {
@@ -247,13 +341,16 @@
       padding: 2.5rem 1.5rem;
       font-size: 0.75rem;
       letter-spacing: 0.12em;
-      color: var(--cream-dim);
+      color: var(--muted);
       border-top: 1px solid var(--border);
     }
-    footer a { color: var(--cream-dim); text-decoration: none; }
-    footer a:hover { color: var(--cream); }
-    .footer-brand { color: var(--cyan); font-weight: 700; margin-bottom: 0.4rem; font-size: 0.85rem; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+    .footer-brand { color: var(--green); font-weight: 700; margin-bottom: 0.4rem; font-size: 0.85rem; }
 
+    @media (prefers-reduced-motion: reduce) {
+      .cloud, .storm-flash { animation: none; }
+    }
     @media (max-width: 500px) {
       nav .nav-links { display: none; }
     }
@@ -273,36 +370,47 @@
 
   <!-- HERO -->
   <div class="hero">
-    <img
-      src="logo.png"
-      alt="SignalForge Yukon badge"
-      class="hero-logo"
-      onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';"
-    />
-    <!-- SVG fallback if logo.png is missing -->
-    <svg id="logo-fallback" class="hero-logo-fallback" style="display:none;" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="60" cy="60" r="58" stroke="#3dcfcf" stroke-width="1.5" fill="none"/>
-      <line x1="60" y1="20" x2="60" y2="80" stroke="#3dcfcf" stroke-width="1.5"/>
-      <line x1="60" y1="40" x2="40" y2="60" stroke="#3dcfcf" stroke-width="1.5"/>
-      <line x1="60" y1="40" x2="80" y2="60" stroke="#3dcfcf" stroke-width="1.5"/>
-      <line x1="60" y1="55" x2="45" y2="75" stroke="#3dcfcf" stroke-width="1.5"/>
-      <line x1="60" y1="55" x2="75" y2="75" stroke="#3dcfcf" stroke-width="1.5"/>
-      <line x1="45" y1="75" x2="75" y2="75" stroke="#3dcfcf" stroke-width="1"/>
-      <line x1="60" y1="75" x2="60" y2="90" stroke="#3dcfcf" stroke-width="1.5"/>
-      <path d="M46 28 Q60 18 74 28" stroke="#3dcfcf" stroke-width="1" fill="none" opacity="0.6"/>
-      <path d="M38 22 Q60 8 82 22" stroke="#3dcfcf" stroke-width="1" fill="none" opacity="0.35"/>
-    </svg>
+    <!-- Animated storm background -->
+    <div class="storm-bg" aria-hidden="true">
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="cloud cloud-3"></div>
+      <div class="cloud cloud-4"></div>
+      <div class="storm-flash"></div>
+    </div>
 
-    <h1>SignalForge</h1>
-    <div class="hero-sub">Yukon's Voice in the Storm</div>
-    <p class="hero-desc">
-      Community-powered radio monitoring for Yukon, Oklahoma and beyond.
-      No towers. No licenses. No gatekeepers.
-      Just people keeping the signal alive.
-    </p>
-    <div class="hero-cta">
-      <a href="#recorder" class="btn btn-primary">Download P7 Recorder</a>
-      <a href="#mission" class="btn btn-ghost">Our Mission</a>
+    <div class="hero-content">
+      <img
+        src="SignalForgeWhite.png"
+        alt="SignalForge badge"
+        class="hero-logo"
+        onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';"
+      />
+      <!-- SVG fallback if logo is missing -->
+      <svg id="logo-fallback" class="hero-logo-fallback" style="display:none;" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="58" stroke="#00ff41" stroke-width="1.5" fill="none"/>
+        <line x1="60" y1="20" x2="60" y2="80" stroke="#00ff41" stroke-width="1.5"/>
+        <line x1="60" y1="40" x2="40" y2="60" stroke="#00ff41" stroke-width="1.5"/>
+        <line x1="60" y1="40" x2="80" y2="60" stroke="#00ff41" stroke-width="1.5"/>
+        <line x1="60" y1="55" x2="45" y2="75" stroke="#00ff41" stroke-width="1.5"/>
+        <line x1="60" y1="55" x2="75" y2="75" stroke="#00ff41" stroke-width="1.5"/>
+        <line x1="45" y1="75" x2="75" y2="75" stroke="#00ff41" stroke-width="1"/>
+        <line x1="60" y1="75" x2="60" y2="90" stroke="#00ff41" stroke-width="1.5"/>
+        <path d="M46 28 Q60 18 74 28" stroke="#00ff41" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M38 22 Q60 8 82 22" stroke="#00ff41" stroke-width="1" fill="none" opacity="0.35"/>
+      </svg>
+
+      <h1>SignalForge</h1>
+      <div class="hero-sub">Voice in the Storm</div>
+      <p class="hero-desc">
+        Community-powered radio monitoring for Yukon, Oklahoma and beyond.
+        No towers. No licenses. No gatekeepers.
+        Just people keeping the signal alive.
+      </p>
+      <div class="hero-cta">
+        <a href="#recorder" class="btn btn-primary">Download P7 Recorder</a>
+        <a href="#mission" class="btn btn-ghost">Our Mission</a>
+      </div>
     </div>
   </div>
 
