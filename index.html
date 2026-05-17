@@ -601,7 +601,7 @@
     const RELEASES_REPO = 'CptPlastic/signalforge.org';
 
     const PLATFORMS = [
-      { key: 'windows', label: 'Windows Desktop', hint: '.zip' },
+      { key: 'windows', label: 'Windows Desktop', hint: 'setup.exe' },
     ];
 
     async function loadRelease() {
@@ -616,7 +616,11 @@
         const release = await res.json();
 
         const btns = PLATFORMS.map(p => {
-          const asset = (release.assets || []).find(a => a.name.includes(p.key));
+          const assets = release.assets || [];
+          const asset = assets.find(a => {
+            const name = a.name.toLowerCase();
+            return name.includes(p.key) && name.includes(p.hint.toLowerCase());
+          }) || assets.find(a => a.name.toLowerCase().includes(p.key));
           if (!asset) return '';
           return `<a class="dl-btn" href="${asset.browser_download_url}" rel="noopener noreferrer">
             <span class="dl-platform">${p.label}</span>
