@@ -1,6 +1,6 @@
 # SignalForge Source Mirror
 
-SignalForge is the public community surface for P7 Scanner operators. The public source mirror should be a clean, buildable downstream copy of the P7 Scanner stack.
+SignalForge is the public community surface for P7 Scanner operators. The public source mirror lives at <https://github.com/CptPlastic/signalforge-node> and should be a clean, buildable downstream copy of the P7 Scanner stack.
 
 ## What Belongs in the Mirror
 
