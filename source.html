@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SignalForge source mirror and P7 Scanner build instructions." />
+  <title>SignalForge Source Mirror</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --text: #c9c9c9;
+      --muted: #666666;
+      --green: #00ff41;
+      --green-dim: #006620;
+      --border: #1f1f1f;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-monospace, 'SFMono-Regular', 'Menlo', 'Courier New', monospace;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    nav a, main a { color: var(--green); text-decoration: none; }
+    nav a:hover, main a:hover { text-decoration: underline; }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    .label {
+      color: var(--green-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    h1, h2 {
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+    }
+    h1 { font-size: clamp(1.7rem, 6vw, 3rem); margin-bottom: 1rem; }
+    h2 { font-size: 1rem; margin: 2.4rem 0 0.8rem; }
+    p { color: var(--muted); margin-bottom: 1rem; }
+    strong { color: var(--text); }
+    ul { margin-left: 1.2rem; color: var(--muted); }
+    li { margin-bottom: 0.5rem; }
+    pre {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-size: 0.82rem;
+    }
+    code { color: var(--text); }
+    .callout {
+      border-left: 3px solid var(--green);
+      background: var(--bg2);
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">SignalForge</a>
+    <a href="https://github.com/CptPlastic/signalforge.org" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </nav>
+  <main>
+    <div class="label">// source mirror</div>
+    <h1>Build Your Own Node</h1>
+    <p>
+      SignalForge is the public community surface for P7 Scanner operators. The public source mirror
+      should be a clean, buildable downstream copy of the P7 Scanner stack.
+    </p>
+    <div class="callout">
+      Yes, include the clients. A usable node needs the Go server, React web console, recorder clients,
+      Dockerfiles, compose files, and safe example configuration.
+    </div>
+
+    <h2>What Belongs</h2>
+    <ul>
+      <li>Go server and database migrations.</li>
+      <li>React web console.</li>
+      <li>Recorder clients and build scripts.</li>
+      <li>Dockerfiles and compose files for local, Plesk, Portainer, and peer-stack deployments.</li>
+      <li>Operator documentation, update manifest behavior, and SignalHub federation docs.</li>
+      <li>Example environment files with safe placeholders.</li>
+    </ul>
+
+    <h2>What Stays Out</h2>
+    <ul>
+      <li>Real <code>.env</code> files.</li>
+      <li>API keys, source upload keys, mail credentials, webhook URLs, database passwords, and private deployment notes.</li>
+      <li>Generated build output, local volumes, or machine-specific config.</li>
+      <li>Anything that makes one operator's node look official by default.</li>
+    </ul>
+
+    <h2>Fastest Operator Path</h2>
+    <p>Use official public images and a pinned image tag:</p>
+    <pre><code>IMAGE_NAMESPACE=cptplastic
+IMAGE_TAG=&lt;published-short-sha&gt;
+docker-compose --env-file .env -f docker-compose.plesk.yml up -d</code></pre>
+    <p>The latest public tag is published at <a href="/p7-scanner-update.json">/p7-scanner-update.json</a>.</p>
+
+    <h2>Build From Source</h2>
+    <pre><code>cd server
+go test ./...
+go build ./...</code></pre>
+    <pre><code>cd client
+npm install
+npm run build</code></pre>
+    <pre><code>docker-compose up --build -d</code></pre>
+
+    <h2>SignalHub Test Stack</h2>
+    <pre><code>cp .env.peer.example .env.peer
+docker-compose --env-file .env.peer -f docker-compose.peer.yml up -d</code></pre>
+
+    <h2>Trust Model</h2>
+    <ul>
+      <li>Anyone can run a node.</li>
+      <li>Direct peering uses invite tokens.</li>
+      <li>SignalForge can list known hubs.</li>
+      <li>Verified and official status require maintainer approval.</li>
+      <li>Remote sources stay labeled with their origin hub.</li>
+    </ul>
+  </main>
+</body>
+</html>
