@@ -12,6 +12,7 @@ SignalForge is the public community surface for P7 Scanner operators, documentat
 
 - `p7-scanner` remains the root/mother hub for core application development.
 - `signalforge.org` is the public downstream/community repo.
+- The public source mirror should include the server, web console, recorder clients, compose files, and safe example configuration.
 - Public contributors do not need direct write access; fork-based pull requests are welcome.
 
 ## Pull Request Expectations

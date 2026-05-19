@@ -494,6 +494,7 @@
     <div class="nav-links">
       <a href="#mission">Mission</a>
       <a href="#recorder">Recorder</a>
+      <a href="#source">Source</a>
       <a href="#signalhub">SignalHub</a>
       <a href="#network">Network</a>
     </div>
@@ -639,6 +640,55 @@
     <div class="callout" style="margin-top:1.2em;">
       Need help or want to connect with other contributors? <br>
       <a href="mailto:info@projectseven.us">Email us</a> or join our Discord (coming soon).
+    </div>
+  </section>
+
+  <!-- SOURCE -->
+  <section id="source">
+    <div class="section-label">// source</div>
+    <h2>Build Your Own Node</h2>
+    <p>
+      SignalForge will carry a clean public source mirror for P7 Scanner: server, web client,
+      recorder clients, compose files, operator docs, and SignalHub federation code. The private
+      development hub can move fast; the public mirror stays buildable, documented, and free of
+      local secrets or deployment-only clutter.
+    </p>
+    <p>
+      <strong>Yes, the clients belong in the mirror.</strong> A node is not just the Go server.
+      Operators need the React console, recorder tools, and container recipes to run the whole stack
+      without reverse-engineering the Project Seven deployment.
+    </p>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>Server</h3>
+        <p>Go API, database migrations, ingest endpoints, auth, hub identity, and federation routes.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Web Console</h3>
+        <p>React client for monitoring calls, managing sources, radio sets, peers, and updates.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Recorder Clients</h3>
+        <p>Desktop and CLI tools that turn local scanner, SDR, or audio feeds into node sources.</p>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <span>Clone the public mirror once it is published, or pull the official containers from <strong>ghcr.io/cptplastic</strong>.</span>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <span>Copy the example environment file, set your domain, mail settings, and image tag, then deploy with Docker Compose.</span>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span>Log in, create your hub identity, enable federation only when you are ready, and peer with trusted nodes by invite.</span>
+      </div>
+    </div>
+    <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
+      <a href="SOURCE.md" class="btn btn-primary">Source & Build Notes</a>
+      <a href="https://github.com/CptPlastic/signalforge.org" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">SignalForge GitHub</a>
     </div>
   </section>
 
