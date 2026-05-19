@@ -1,0 +1,34 @@
+name: Feature request
+description: Suggest an improvement for SignalForge or SignalHub
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What should this improve for operators or listeners?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What would you like to happen?
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Website/docs
+        - Recorder onboarding
+        - P7 Scanner downstream build
+        - SignalHub federation
+        - Community operations
+        - Other
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context

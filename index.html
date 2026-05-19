@@ -7,7 +7,7 @@
   <title>SignalForge — Voice in the Storm</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -443,6 +443,27 @@
     }
     .step strong { color: var(--text); }
 
+    /* -- SIGNALHUB -- */
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .hub-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 1rem;
+    }
+    .hub-card h3 {
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.45rem;
+    }
+    .hub-card p { font-size: 0.8rem; margin-bottom: 0; }
+
     /* ── FOOTER ── */
     footer {
       text-align: center;
@@ -473,6 +494,7 @@
     <div class="nav-links">
       <a href="#mission">Mission</a>
       <a href="#recorder">Recorder</a>
+      <a href="#signalhub">SignalHub</a>
       <a href="#network">Network</a>
     </div>
   </nav>
@@ -516,8 +538,8 @@
       <div class="hero-sub">Voice in the Storm</div>
       <p class="hero-desc">
         Community-powered radio monitoring for Yukon, Oklahoma and beyond.
-        No towers. No licenses. No gatekeepers.
-        Just people keeping the signal alive.
+        P7 Scanner is the root hub; SignalForge is where the public network grows.
+        No towers. No gatekeepers. Just people keeping the signal alive.
       </p>
       <div class="hero-cta">
         <a href="#recorder" class="btn btn-primary">Download P7 Recorder</a>
@@ -601,22 +623,80 @@
       </div>
     </div>
 
-    <!-- ONBOARDING SECTION -->
-    <section id="onboarding" style="margin-top:2.5rem;">
-      <div class="section-label">// onboarding</div>
-      <h2>How to Create an Account</h2>
-      <ol style="margin-left:1.2em; color:var(--muted); font-size:0.97em;">
-        <li style="margin-bottom:0.7em;">Go to <a href="https://p7scan.projectseven.us/" target="_blank" rel="noopener noreferrer">p7scan.projectseven.us</a>.</li>
-        <li style="margin-bottom:0.7em;">Click <strong>Account</strong> in the top navigation bar.</li>
-        <li style="margin-bottom:0.7em;">Enter your email address and request a magic link.</li>
-        <li style="margin-bottom:0.7em;">Check your email for the login link or token. (If you don’t see it, check spam/junk.)</li>
-        <li style="margin-bottom:0.7em;">Paste the token into the site to complete sign-in.</li>
-      </ol>
-      <div class="callout" style="margin-top:1.2em;">
-        Need help or want to connect with other contributors? <br>
-        <a href="mailto:info@projectseven.us">Email us</a> or join our Discord (coming soon).
+  </section>
+
+  <!-- ONBOARDING SECTION -->
+  <section id="onboarding">
+    <div class="section-label">// onboarding</div>
+    <h2>How to Create an Account</h2>
+    <ol style="margin-left:1.2em; color:var(--muted); font-size:0.97em;">
+      <li style="margin-bottom:0.7em;">Go to <a href="https://p7scan.projectseven.us/" target="_blank" rel="noopener noreferrer">p7scan.projectseven.us</a>.</li>
+      <li style="margin-bottom:0.7em;">Click <strong>Account</strong> in the top navigation bar.</li>
+      <li style="margin-bottom:0.7em;">Enter your email address and request a magic link.</li>
+      <li style="margin-bottom:0.7em;">Check your email for the login link or token. If you do not see it, check spam or junk.</li>
+      <li style="margin-bottom:0.7em;">Paste the token into the site to complete sign-in.</li>
+    </ol>
+    <div class="callout" style="margin-top:1.2em;">
+      Need help or want to connect with other contributors? <br>
+      <a href="mailto:info@projectseven.us">Email us</a> or join our Discord (coming soon).
+    </div>
+  </section>
+
+  <!-- SIGNALHUB -->
+  <section id="signalhub">
+    <div class="section-label">// federation</div>
+    <h2>SignalHub</h2>
+    <p>
+      SignalHub is the next layer: a peer-to-peer pub/sub network for community scanner hubs.
+      Each P7 Scanner can publish local sources, subscribe to trusted remote sources, and keep
+      control of what it shares downstream.
+    </p>
+    <p>
+      <strong>P7 Scanner remains the root hub.</strong> SignalForge will be the public downstream
+      build and community surface: documentation, releases, trusted hub discovery, and the path
+      for new operators to launch their own nodes.
+    </p>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>Publish</h3>
+        <p>Local scanner, SDR, repeater, or stream sources announce live calls, metadata, and health.</p>
       </div>
-    </section>
+      <div class="hub-card">
+        <h3>Subscribe</h3>
+        <p>Trusted hubs can pull selected sources or talkgroups without depending on one central server.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Validate</h3>
+        <p>SignalForge can list known-good hubs while still allowing direct peer-to-peer trust.</p>
+      </div>
+    </div>
+    <div class="callout">
+      The goal is simple: lots of community hubs sharing many local nodes, with origin preserved,
+      resharing controlled, and operators staying in charge of their own infrastructure.
+    </div>
+  </section>
+
+  <!-- MVP -->
+  <section id="mvp">
+    <div class="section-label">// public alpha</div>
+    <h2>MVP Roadmap</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <span>Keep <strong>p7-scanner</strong> as the mother hub and source of truth for core server, recorder, and web app development.</span>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <span>Use the public SignalForge repo for downstream builds, docs, releases, and operator onboarding.</span>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span>Add hub identity, peer invite tokens, remote source subscriptions, and clear local-vs-remote labels.</span>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <span>Launch SignalHub as an alpha federation layer: peer-to-peer first, optional central validation through SignalForge.</span>
+      </div>
     </div>
   </section>
 
