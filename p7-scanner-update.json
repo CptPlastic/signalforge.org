@@ -5,12 +5,12 @@
   "commit": "99740389111fea47b46dea4734d70ed75b0bed3b",
   "shortCommit": "9974038",
   "imageRegistry": "ghcr.io",
-  "imageNamespace": "cptplastic",
+  "imageNamespace": "signalforge-org",
   "imageTag": "9974038",
   "publishedAt": "2026-05-19T04:37:17Z",
   "images": {
-    "server": "ghcr.io/cptplastic/p7-scanner-server:9974038",
-    "client": "ghcr.io/cptplastic/p7-scanner-client:9974038",
-    "mockCallSender": "ghcr.io/cptplastic/p7-scanner-mock-call-sender:9974038"
+    "server": "ghcr.io/signalforge-org/p7-scanner-server:9974038",
+    "client": "ghcr.io/signalforge-org/p7-scanner-client:9974038",
+    "mockCallSender": "ghcr.io/signalforge-org/p7-scanner-mock-call-sender:9974038"
   }
 }
