@@ -2,15 +2,15 @@
   "product": "p7-scanner",
   "channel": "stable",
   "version": "0.1.0-dev",
-  "commit": "99740389111fea47b46dea4734d70ed75b0bed3b",
-  "shortCommit": "9974038",
+  "commit": "7d1617c4c19938ed061e5dc32cae30da36da7fee",
+  "shortCommit": "7d1617c",
   "imageRegistry": "ghcr.io",
   "imageNamespace": "cptplastic",
-  "imageTag": "9974038",
-  "publishedAt": "2026-05-19T04:37:17Z",
+  "imageTag": "7d1617c",
+  "publishedAt": "2026-05-20T02:32:05Z",
   "images": {
-    "server": "ghcr.io/cptplastic/p7-scanner-server:9974038",
-    "client": "ghcr.io/cptplastic/p7-scanner-client:9974038",
-    "mockCallSender": "ghcr.io/cptplastic/p7-scanner-mock-call-sender:9974038"
+    "server": "ghcr.io/cptplastic/p7-scanner-server:7d1617c",
+    "client": "ghcr.io/cptplastic/p7-scanner-client:7d1617c",
+    "mockCallSender": "ghcr.io/cptplastic/p7-scanner-mock-call-sender:7d1617c"
   }
 }
