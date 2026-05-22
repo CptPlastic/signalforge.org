@@ -33,7 +33,7 @@ The mirror can still ship prebuilt containers and release assets for people who 
 Use official public images:
 
 ```bash
-IMAGE_NAMESPACE=cptplastic
+IMAGE_NAMESPACE=signalforge-org
 IMAGE_TAG=<published-short-sha>
 docker-compose --env-file .env -f docker-compose.plesk.yml up -d
 ```
