@@ -2,15 +2,15 @@
   "product": "p7-scanner",
   "channel": "stable",
   "version": "0.1.0-dev",
-  "commit": "59427359b257ffb572459942bbf55592a551bdea",
-  "shortCommit": "5942735",
+  "commit": "8110ab42c32c437d3809a99c37fadd5cf731ba1c",
+  "shortCommit": "8110ab4",
   "imageRegistry": "ghcr.io",
   "imageNamespace": "signalforge-org",
-  "imageTag": "5942735",
-  "publishedAt": "2026-05-22T13:06:14Z",
+  "imageTag": "8110ab4",
+  "publishedAt": "2026-05-22T22:02:40Z",
   "images": {
-    "server": "ghcr.io/signalforge-org/p7-scanner-server:5942735",
-    "client": "ghcr.io/signalforge-org/p7-scanner-client:5942735",
-    "mockCallSender": "ghcr.io/signalforge-org/p7-scanner-mock-call-sender:5942735"
+    "server": "ghcr.io/signalforge-org/p7-scanner-server:8110ab4",
+    "client": "ghcr.io/signalforge-org/p7-scanner-client:8110ab4",
+    "mockCallSender": "ghcr.io/signalforge-org/p7-scanner-mock-call-sender:8110ab4"
   }
 }
