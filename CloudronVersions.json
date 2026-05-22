@@ -1,0 +1,27 @@
+{
+  "versions": {
+    "0.1.0": {
+      "manifest": {
+        "id": "org.signalforge.hub",
+        "title": "SignalForge Hub",
+        "author": "SignalForge",
+        "description": "Community radio monitoring node with live call ingestion, radio sets, public WebSocket players, and SignalHub peer federation. Operators contribute scanner, SDR, or audio sources; listeners get a real-time call log and embeddable public player.",
+        "tagline": "Community-powered radio monitoring node",
+        "version": "0.1.0",
+        "upstreamVersion": "0.1.0",
+        "healthCheckPath": "/api/v1/health",
+        "httpPort": 8080,
+        "addons": {
+          "postgresql": {}
+        },
+        "memoryLimit": 536870912,
+        "manifestVersion": 2,
+        "website": "https://signalforge.org",
+        "documentationUrl": "https://github.com/CptPlastic/signalforge-node",
+        "tags": ["radio", "scanner", "monitoring", "community", "sdr"]
+      },
+      "dockerImage": "ghcr.io/signalforge-org/signalforge-hub:latest",
+      "changelog": "Initial release"
+    }
+  }
+}
