@@ -615,7 +615,7 @@
       <div class="hero-cta">
         <a href="#recorder" class="btn btn-primary">Download P7 Recorder</a>
         <a href="#mission" class="btn btn-ghost">Our Mission</a>
-        <a href="https://p7scan.projectseven.us/" class="btn btn-glow" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>
+        <a href="https://p7hub.projectseven.us/" class="btn btn-glow" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>
       </div>
     </div>
   </div>
@@ -705,7 +705,7 @@
       before running your own hub.
     </p>
     <ol style="margin-left:1.2em; color:var(--muted); font-size:0.97em;">
-      <li style="margin-bottom:0.7em;">Open the main hub at <a href="https://p7scan.projectseven.us/" target="_blank" rel="noopener noreferrer">p7scan.projectseven.us</a>.</li>
+      <li style="margin-bottom:0.7em;">Open the main hub at <a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">p7hub.projectseven.us</a>.</li>
       <li style="margin-bottom:0.7em;">Click <strong>Account</strong> in the top navigation bar.</li>
       <li style="margin-bottom:0.7em;">Enter your email address and request a magic link.</li>
       <li style="margin-bottom:0.7em;">Check your email for the login link or token. If you do not see it, check spam or junk.</li>
@@ -739,8 +739,8 @@ curl http://localhost:8080/api/v1/health</code></pre>
     </div>
     <p>
       Put HTTPS in front of the web port with Caddy, nginx, Traefik, Portainer, or your hosting
-      panel's reverse proxy. The web container handles public traffic and proxies API and
-      WebSocket requests to the server container inside the stack.
+      panel's reverse proxy. The web service handles public traffic and proxies API and
+      WebSocket requests to the api service inside the stack.
     </p>
     <div class="steps">
       <div class="step">
