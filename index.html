@@ -61,10 +61,10 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 5rem 1.5rem 4rem;
+      padding: clamp(2rem, 4.5vh, 3.4rem) 1.5rem clamp(2rem, 4vh, 3rem);
       border-bottom: 1px solid var(--border);
       overflow: hidden;
-      min-height: 75vh;
+      min-height: calc(100vh - 58px);
     }
 
     /* Storm cloud layers */
@@ -278,25 +278,25 @@
     }
 
     .hero-logo {
-      width: min(200px, 50vw);
+      width: min(128px, 32vw);
       height: auto;
-      margin-bottom: 2rem;
+      margin-bottom: clamp(0.8rem, 2vh, 1.25rem);
       opacity: 0.95;
       filter: drop-shadow(0 0 22px rgba(255,255,255,0.16)) drop-shadow(0 0 30px rgba(0,255,65,0.12));
       animation: logo-charge 16s cubic-bezier(0.45, 0, 0.18, 1) infinite;
       animation-delay: -2s;
     }
     .hero h1 {
-      font-size: clamp(2.2rem, 8vw, 4rem);
+      font-size: clamp(2rem, 7vw, 3.45rem);
       font-weight: 700;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: #fff;
       line-height: 1.05;
       text-shadow: 0 0 24px rgba(255,255,255,0.08), 0 0 44px rgba(0,255,65,0.18);
     }
     .hero-sub {
-      margin-top: 0.6rem;
+      margin-top: 0.45rem;
       font-size: clamp(0.72rem, 2.2vw, 0.88rem);
       letter-spacing: 0.35em;
       text-transform: uppercase;
@@ -304,14 +304,14 @@
       text-shadow: 0 0 22px rgba(0,255,65,0.22);
     }
     .hero-desc {
-      margin-top: 1.6rem;
-      max-width: 520px;
-      font-size: 0.88rem;
+      margin-top: clamp(0.85rem, 2vh, 1.2rem);
+      max-width: 760px;
+      font-size: 0.86rem;
       color: var(--muted);
-      line-height: 1.8;
+      line-height: 1.65;
     }
     .hero-cta {
-      margin-top: 2rem;
+      margin-top: clamp(1rem, 2.4vh, 1.45rem);
       display: flex;
       gap: 0.75rem;
       flex-wrap: wrap;
@@ -344,7 +344,7 @@
       border-color: var(--green);
     }
 
-    /* Highlighted glowing button for P7 Scanner */
+    /* Highlighted glowing button for the hosted hub */
     .btn-glow {
       background: var(--green);
       color: #0a0a0a;
@@ -610,13 +610,12 @@
       <div class="hero-sub">Voice in the Storm</div>
       <p class="hero-desc">
         Community-powered radio monitoring for Yukon, Oklahoma and beyond.
-        P7 Scanner is the root hub; SignalForge is where the public network grows.
-        No towers. No gatekeepers. Just people keeping the signal alive.
+        Run a hub, add a recorder, and share trusted local signals without towers or gatekeepers.
       </p>
       <div class="hero-cta">
         <a href="#recorder" class="btn btn-primary">Download P7 Recorder</a>
         <a href="#mission" class="btn btn-ghost">Our Mission</a>
-        <a href="https://p7scan.projectseven.us/" class="btn btn-glow" target="_blank" rel="noopener noreferrer">P7 Scanner Web App</a>
+        <a href="https://p7scan.projectseven.us/" class="btn btn-glow" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>
       </div>
     </div>
   </div>
@@ -640,10 +639,10 @@
       didn't need it.
     </div>
     <p>
-      <strong>P7 Scanner</strong> is what came next — a software-defined radio monitoring
+      <strong>SignalForge Hub</strong> is what came next — a software-defined radio monitoring
       platform where community members contribute scanner, repeater, SDR, or streamed audio
       sources. No tower lease. No $5,800 equipment budget. No waiting on a committee.
-      Every person who runs a recorder node expands the network.
+      Every person who runs a recorder expands the network.
     </p>
 
     <div class="pillars">
@@ -670,7 +669,7 @@
     <div class="section-label">// download</div>
     <h2>P7 Recorder</h2>
     <p>
-      P7 Recorder is the desktop console that connects local audio to the P7 Scanner network.
+      P7 Recorder is the desktop console that connects local audio to the SignalForge network.
       Run it on a Windows machine with a radio feed, scanner output, SDR setup, or any compatible
       audio source and start contributing to your community's feed.
     </p>
@@ -691,7 +690,7 @@
       </div>
       <div class="step">
         <span class="step-num">3</span>
-        <span>Configure your <strong>source key</strong> from your P7 Scanner instance and start scanning.</span>
+        <span>Configure your <strong>source key</strong> from your SignalForge Hub instance and start scanning.</span>
       </div>
     </div>
 
@@ -700,9 +699,13 @@
   <!-- ONBOARDING SECTION -->
   <section id="onboarding">
     <div class="section-label">// onboarding</div>
-    <h2>How to Create an Account</h2>
+    <h2>Create an Account on the Main Hub</h2>
+    <p>
+      Use the hosted SignalForge hub if you want to listen, contribute a recorder, or try the network
+      before running your own hub.
+    </p>
     <ol style="margin-left:1.2em; color:var(--muted); font-size:0.97em;">
-      <li style="margin-bottom:0.7em;">Go to <a href="https://p7scan.projectseven.us/" target="_blank" rel="noopener noreferrer">p7scan.projectseven.us</a>.</li>
+      <li style="margin-bottom:0.7em;">Open the main hub at <a href="https://p7scan.projectseven.us/" target="_blank" rel="noopener noreferrer">p7scan.projectseven.us</a>.</li>
       <li style="margin-bottom:0.7em;">Click <strong>Account</strong> in the top navigation bar.</li>
       <li style="margin-bottom:0.7em;">Enter your email address and request a magic link.</li>
       <li style="margin-bottom:0.7em;">Check your email for the login link or token. If you do not see it, check spam or junk.</li>
@@ -723,10 +726,14 @@
       No single-platform package, no hosted template, no lock-in: one generated environment
       file, one compose stack, and a PostgreSQL volume you can back up or move.
     </p>
+    <p>
+      For a local test, install Docker Desktop, make sure it is running, and use
+      <strong>http://localhost:3000</strong> as the public hub URL when the helper asks.
+    </p>
     <div class="install-panel">
       <pre><code>git clone https://github.com/CptPlastic/signalforge-node.git
 cd signalforge-node
-make init-env
+SIGNALFORGE_PUBLIC_URL=http://localhost:3000 make init-env
 make install-up
 curl http://localhost:8080/api/v1/health</code></pre>
     </div>
@@ -751,24 +758,23 @@ curl http://localhost:8080/api/v1/health</code></pre>
     </div>
     <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
       <a href="source.html#fastest-operator-path" class="btn btn-primary">Install Notes</a>
-      <a href="https://github.com/CptPlastic/signalforge-node" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Node Source GitHub</a>
+      <a href="https://github.com/CptPlastic/signalforge-node" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Hub Source GitHub</a>
     </div>
   </section>
 
   <!-- SOURCE -->
   <section id="source">
     <div class="section-label">// source</div>
-    <h2>Build Your Own Node</h2>
+    <h2>Build Your Own Hub</h2>
     <p>
-      SignalForge will carry a clean public source mirror for P7 Scanner: server, web client,
-      recorder clients, compose files, operator docs, and SignalHub federation code. The private
-      development hub can move fast; the public mirror stays buildable, documented, and free of
-      local secrets or deployment-only clutter.
+      <strong>signalforge-node</strong> is the public, buildable source for the hub stack: server, web client,
+      recorder clients, compose files, operator docs, and SignalHub federation code. The public
+      repo stays buildable, documented, and free of local secrets or deployment-only clutter.
     </p>
     <p>
-      <strong>Yes, the clients belong in the mirror.</strong> A node is not just the Go server.
+      <strong>Yes, the clients belong in the mirror.</strong> A hub is not just the Go server.
       Operators need the React console, recorder tools, and container recipes to run the whole stack
-      without reverse-engineering the Project Seven deployment.
+      without reverse-engineering any projectseven deployment.
     </p>
     <div class="hub-grid">
       <div class="hub-card">
@@ -781,7 +787,7 @@ curl http://localhost:8080/api/v1/health</code></pre>
       </div>
       <div class="hub-card">
         <h3>Recorder Clients</h3>
-        <p>Desktop and CLI tools that turn local scanner, SDR, or audio feeds into node sources.</p>
+        <p>Desktop and CLI tools that turn local scanner, SDR, or audio feeds into signal sources.</p>
       </div>
     </div>
     <div class="steps">
@@ -795,12 +801,12 @@ curl http://localhost:8080/api/v1/health</code></pre>
       </div>
       <div class="step">
         <span class="step-num">3</span>
-        <span>Log in, create your hub identity, enable federation only when you are ready, and peer with trusted nodes by invite.</span>
+        <span>Log in, create your hub identity, enable federation only when you are ready, and peer with trusted hubs by invite.</span>
       </div>
     </div>
     <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
       <a href="source.html" class="btn btn-primary">Source & Build Notes</a>
-      <a href="https://github.com/CptPlastic/signalforge-node" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Node Source GitHub</a>
+      <a href="https://github.com/CptPlastic/signalforge-node" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Hub Source GitHub</a>
     </div>
   </section>
 
@@ -810,13 +816,12 @@ curl http://localhost:8080/api/v1/health</code></pre>
     <h2>SignalHub</h2>
     <p>
       SignalHub is the next layer: a peer-to-peer pub/sub network for community scanner hubs.
-      Each P7 Scanner can publish local sources, subscribe to trusted remote sources, and keep
+      Each SignalForge Hub can publish local sources, subscribe to trusted remote sources, and keep
       control of what it shares downstream.
     </p>
     <p>
-      <strong>P7 Scanner remains the root hub.</strong> SignalForge will be the public downstream
-      build and community surface: documentation, releases, trusted hub discovery, and the path
-      for new operators to launch their own nodes.
+      SignalForge is peer-to-peer first. Operators run their own hubs, connect by invite,
+      and choose which local sources they share with trusted peers.
     </p>
     <div class="hub-grid">
       <div class="hub-card">
@@ -833,32 +838,8 @@ curl http://localhost:8080/api/v1/health</code></pre>
       </div>
     </div>
     <div class="callout">
-      The goal is simple: lots of community hubs sharing many local nodes, with origin preserved,
+      The goal is simple: lots of community hubs sharing local sources, with origin preserved,
       resharing controlled, and operators staying in charge of their own infrastructure.
-    </div>
-  </section>
-
-  <!-- MVP -->
-  <section id="mvp">
-    <div class="section-label">// public alpha</div>
-    <h2>MVP Roadmap</h2>
-    <div class="steps">
-      <div class="step">
-        <span class="step-num">1</span>
-        <span>Keep <strong>p7-scanner</strong> as the mother hub and source of truth for core server, recorder, and web app development.</span>
-      </div>
-      <div class="step">
-        <span class="step-num">2</span>
-        <span>Use the public SignalForge repo for downstream builds, docs, releases, and operator onboarding.</span>
-      </div>
-      <div class="step">
-        <span class="step-num">3</span>
-        <span>Add hub identity, peer invite tokens, remote source subscriptions, and clear local-vs-remote labels.</span>
-      </div>
-      <div class="step">
-        <span class="step-num">4</span>
-        <span>Launch SignalHub as an alpha federation layer: peer-to-peer first, optional central validation through SignalForge.</span>
-      </div>
     </div>
   </section>
 
@@ -871,7 +852,7 @@ curl http://localhost:8080/api/v1/health</code></pre>
       stitched across the city. The hardware approach hit walls. The software approach has no walls.
     </p>
     <p>
-      Every P7 Scanner instance is a node. Every recorder running is a signal source.
+      Every SignalForge Hub instance can stand on its own. Every recorder running is a signal source.
       Contributors in Yukon, in OKC, anywhere — each one extends the reach of the network
       without a single piece of shared infrastructure.
     </p>
@@ -879,7 +860,7 @@ curl http://localhost:8080/api/v1/health</code></pre>
       The city didn't give us the tower. So we built something that doesn't need one.
     </div>
     <p>
-      If you want to contribute a scanner node, run the recorder and reach out.
+      If you want to contribute a scanner source or run your own hub, run the recorder and reach out.
       SignalForge is community infrastructure — and you're the infrastructure.
     </p>
     <div style="margin-top: 1.5rem;">
@@ -890,7 +871,7 @@ curl http://localhost:8080/api/v1/health</code></pre>
   <!-- FOOTER -->
   <footer>
     <div class="footer-brand">SignalForge</div>
-    <div>Yukon, Oklahoma &mdash; projectseven .Co .Ltd</div>
+    <div>Yukon, Oklahoma &mdash; projectseven co ltd</div>
     <div style="margin-top: 0.5rem;">
       <a href="mailto:info@projectseven.us">info@projectseven.us</a>
     </div>

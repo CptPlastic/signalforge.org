@@ -1,6 +1,6 @@
-# SignalForge Source Mirror
+# SignalForge Hub Source
 
-SignalForge is the public community surface for P7 Scanner operators. The public source mirror lives at <https://github.com/CptPlastic/signalforge-node> and should be a clean, buildable downstream copy of the P7 Scanner stack.
+SignalForge is the public community surface for operators. The public hub source lives at <https://github.com/CptPlastic/signalforge-node> and is the buildable hub stack people clone, inspect, and run.
 
 ## What Belongs in the Mirror
 
@@ -15,12 +15,12 @@ SignalForge is the public community surface for P7 Scanner operators. The public
 
 - Real `.env` files.
 - API keys, magic-link provider secrets, webhook URLs, database passwords, or source upload keys.
-- Local volumes, generated build output, private deployment notes, or machine-specific config.
-- Anything that would make one operator's node look official by default.
+- Local volumes, generated build output, operator-only deployment notes, or machine-specific config.
+- Anything that would make one operator's hub look official by default.
 
 ## Include the Clients
 
-Yes. The public mirror should include the clients. Operators need the whole node, not just the API:
+Yes. The public mirror should include the clients. Operators need the whole hub, not just the API:
 
 - `client/` is the web console people use to run a hub.
 - `tools/p7-recorder-go/` and recorder UI tools are how local audio becomes a source.
@@ -30,17 +30,17 @@ The mirror can still ship prebuilt containers and release assets for people who 
 
 ## Fastest Operator Path
 
-Use the public node source, official public images, and the Compose environment helper:
+Use the public hub source, official public images, Docker Desktop, and the Compose environment helper:
 
 ```bash
 git clone https://github.com/CptPlastic/signalforge-node.git
 cd signalforge-node
-make init-env
+SIGNALFORGE_PUBLIC_URL=http://localhost:3000 make init-env
 make install-up
 curl http://localhost:8080/api/v1/health
 ```
 
-The helper writes `.env.production`, generates a strong PostgreSQL password, and asks for the hub URL, name, ports, and optional Mailjet settings. The production Compose stack runs the web console, Go API, and PostgreSQL as separate services with one command.
+The helper writes `.env.production`, generates a strong PostgreSQL password, and asks for the hub URL, name, ports, and optional Mailjet settings. The production Compose stack runs the web console, Go API, and PostgreSQL as separate services with one command. For a laptop test, install Docker Desktop, keep it running, use `http://localhost:3000` as the public hub URL, and open that URL after the stack starts.
 
 The latest public tag is published at:
 
@@ -50,7 +50,7 @@ https://signalforge.org/p7-scanner-update.json
 
 Running hubs can check `/api/v1/update-check` to know when a newer public image is available.
 
-## Build From Source
+## Local Build From Source
 
 Server:
 
@@ -71,21 +71,21 @@ npm run build
 Local full stack:
 
 ```bash
-docker-compose up --build -d
+docker compose up --build -d
 ```
 
 Peer stack for SignalHub testing:
 
 ```bash
 cp .env.peer.example .env.peer
-docker-compose --env-file .env.peer -f docker-compose.peer.yml up -d
+docker compose --env-file .env.peer -f docker-compose.peer.yml up -d
 ```
 
 ## Trust Model
 
 The source and containers should be open. Official status should not be automatic.
 
-- Anyone can run a node.
+- Anyone can run a hub.
 - Direct peering uses invite tokens.
 - SignalForge can list known hubs.
 - Verified and official status require maintainer approval.

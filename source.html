@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SignalForge source mirror and P7 Scanner build instructions." />
-  <title>SignalForge Source Mirror</title>
+  <meta name="description" content="SignalForge public hub source and install instructions." />
+  <title>SignalForge Hub Source</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -84,18 +84,18 @@
     <a href="https://github.com/CptPlastic/signalforge-node" target="_blank" rel="noopener noreferrer">GitHub</a>
   </nav>
   <main>
-    <div class="label">// source mirror</div>
-    <h1>Build Your Own Node</h1>
+    <div class="label">// public hub source</div>
+    <h1>Build or Test Your Own Hub</h1>
     <p>
-      SignalForge is the public community surface for P7 Scanner operators. The public source mirror
-      should be a clean, buildable downstream copy of the P7 Scanner stack.
+      SignalForge is the public community surface for operators. The public hub source is
+      <strong>signalforge-node</strong>: the buildable hub stack people clone, inspect, and run.
     </p>
     <p>
-      The buildable node source lives at <a href="https://github.com/CptPlastic/signalforge-node" target="_blank" rel="noopener noreferrer">github.com/CptPlastic/signalforge-node</a>.
+      The public hub source lives at <a href="https://github.com/CptPlastic/signalforge-node" target="_blank" rel="noopener noreferrer">github.com/CptPlastic/signalforge-node</a>.
     </p>
     <div class="callout">
-      Yes, include the clients. A usable node needs the Go server, React web console, recorder clients,
-      Dockerfiles, compose files, and safe example configuration.
+      One public source path: clone <strong>signalforge-node</strong>, generate config, run the Compose stack.
+      Docker Desktop is enough for a first local test.
     </div>
 
     <h2>What Belongs</h2>
@@ -111,41 +111,42 @@
     <h2>What Stays Out</h2>
     <ul>
       <li>Real <code>.env</code> files.</li>
-      <li>API keys, source upload keys, mail credentials, webhook URLs, database passwords, and private deployment notes.</li>
+      <li>API keys, source upload keys, mail credentials, webhook URLs, database passwords, and operator-only deployment notes.</li>
       <li>Generated build output, local volumes, or machine-specific config.</li>
-      <li>Anything that makes one operator's node look official by default.</li>
+      <li>Anything that makes one operator's hub look official by default.</li>
     </ul>
 
     <h2 id="fastest-operator-path">Fastest Operator Path</h2>
-    <p>Use the public node source, official public images, and the Compose environment helper:</p>
+    <p>Use the public hub source, official images, Docker Desktop, and the Compose environment helper:</p>
     <pre><code>git clone https://github.com/CptPlastic/signalforge-node.git
 cd signalforge-node
-make init-env
+SIGNALFORGE_PUBLIC_URL=http://localhost:3000 make init-env
 make install-up
 curl http://localhost:8080/api/v1/health</code></pre>
     <p>
       The helper writes <code>.env.production</code>, generates a strong PostgreSQL password,
       and asks for the hub URL, name, ports, and optional Mailjet settings. The production
       Compose stack runs the web console, Go API, and PostgreSQL as separate services with one command.
+      For a laptop test, open <code>http://localhost:3000</code> after the stack starts.
     </p>
     <p>The latest public tag is published at <a href="/p7-scanner-update.json">/p7-scanner-update.json</a>.</p>
 
-    <h2>Build From Source</h2>
+    <h2>Local Build From Source</h2>
     <pre><code>cd server
 go test ./...
 go build ./...</code></pre>
     <pre><code>cd client
 npm install
 npm run build</code></pre>
-    <pre><code>docker-compose up --build -d</code></pre>
+    <pre><code>docker compose up --build -d</code></pre>
 
-    <h2>SignalHub Test Stack</h2>
+    <h2>Peer Test Stack</h2>
     <pre><code>cp .env.peer.example .env.peer
-docker-compose --env-file .env.peer -f docker-compose.peer.yml up -d</code></pre>
+  docker compose --env-file .env.peer -f docker-compose.peer.yml up -d</code></pre>
 
     <h2>Trust Model</h2>
     <ul>
-      <li>Anyone can run a node.</li>
+      <li>Anyone can run a hub.</li>
       <li>Direct peering uses invite tokens.</li>
       <li>SignalForge can list known hubs.</li>
       <li>Verified and official status require maintainer approval.</li>
