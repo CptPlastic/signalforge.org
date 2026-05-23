@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "updatedAt": 0,
+  "issuer": "signalforge-directory",
+  "statuses": [
+    "unlisted",
+    "listed",
+    "verified",
+    "suspended"
+  ],
+  "trustLevels": [
+    "community",
+    "listed",
+    "verified",
+    "trusted",
+    "official",
+    "suspended"
+  ],
+  "hubs": []
+}
