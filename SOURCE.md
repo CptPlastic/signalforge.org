@@ -7,7 +7,7 @@ SignalForge is the public community surface for P7 Scanner operators. The public
 - Go server and database migrations.
 - React web console.
 - Recorder clients and build scripts.
-- Dockerfiles and compose files for local, Plesk, Portainer, and peer-stack deployments.
+- Dockerfiles, compose files, and the environment helper for local, production-style, Portainer, and peer-stack deployments.
 - Operator documentation, update manifest behavior, and SignalHub federation docs.
 - Example environment files with safe placeholders.
 
@@ -30,13 +30,17 @@ The mirror can still ship prebuilt containers and release assets for people who 
 
 ## Fastest Operator Path
 
-Use official public images:
+Use the public node source, official public images, and the Compose environment helper:
 
 ```bash
-IMAGE_NAMESPACE=signalforge-org
-IMAGE_TAG=<published-short-sha>
-docker-compose --env-file .env -f docker-compose.plesk.yml up -d
+git clone https://github.com/CptPlastic/signalforge-node.git
+cd signalforge-node
+make init-env
+make install-up
+curl http://localhost:8080/api/v1/health
 ```
+
+The helper writes `.env.production`, generates a strong PostgreSQL password, and asks for the hub URL, name, ports, and optional Mailjet settings. The production Compose stack runs the web console, Go API, and PostgreSQL as separate services with one command.
 
 The latest public tag is published at:
 

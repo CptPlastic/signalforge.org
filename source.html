@@ -103,7 +103,7 @@
       <li>Go server and database migrations.</li>
       <li>React web console.</li>
       <li>Recorder clients and build scripts.</li>
-      <li>Dockerfiles and compose files for local, Plesk, Portainer, and peer-stack deployments.</li>
+      <li>Dockerfiles, compose files, and the environment helper for local, production-style, Portainer, and peer-stack deployments.</li>
       <li>Operator documentation, update manifest behavior, and SignalHub federation docs.</li>
       <li>Example environment files with safe placeholders.</li>
     </ul>
@@ -116,11 +116,18 @@
       <li>Anything that makes one operator's node look official by default.</li>
     </ul>
 
-    <h2>Fastest Operator Path</h2>
-    <p>Use official public images and a pinned image tag:</p>
-    <pre><code>IMAGE_NAMESPACE=signalforge-org
-IMAGE_TAG=&lt;published-short-sha&gt;
-docker-compose --env-file .env -f docker-compose.plesk.yml up -d</code></pre>
+    <h2 id="fastest-operator-path">Fastest Operator Path</h2>
+    <p>Use the public node source, official public images, and the Compose environment helper:</p>
+    <pre><code>git clone https://github.com/CptPlastic/signalforge-node.git
+cd signalforge-node
+make init-env
+make install-up
+curl http://localhost:8080/api/v1/health</code></pre>
+    <p>
+      The helper writes <code>.env.production</code>, generates a strong PostgreSQL password,
+      and asks for the hub URL, name, ports, and optional Mailjet settings. The production
+      Compose stack runs the web console, Go API, and PostgreSQL as separate services with one command.
+    </p>
     <p>The latest public tag is published at <a href="/p7-scanner-update.json">/p7-scanner-update.json</a>.</p>
 
     <h2>Build From Source</h2>
