@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 0,
+  "updatedAt": 1779569501,
   "issuer": "signalforge-directory",
   "statuses": [
     "unlisted",
@@ -16,5 +16,19 @@
     "official",
     "suspended"
   ],
-  "hubs": []
+  "hubs": [
+    {
+      "hubId": "hub_f1535abf02af1b0c08252134c1ff1ee5a451b47af33380dedb153ad973de91e0",
+      "name": "SignalForge Hosted Hub",
+      "publicUrl": "https://p7hub.projectseven.us",
+      "region": "Yukon, OK",
+      "directoryStatus": "verified",
+      "trustLevel": "official",
+      "trustIssuerHubId": "signalforge-directory",
+      "trustCertificate": "",
+      "trustExpiresAt": 0,
+      "trustVerifiedAt": 1779569501,
+      "lastSeenAt": 0
+    }
+  ]
 }
