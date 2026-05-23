@@ -1,0 +1,25 @@
+name: Validate directory feed
+
+on:
+  pull_request:
+    paths:
+      - directory/hubs.json
+      - tools/validate-directory.py
+      - .github/workflows/validate-directory.yml
+  push:
+    branches:
+      - main
+    paths:
+      - directory/hubs.json
+      - tools/validate-directory.py
+      - .github/workflows/validate-directory.yml
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: python tools/validate-directory.py

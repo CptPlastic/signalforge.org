@@ -22,6 +22,7 @@
       "name": "SignalForge Hosted Hub",
       "publicUrl": "https://p7hub.projectseven.us",
       "region": "Yukon, OK",
+      "publicKey": "",
       "directoryStatus": "verified",
       "trustLevel": "official",
       "trustIssuerHubId": "signalforge-directory",
