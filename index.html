@@ -944,11 +944,13 @@ curl http://localhost:8080/api/v1/health</code></pre>
       const ver  = document.getElementById('dl-version');
       try {
         const res = await fetch(
-          `https://api.github.com/repos/${RELEASES_REPO}/releases/latest`,
+          `https://api.github.com/repos/${RELEASES_REPO}/releases`,
           { headers: { Accept: 'application/vnd.github+json' } }
         );
         if (!res.ok) throw new Error(res.status);
-        const release = await res.json();
+        const releases = await res.json();
+        const release = releases.find(r => (r.tag_name || '').startsWith('signalforge-cli-v'));
+        if (!release) throw new Error('no signalforge-cli release');
 
         const btns = PLATFORMS.map(p => {
           const assets = release.assets || [];
