@@ -142,14 +142,14 @@ curl http://localhost:8080/api/v1/health</code></pre>
 
     <h2>Recorder CLI</h2>
     <p>
-      The recommended recorder path is the cross-platform <code>signalforge</code> CLI. It checks hub
+      The recommended recorder path is the cross-platform <code>signalforge</code> CLI, also installed as <code>sf</code>. It checks hub
       connectivity, validates source keys, inspects audio folders, uploads single files, and can watch
       a folder for stable audio files.
     </p>
-    <pre><code>signalforge recorder check --source-key sk_live_REPLACE_WITH_SOURCE_KEY
-signalforge recorder inspect --input ./calls
-  signalforge recorder watch --input ./calls --source-key sk_live_REPLACE_WITH_SOURCE_KEY
-  signalforge update check</code></pre>
+    <pre><code>sf recorder check --source-key sk_live_REPLACE_WITH_SOURCE_KEY
+sf recorder inspect --input ./calls
+  sf recorder watch --input ./calls --source-key sk_live_REPLACE_WITH_SOURCE_KEY
+  sf update check</code></pre>
 
     <h2>Local Build From Source</h2>
     <pre><code>cd server

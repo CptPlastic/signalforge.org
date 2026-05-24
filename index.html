@@ -692,7 +692,7 @@
       </div>
       <div class="step">
         <span class="step-num">3</span>
-        <span>Run <strong>signalforge recorder watch --input ./calls</strong> with your hub URL and source key.</span>
+        <span>Run <strong>sf recorder watch --input ./calls</strong> with your hub URL and source key. <strong>signalforge</strong> still works too.</span>
       </div>
     </div>
 
@@ -703,10 +703,10 @@
     scoop bucket add signalforge https://github.com/CptPlastic/scoop-signalforge
     scoop install signalforge
 
-    signalforge recorder check --source-key sk_live_REPLACE_WITH_SOURCE_KEY
-signalforge recorder inspect --input ./calls
-    signalforge recorder watch --input ./calls --source-key sk_live_REPLACE_WITH_SOURCE_KEY
-    signalforge update check</code></pre>
+    sf recorder check --source-key sk_live_REPLACE_WITH_SOURCE_KEY
+  sf recorder inspect --input ./calls
+    sf recorder watch --input ./calls --source-key sk_live_REPLACE_WITH_SOURCE_KEY
+    sf update check</code></pre>
     </div>
 
   </section>
