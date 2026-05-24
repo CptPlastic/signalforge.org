@@ -615,7 +615,7 @@
         Run a hub, add a recorder, and share trusted local signals without towers or gatekeepers.
       </p>
       <div class="hero-cta">
-        <a href="#recorder" class="btn btn-primary">Download P7 Recorder</a>
+        <a href="#recorder" class="btn btn-primary">Install SignalForge CLI</a>
         <a href="#mission" class="btn btn-ghost">Our Mission</a>
         <a href="https://p7hub.projectseven.us/" class="btn btn-glow" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>
       </div>
@@ -669,11 +669,11 @@
   <!-- RECORDER DOWNLOAD -->
   <section id="recorder">
     <div class="section-label">// download</div>
-    <h2>P7 Recorder</h2>
+    <h2>SignalForge CLI</h2>
     <p>
-      P7 Recorder is the desktop console that connects local audio to the SignalForge network.
-      Run it on a Windows machine with a radio feed, scanner output, SDR setup, or any compatible
-      audio source and start contributing to your community's feed.
+      SignalForge CLI is the new one-binary recorder path for Windows, macOS, and Linux.
+      Point it at an audio folder, validate your hub and source key, and upload calls without
+      installing a separate desktop recorder console.
     </p>
 
     <div id="dl-grid" class="dl-grid">
@@ -684,16 +684,23 @@
     <div class="steps">
       <div class="step">
         <span class="step-num">1</span>
-        <span>Download the Windows recorder console above.</span>
+        <span>Download the SignalForge CLI build for your platform above.</span>
       </div>
       <div class="step">
         <span class="step-num">2</span>
-        <span>Connect an audio source: scanner speaker output, radio feed, SDR audio, or another local stream.</span>
+        <span>Add it to your PATH and open a terminal.</span>
       </div>
       <div class="step">
         <span class="step-num">3</span>
-        <span>Configure your <strong>source key</strong> from your SignalForge Hub instance and start scanning.</span>
+        <span>Run <strong>signalforge recorder watch --input ./calls</strong> with your hub URL and source key.</span>
       </div>
+    </div>
+
+    <div class="install-panel" style="margin-top:1.4rem;">
+      <pre><code>signalforge recorder check --source-key sk_live_REPLACE_WITH_SOURCE_KEY
+signalforge recorder inspect --input ./calls
+    signalforge recorder watch --input ./calls --source-key sk_live_REPLACE_WITH_SOURCE_KEY
+    signalforge update check</code></pre>
     </div>
 
   </section>
@@ -904,7 +911,7 @@ curl http://localhost:8080/api/v1/health</code></pre>
       The city didn't give us the tower. So we built something that doesn't need one.
     </div>
     <p>
-      If you want to contribute a scanner source or run your own hub, run the recorder and reach out.
+      If you want to contribute a scanner source or run your own hub, install the SignalForge CLI and reach out.
       SignalForge is community infrastructure — and you're the infrastructure.
     </p>
     <div style="margin-top: 1.5rem;">
@@ -921,13 +928,15 @@ curl http://localhost:8080/api/v1/health</code></pre>
     </div>
   </footer>
 
-  <script>
-    const RELEASES_REPO = 'CptPlastic/signalforge.org';
+  <script type="module">
+    const RELEASES_REPO = 'CptPlastic/p7-scanner';
 
     const PLATFORMS = [
-      { key: 'windows', label: 'Windows Desktop', hint: 'setup.exe' },
-      { key: 'macos', label: 'macOS Desktop', hint: '.pkg' },
-      { key: 'linux', label: 'Linux CLI', hint: '.tar.gz' },
+      { key: 'windows', label: 'Windows CLI', hint: '.exe' },
+      { key: 'darwin-amd64', label: 'macOS Intel CLI', hint: 'darwin-amd64' },
+      { key: 'darwin-arm64', label: 'macOS Apple Silicon CLI', hint: 'darwin-arm64' },
+      { key: 'linux-amd64', label: 'Linux x64 CLI', hint: 'linux-amd64' },
+      { key: 'linux-arm64', label: 'Linux ARM64 CLI', hint: 'linux-arm64' },
     ];
 
     async function loadRelease() {
@@ -961,7 +970,7 @@ curl http://localhost:8080/api/v1/health</code></pre>
       }
     }
 
-    loadRelease();
+    await loadRelease();
   </script>
 
 </body>

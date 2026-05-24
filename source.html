@@ -105,7 +105,7 @@
     <ul>
       <li>Go server and database migrations.</li>
       <li>React web console.</li>
-      <li>Recorder clients and build scripts.</li>
+      <li>SignalForge CLI recorder runtime and legacy recorder build scripts.</li>
       <li>Dockerfiles, compose files, and the environment helper for local, production-style, Portainer, and peer-stack deployments.</li>
       <li>Operator documentation, update manifest behavior, and SignalHub federation docs.</li>
       <li>Example environment files with safe placeholders.</li>
@@ -140,6 +140,17 @@ curl http://localhost:8080/api/v1/health</code></pre>
       hub identity, sources, calls, and radio sets. See <a href="api.html">SignalForge Hub API</a>.
     </p>
 
+    <h2>Recorder CLI</h2>
+    <p>
+      The recommended recorder path is the cross-platform <code>signalforge</code> CLI. It checks hub
+      connectivity, validates source keys, inspects audio folders, uploads single files, and can watch
+      a folder for stable audio files.
+    </p>
+    <pre><code>signalforge recorder check --source-key sk_live_REPLACE_WITH_SOURCE_KEY
+signalforge recorder inspect --input ./calls
+  signalforge recorder watch --input ./calls --source-key sk_live_REPLACE_WITH_SOURCE_KEY
+  signalforge update check</code></pre>
+
     <h2>Local Build From Source</h2>
     <pre><code>cd server
 go test ./...
@@ -147,6 +158,8 @@ go build ./...</code></pre>
     <pre><code>cd client
 npm install
 npm run build</code></pre>
+    <pre><code>cd tools/signalforge-cli
+  go build -o dist/signalforge ./cmd/signalforge</code></pre>
     <pre><code>docker compose up --build -d</code></pre>
 
     <h2>Peer Test Stack</h2>

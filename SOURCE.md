@@ -6,7 +6,7 @@ SignalForge is the public community surface for operators. The public hub source
 
 - Go server and database migrations.
 - React web console.
-- Recorder clients and build scripts.
+- SignalForge CLI recorder runtime and legacy recorder build scripts.
 - Dockerfiles, compose files, and the environment helper for local, production-style, Portainer, and peer-stack deployments.
 - Operator documentation, update manifest behavior, and SignalHub federation docs.
 - Example environment files with safe placeholders.
@@ -23,7 +23,8 @@ SignalForge is the public community surface for operators. The public hub source
 Yes. The public mirror should include the clients. Operators need the whole hub, not just the API:
 
 - `client/` is the web console people use to run a hub.
-- `tools/p7-recorder-go/` and recorder UI tools are how local audio becomes a source.
+- `tools/signalforge-cli/` is the primary recorder path for folder ingest, source-key checks, and the Bubble Tea recorder console.
+- Legacy recorder tools stay in `tools/` while live capture moves into the CLI.
 - Docker and compose files tie the server and client together in a way non-developers can deploy.
 
 The mirror can still ship prebuilt containers and release assets for people who do not want to build from source.
