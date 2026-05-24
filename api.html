@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SignalForge Hub public API documentation for operators, recorder clients, and federation peers." />
+  <title>SignalForge Hub API</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --text: #c9c9c9;
+      --muted: #666666;
+      --green: #00ff41;
+      --green-dim: #006620;
+      --border: #1f1f1f;
+      --red: #ff4444;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-monospace, 'SFMono-Regular', 'Menlo', 'Courier New', monospace;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    nav div { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-end; }
+    nav a, main a { color: var(--green); text-decoration: none; }
+    nav a:hover, main a:hover { text-decoration: underline; }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    .label {
+      color: var(--green-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    h1, h2, h3 {
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+    }
+    h1 { font-size: clamp(1.7rem, 6vw, 3rem); margin-bottom: 1rem; }
+    h2 { font-size: 1rem; margin: 2.4rem 0 0.8rem; }
+    h3 { font-size: 0.84rem; margin: 1.4rem 0 0.45rem; color: var(--green); }
+    p { color: var(--muted); margin-bottom: 1rem; }
+    strong { color: var(--text); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.82rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.62rem 0.7rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--green); background: var(--bg2); text-transform: uppercase; letter-spacing: 0.08em; }
+    td { color: var(--muted); }
+    code { color: var(--text); }
+    pre {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-size: 0.82rem;
+    }
+    .callout {
+      border-left: 3px solid var(--green);
+      background: var(--bg2);
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      color: var(--text);
+    }
+    .warn { border-left-color: var(--red); }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">SignalForge</a>
+    <div>
+      <a href="source.html">Source</a>
+      <a href="directory/hubs.json">Directory Feed</a>
+      <a href="https://github.com/CptPlastic/signalforge-node" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </nav>
+  <main>
+    <div class="label">// hub api</div>
+    <h1>SignalForge Hub API</h1>
+    <p>
+      Every SignalForge Hub exposes the same API surface. The web console, recorder clients,
+      public radio-set players, and trusted peer hubs all talk to this hub API.
+    </p>
+    <div class="callout">
+      Use this as the public operator reference. The source repository contains the deeper developer copy at
+      <a href="https://github.com/CptPlastic/signalforge-node/blob/dev/docs/API.md" target="_blank" rel="noopener noreferrer">docs/API.md</a>.
+    </div>
+
+    <h2>Base URL</h2>
+    <p>Use the public hub URL as the base URL. API routes are under <code>/api/v1</code> unless noted.</p>
+    <pre><code>https://p7hub.projectseven.us/api/v1/health</code></pre>
+
+    <h2>Authentication Model</h2>
+    <table>
+      <thead><tr><th>Scope</th><th>Access</th></tr></thead>
+      <tbody>
+        <tr><td>Public</td><td>Health, version, update check, recorder ingest, public player routes.</td></tr>
+        <tr><td>User session</td><td>Call browsing, radio sets, talkgroup preferences, readable sources.</td></tr>
+        <tr><td>Admin session</td><td>Users, audit logs, hub identity, federation peers, source management, directory refresh.</td></tr>
+        <tr><td>Source key</td><td>Recorder upload through <code>POST /api/call-upload</code>.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>System Endpoints</h2>
+    <table>
+      <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>GET</td><td><code>/api/v1/health</code></td><td>Basic hub health.</td></tr>
+        <tr><td>GET</td><td><code>/api/v1/version</code></td><td>Server build metadata.</td></tr>
+        <tr><td>GET</td><td><code>/api/v1/update-check</code></td><td>Compare deployed tag to the public image manifest.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Hub Identity And Directory</h2>
+    <table>
+      <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>GET</td><td><code>/api/v1/hub/identity</code></td><td>Read local hub identity. Requires a user session.</td></tr>
+        <tr><td>PUT</td><td><code>/api/v1/hub/identity</code></td><td>Update hub name, URL, region, contact, and federation toggle.</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/hub/identity/keypair</code></td><td>Generate the local Ed25519 hub keypair if missing. Returns only the public key.</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/hub/directory/refresh</code></td><td>Fetch the configured directory feed and update local trust fields.</td></tr>
+        <tr><td>GET</td><td><code>/api/v1/hub/federation/status</code></td><td>Admin federation, trust, sharing, and peer status view.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Federation</h2>
+    <table>
+      <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>GET</td><td><code>/api/v1/hub/invites</code></td><td>List hub invite tokens.</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/hub/invites</code></td><td>Create a peer invite token.</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/hub/invites/accept</code></td><td>Accept a remote hub invite.</td></tr>
+        <tr><td>GET</td><td><code>/api/v1/hub/peers</code></td><td>List known peer hubs.</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/hub/peers</code></td><td>Connect to a remote hub with URL and invite token.</td></tr>
+        <tr><td>GET</td><td><code>/api/v1/federation/sources</code></td><td>Peer-readable shared local sources.</td></tr>
+        <tr><td>GET</td><td><code>/api/v1/federation/calls</code></td><td>Peer-readable shared local calls. Imported remote calls are not re-exported.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Calls, Sources, And Radio Sets</h2>
+    <table>
+      <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>GET</td><td><code>/api/v1/calls</code></td><td>List readable calls with pagination, search, talkgroup, group, source, and radio-set filters.</td></tr>
+        <tr><td>GET</td><td><code>/api/v1/calls/{id}/audio</code></td><td>Download or play readable call audio.</td></tr>
+        <tr><td>GET</td><td><code>/api/v1/sources</code></td><td>List visible ingestion sources.</td></tr>
+        <tr><td>PUT</td><td><code>/api/v1/sources</code></td><td>Create or update a source profile.</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/sources/{id}/keys</code></td><td>Generate a source upload key.</td></tr>
+        <tr><td>GET</td><td><code>/api/v1/radio-sets</code></td><td>List saved radio sets.</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/radio-sets/{id}/share</code></td><td>Generate a public player share token.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Recorder Upload</h2>
+    <p>
+      Recorder clients upload calls with multipart form data to <code>POST /api/call-upload</code>.
+      Required fields are <code>key</code>, <code>talkgroup</code>, and an <code>audio</code> file part.
+    </p>
+    <pre><code>curl -F key=sk_live_REPLACE_WITH_SOURCE_KEY -F test=1 https://p7hub.projectseven.us/api/call-upload</code></pre>
+    <p>
+      A valid key probe returns HTTP <code>417</code> with <code>incomplete call data: no talkgroup</code>.
+      That is expected and means the key was accepted.
+    </p>
+    <pre><code>p7-recorder-go --config config.toml --check-hub</code></pre>
+
+    <h2>Public Player</h2>
+    <table>
+      <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>GET</td><td><code>/public/player/{token}</code></td><td>Self-contained public player page.</td></tr>
+        <tr><td>GET</td><td><code>/public/ws/{token}</code></td><td>Public WebSocket with metadata and base64 audio in one message.</td></tr>
+        <tr><td>GET</td><td><code>/public/last-call/{token}</code></td><td>Most recent call audio for a share token.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Custom Consoles</h2>
+    <p>
+      Authenticated operator consoles can connect to <code>GET /ws</code> for live hub events.
+      Most integrations should use the documented HTTP routes first.
+    </p>
+    <div class="callout warn">
+      Do not publish source API keys, invite tokens, magic-link tokens, session cookies, or private hub keys.
+    </div>
+  </main>
+</body>
+</html>
