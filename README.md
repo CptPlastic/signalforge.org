@@ -4,7 +4,7 @@ VOICE IN THE STORM
 
 SignalForge is the public community surface for hub operators, docs, download links, directory data, and SignalHub federation.
 
-This repository is not the official binary build source. SignalForge CLI recorder binaries are published from `CptPlastic/p7-scanner` releases tagged `signalforge-cli-v*` and linked from the site. Hub source lives in `signalforge-node`; hub image update metadata is published here as `p7-scanner-update.json`.
+This repository is not the official binary build source. SignalForge CLI recorder binaries are built from `CptPlastic/p7-scanner`, mirrored here as public releases tagged `signalforge-cli-v*`, and linked from the site. Hub source lives in `signalforge-node`; hub image update metadata is published here as `p7-scanner-update.json`.
 
 See [SOURCE.md](SOURCE.md) for the public hub source policy and build paths. The public hub source lives at <https://github.com/CptPlastic/signalforge-node>.
 
