@@ -684,7 +684,7 @@
     <div class="steps">
       <div class="step">
         <span class="step-num">1</span>
-        <span>Download the SignalForge CLI build for your platform above.</span>
+        <span>Install with Homebrew or Scoop, or download the release archive for your platform above.</span>
       </div>
       <div class="step">
         <span class="step-num">2</span>
@@ -697,7 +697,13 @@
     </div>
 
     <div class="install-panel" style="margin-top:1.4rem;">
-      <pre><code>signalforge recorder check --source-key sk_live_REPLACE_WITH_SOURCE_KEY
+      <pre><code>brew tap CptPlastic/signalforge
+    brew install signalforge
+
+    scoop bucket add signalforge https://github.com/CptPlastic/scoop-signalforge
+    scoop install signalforge
+
+    signalforge recorder check --source-key sk_live_REPLACE_WITH_SOURCE_KEY
 signalforge recorder inspect --input ./calls
     signalforge recorder watch --input ./calls --source-key sk_live_REPLACE_WITH_SOURCE_KEY
     signalforge update check</code></pre>
@@ -932,7 +938,7 @@ curl http://localhost:8080/api/v1/health</code></pre>
     const RELEASES_REPO = 'CptPlastic/signalforge.org';
 
     const PLATFORMS = [
-      { key: 'windows', label: 'Windows CLI', hint: '.exe' },
+      { key: 'windows', label: 'Windows CLI', hint: 'windows-amd64' },
       { key: 'darwin-amd64', label: 'macOS Intel CLI', hint: 'darwin-amd64' },
       { key: 'darwin-arm64', label: 'macOS Apple Silicon CLI', hint: 'darwin-arm64' },
       { key: 'linux-amd64', label: 'Linux x64 CLI', hint: 'linux-amd64' },
