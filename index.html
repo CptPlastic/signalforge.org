@@ -563,6 +563,7 @@
       <a href="#mission">Mission</a>
       <a href="#recorder">Recorder</a>
       <a href="#run">Run a Hub</a>
+      <a href="#transcription">Transcription</a>
       <a href="#source">Source</a>
       <a href="api.html">API</a>
       <a href="#signalhub">SignalHub</a>
@@ -775,6 +776,58 @@ curl http://localhost:8080/api/v1/health</code></pre>
       <a href="source.html#fastest-operator-path" class="btn btn-primary">Install Notes</a>
       <a href="https://github.com/CptPlastic/signalforge-node" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Hub Source GitHub</a>
     </div>
+  </section>
+
+  <!-- TRANSCRIPTION -->
+  <section id="transcription">
+    <div class="section-label">// speech-to-text</div>
+    <h2>Transcription</h2>
+    <p>
+      SignalForge Hub ships with an optional self-hosted transcription worker that turns
+      recorded calls into searchable text — no third-party API key, no audio leaving your
+      infrastructure. It runs <strong>faster-whisper</strong> inside a Docker container and
+      pulls jobs from the hub's internal queue.
+    </p>
+    <div class="callout">
+      Enable the <strong>transcriber</strong> service in your Compose stack and calls are
+      automatically queued for transcription when they arrive. Results appear in the web
+      console alongside each call.
+    </div>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>Local &amp; Private</h3>
+        <p>Runs entirely on your hardware. Audio is never sent to an external service.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Configurable Model</h3>
+        <p>Choose the Whisper model size that fits your hardware. <strong>small</strong> is the recommended default — meaningfully better than <strong>base</strong> while still practical on CPU.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Radio-Optimized</h3>
+        <p>Set a domain prompt to prime the model with scanner vocabulary — ten-codes, callsigns, local streets — before it touches a single call.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.2rem;">
+      Key environment variables for the <strong>transcriber</strong> service:
+    </p>
+    <div class="install-panel">
+      <pre><code># Model size — tiny · base · small · medium · large-v3
+TRANSCRIPTION_MODEL=small
+
+# Comma-free phrase list that primes the model for your traffic
+TRANSCRIPTION_INITIAL_PROMPT=Police and fire dispatch radio traffic. Units responding. 10-4. Copy. Dispatch. Requesting backup. Officer down. Units on scene. Negative. Affirmative. Stand by. All units. Channel.
+
+# Force a language or leave blank for auto-detect
+TRANSCRIPTION_LANGUAGE=en
+
+# Run on CPU (default) or cuda if you have a GPU
+TRANSCRIPTION_DEVICE=cpu</code></pre>
+    </div>
+    <p>
+      Larger models produce better accuracy but require more RAM and CPU time. <strong>small</strong>
+      is a good starting point for most deployments. <strong>medium</strong> or <strong>large-v3</strong>
+      are worth trying if you have the hardware and want the best results on noisy radio audio.
+    </p>
   </section>
 
   <!-- SOURCE -->
