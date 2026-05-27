@@ -1,19 +1,19 @@
 {
   "product": "p7-scanner",
   "channel": "stable",
-  "version": "b2ffed1",
-  "commit": "b2ffed1e27f01f74f74af9226ec7e298c2d28aa5",
-  "shortCommit": "b2ffed1",
+  "version": "0199914",
+  "commit": "01999146a20694e61585e4525cad19bb846f14d4",
+  "shortCommit": "0199914",
   "imageRegistry": "ghcr.io",
   "imageNamespace": "signalforge-org",
-  "imageTag": "b2ffed1",
-  "publishedAt": "2026-05-27T01:13:13Z",
+  "imageTag": "0199914",
+  "publishedAt": "2026-05-27T01:25:12Z",
   "images": {
-    "api": "ghcr.io/signalforge-org/signalforge-hub-api:b2ffed1",
-    "web": "ghcr.io/signalforge-org/signalforge-hub-web:b2ffed1",
-    "mockCallSender": "ghcr.io/signalforge-org/signalforge-hub-mock-call-sender:b2ffed1",
-    "transcriber": "ghcr.io/signalforge-org/signalforge-hub-transcriber:b2ffed1",
-    "legacyServer": "ghcr.io/signalforge-org/p7-scanner-server:b2ffed1",
-    "legacyClient": "ghcr.io/signalforge-org/p7-scanner-client:b2ffed1"
+    "api": "ghcr.io/signalforge-org/signalforge-hub-api:0199914",
+    "web": "ghcr.io/signalforge-org/signalforge-hub-web:0199914",
+    "mockCallSender": "ghcr.io/signalforge-org/signalforge-hub-mock-call-sender:0199914",
+    "transcriber": "ghcr.io/signalforge-org/signalforge-hub-transcriber:0199914",
+    "legacyServer": "ghcr.io/signalforge-org/p7-scanner-server:0199914",
+    "legacyClient": "ghcr.io/signalforge-org/p7-scanner-client:0199914"
   }
 }
