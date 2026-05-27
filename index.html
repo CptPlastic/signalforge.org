@@ -564,6 +564,7 @@
       <a href="#recorder">Recorder</a>
       <a href="#run">Run a Hub</a>
       <a href="#transcription">Transcription</a>
+      <a href="#ptt">PTT</a>
       <a href="#source">Source</a>
       <a href="api.html">API</a>
       <a href="#signalhub">SignalHub</a>
@@ -827,6 +828,72 @@ TRANSCRIPTION_DEVICE=cpu</code></pre>
       Larger models produce better accuracy but require more RAM and CPU time. <strong>small</strong>
       is a good starting point for most deployments. <strong>medium</strong> or <strong>large-v3</strong>
       are worth trying if you have the hardware and want the best results on noisy radio audio.
+    </p>
+  </section>
+
+  <!-- PTT -->
+  <section id="ptt">
+    <div class="section-label">// push-to-talk</div>
+    <h2>Push-to-Talk Inside a Radio Set</h2>
+    <p>
+      Hubs can carry more than just received radio traffic. Authorized users in a hub can press-and-hold
+      a button — in the web client or a per-set "PTT mode" screen — to record a short audio message that
+      is delivered to every listener of that radio set, alongside the real radio. Each PTT call gets a
+      distinct amber badge, a Nextel-style chirp before playback, and the sender's identity in the call
+      log, so listeners always know they're hearing a person, not the radio.
+    </p>
+    <div class="callout">
+      PTT is an opt-in capability. A hub admin enables <strong>tx_enabled</strong> per user, so a hub
+      can be a pure listen-only system or a coordinated comms channel — your choice.
+    </div>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>Per-Set Virtual Talkgroup</h3>
+        <p>Every radio set gets its own PTT talkgroup (9_000_001+) auto-allocated on creation. PTT calls
+          land on that channel so they fan out only to that set's listeners.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Hold-to-Talk in the Browser</h3>
+        <p>Press and hold the PTT button — or hold spacebar on a dedicated PTT screen — to record. On
+          release, the clip uploads, lands as a call, and plays for everyone on the radio set in seconds.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Dispatcher Broadcast</h3>
+        <p>Users with the <strong>dispatcher_enabled</strong> flag can key multiple radio sets at once,
+          delivering a single transmission across many talkgroups — useful for coordinated alerts across
+          a hub's listener groups.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Listener Cue</h3>
+        <p>Every PTT call plays a short two-tone chirp before the audio so listeners instantly know it's
+          a person keying, not a scanned transmission. The call log labels the sender by email.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Idempotent Upload</h3>
+        <p>Clients generate a UUID per transmission. Network retries return the same call without creating
+          duplicates — important for mobile PTT on spotty connections.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Phase 1 — Web First</h3>
+        <p>Today: web PTT for desktop and mobile browsers. Coming next: native iOS / Android with
+          hardware-button support (Bluetooth PTT headsets, Apple's PushToTalk framework).</p>
+      </div>
+    </div>
+    <p style="margin-top:1.2rem;">
+      Endpoints surfaced by the PTT subsystem:
+    </p>
+    <div class="install-panel">
+      <pre><code># Single-set PTT (held button on one radio set)
+POST /api/v1/radio-sets/{id}/ptt
+multipart: audio, duration, clientId
+
+# Multi-set dispatcher broadcast (one keying, N talkgroups)
+POST /api/v1/ptt/broadcast
+multipart: audio, duration, clientId, radioSetIds=id1,id2,id3</code></pre>
+    </div>
+    <p>
+      Both endpoints require an active session with <strong>tx_enabled</strong> (and
+      <strong>dispatcher_enabled</strong> for the broadcast endpoint). Guests cannot transmit.
     </p>
   </section>
 
