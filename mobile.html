@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SignalForge Mobile — native iOS and Android app for hub monitoring, push-to-talk, and dispatcher broadcast." />
+  <title>SignalForge Mobile — Voice in the Storm</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --text: #c9c9c9;
+      --muted: #555555;
+      --green: #00ff41;
+      --green-dim: #006620;
+      --amber: #ffb020;
+      --border: #1f1f1f;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.25rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .site-nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 3.25rem;
+      gap: 1rem;
+    }
+    .nav-brand { color: var(--green); font-weight: 700; text-decoration: none; }
+    .nav-brand:hover { color: #33ff66; }
+    .nav-links { display: flex; gap: 1rem; align-items: center; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(2.5rem, 6vh, 4rem) 1.5rem 3rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .app-icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    }
+    h1 {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+    .hero-sub {
+      color: var(--green);
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .version-pill {
+      display: inline-block;
+      margin-bottom: 1.25rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--green-dim);
+      color: var(--green);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+    }
+    .hero-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      max-width: 36rem;
+      margin: 0 auto 1.75rem;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.2rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .btn-glow {
+      background: var(--green);
+      color: #0a0a0a;
+      border-color: var(--green);
+      font-weight: 700;
+    }
+    .btn-glow:hover { background: #33ff66; }
+    .btn-ghost { background: transparent; color: var(--muted); }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
+    .btn-soon {
+      background: var(--bg2);
+      color: var(--muted);
+      cursor: default;
+      opacity: 0.85;
+    }
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--green-dim);
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.85rem; }
+    p strong { color: var(--text); }
+    .callout {
+      border-left: 3px solid var(--amber);
+      padding: 1rem 1.25rem;
+      background: var(--bg2);
+      margin: 1.25rem 0;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+    .hub-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 1rem;
+    }
+    .hub-card h3 {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.45rem;
+    }
+    .hub-card p { font-size: 0.8rem; margin-bottom: 0; }
+    .hub-card.amber h3 { color: var(--amber); }
+    .brand-swatch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .swatch {
+      flex: 1 1 140px;
+      border: 1px solid var(--border);
+      padding: 0.85rem;
+      background: var(--bg2);
+      font-size: 0.75rem;
+    }
+    .swatch-chip {
+      width: 100%;
+      height: 2.5rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid var(--border);
+    }
+    footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem 3rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+    footer a { color: var(--green); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <a class="nav-brand" href="index.html">SignalForge</a>
+      <nav class="nav-links" aria-label="Mobile">
+        <a href="index.html">Home</a>
+        <a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Hub</a>
+        <a href="api.html">API</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <img class="app-icon" src="icon.svg" width="120" height="120" alt="SignalForge app icon" />
+    <h1>SignalForge Mobile</h1>
+    <div class="hero-sub">Voice in the Storm — in your pocket</div>
+    <div class="version-pill">v1.0.1</div>
+    <p class="hero-desc">
+      Native iOS and Android client for SignalForge hubs: live monitor playback, push-to-talk,
+      dispatcher broadcast, and background listening while locked — built for the same community
+      network as the web console.
+    </p>
+    <div class="btn-row">
+      <a href="https://p7hub.projectseven.us/" class="btn btn-glow" target="_blank" rel="noopener noreferrer">Connect to Hub</a>
+      <a href="index.html#onboarding" class="btn btn-ghost">Create Account</a>
+    </div>
+    <div class="btn-row">
+      <span class="btn btn-soon">App Store — coming soon</span>
+      <span class="btn btn-soon">Google Play — coming soon</span>
+    </div>
+    <p style="font-size:0.78rem; margin-top:0.75rem;">
+      Early access via TestFlight and internal Android builds. Public store listings are next.
+    </p>
+  </div>
+
+  <section id="features">
+    <div class="section-label">// capabilities</div>
+    <h2>What the app does</h2>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>Live Monitor</h3>
+        <p>WebSocket-driven playback with a FIFO queue on busy talkgroups, lock-screen Now Playing, and background audio hold.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Push-to-Talk</h3>
+        <p>Hold-to-talk on each radio set — same hub endpoints as the web client, with idempotent uploads for spotty mobile data.</p>
+      </div>
+      <div class="hub-card amber">
+        <h3>◎ Dispatcher</h3>
+        <p>Broadcast one keying to many radio sets at once. Incoming dispatches show an amber <strong>DISPATCH</strong> badge in the call log.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Magic-link sign-in</h3>
+        <p>Point the app at your hub URL, paste the token from email, and you're on the air — no separate mobile account system.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Radio log</h3>
+        <p>In-app diagnostics for PTT and playback events — share logs from TestFlight builds when you need to debug in the field.</p>
+      </div>
+      <div class="hub-card">
+        <h3>iPad + phone</h3>
+        <p>Universal iOS build and Android package — same PTT stack, optimized for native AVAudioSession on Apple devices.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="brand">
+    <div class="section-label">// brand</div>
+    <h2>Visual identity</h2>
+    <p>
+      The mobile app uses the same mast-and-beacon mark as <a href="index.html" style="color:var(--green);">signalforge.org</a>
+      on a console-black field. Typography follows JetBrains Mono — terminal green for live traffic, amber for dispatch.
+    </p>
+    <div class="brand-swatch">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#0a0a0a;"></div>
+        Console black<br /><code>#0a0a0a</code>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#00ff41;"></div>
+        Signal green<br /><code>#00ff41</code>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#ffb020;"></div>
+        Dispatch amber<br /><code>#ffb020</code>
+      </div>
+    </div>
+    <div class="callout">
+      Logo assets: <a href="LOGO.svg" style="color:var(--amber);">LOGO.svg</a> (mark only) and
+      <a href="icon.svg" style="color:var(--amber);">icon.svg</a> (app icon source, 256×256).
+    </div>
+  </section>
+
+  <section id="requirements">
+    <div class="section-label">// operator notes</div>
+    <h2>Hub requirements</h2>
+    <p>
+      Mobile PTT needs <strong>tx_enabled</strong> on your hub account. Dispatcher broadcast needs
+      <strong>dispatcher_enabled</strong>. Guests cannot transmit. Dispatch calls are tagged
+      <code style="color:var(--text);">origin: ptt-dispatch</code> on current hub builds.
+    </p>
+    <p>
+      Works with any SignalForge hub you can reach over HTTPS — hosted hub, your own Compose stack, or a peer on SignalHub.
+    </p>
+  </section>
+
+  <footer>
+    <p>SignalForge Mobile · v1.0.1</p>
+    <p style="margin-top:0.5rem;">
+      <a href="index.html">signalforge.org</a> · Yukon, Oklahoma — projectseven co ltd
+    </p>
+  </footer>
+</body>
+</html>
