@@ -19,9 +19,13 @@ Normal tap cycles **only** the tactical trio — never passes through full brigh
 DARK → NITE → NVG → DARK → …
 ```
 
-**LIGHT** requires a **long-press** (800 ms) on the DARK control. This prevents accidentally flash-blinding NVG or night-adapted eyes.
+**LIGHT** is deliberate but desktop-friendly:
 
-From LIGHT, one tap returns to DARK.
+- **Click ☀ LIGHT** in the mode bar to enter daylight mode.
+- **Click ☀ LIGHT** again (or any tactical mode) to leave.
+- **Long-press DARK** (800 ms) also enters LIGHT on touch devices.
+
+The tactical cycle never auto-passes through LIGHT, so you won't flash-blind NVG or night-adapted eyes mid-op.
 
 ## Palettes
 
@@ -93,7 +97,7 @@ Switcher label format (all surfaces):
 
 - Active mode: accent color + underline
 - Inactive: muted
-- LIGHT tab: long-press to enter; short tap from another mode does nothing
+- LIGHT tab: click to enter/exit; long-press DARK is an alternate on touch
 
 ## Related
 

@@ -16,6 +16,50 @@ html[data-sf-mode="dark"] {
   --sf-nav-bg: rgba(10, 10, 10, 0.94);
   --sf-panel-hover: rgba(255, 199, 0, 0.06);
   --sf-cta-hover: rgba(255, 199, 0, 0.08);
+  --sf-storm-floor: rgba(0, 40, 18, 0.35);
+  --sf-storm-top: #080808;
+  --sf-storm-mid: #0a0a0a;
+  --sf-storm-bottom: #060606;
+  --sf-storm-sky: rgba(255, 255, 255, 0.035);
+  --sf-bolt-a1: rgba(180, 255, 200, 0.55);
+  --sf-bolt-a2: rgba(0, 255, 65, 0.28);
+  --sf-bolt-a3: rgba(0, 255, 65, 0.12);
+  --sf-bolt-b1: rgba(190, 255, 210, 0.5);
+  --sf-bolt-b2: rgba(0, 255, 65, 0.22);
+  --sf-bolt-b3: rgba(160, 255, 185, 0.35);
+  --sf-bolt-c1: rgba(0, 255, 65, 0.18);
+  --sf-cloud-1: #1a1a1a;
+  --sf-cloud-2: #171717;
+  --sf-cloud-3: #141414;
+  --sf-cloud-m1: #222222;
+  --sf-cloud-m2: #1c1c1c;
+  --sf-cloud-m3: #1e1e1e;
+  --sf-cloud-f1: #252525;
+  --sf-cloud-f2: #1f1f1f;
+  --sf-cloud-f3: #202020;
+  --sf-vignette-mid: rgba(0, 0, 0, 0.35);
+  --sf-vignette-edge: rgba(0, 0, 0, 0.72);
+  --sf-vignette-top: rgba(0, 0, 0, 0.15);
+  --sf-vignette-bottom: rgba(0, 0, 0, 0.45);
+  --sf-logo-glow-white: rgba(255, 255, 255, 0.12);
+  --sf-logo-glow-accent: rgba(0, 255, 65, 0.14);
+  --sf-heading-glow-white: rgba(255, 255, 255, 0.08);
+  --sf-heading-glow-accent: rgba(255, 199, 0, 0.18);
+  --sf-sub-glow: rgba(255, 199, 0, 0.22);
+  --sf-btn-on-accent: #0a0a0a;
+  --sf-glow-strong: rgba(255, 199, 0, 0.45);
+  --sf-glow-mid: rgba(255, 199, 0, 0.18);
+  --sf-glow-hover-strong: rgba(255, 199, 0, 0.32);
+  --sf-glow-hover-mid: rgba(255, 199, 0, 0.12);
+  --sf-glow-pulse-strong: rgba(255, 199, 0, 0.58);
+  --sf-glow-pulse-mid: rgba(255, 199, 0, 0.2);
+  --sf-panel-glow: rgba(255, 199, 0, 0.1);
+  --sf-hub-glow: rgba(255, 199, 0, 0.35);
+  --sf-hub-glow-soft: rgba(255, 199, 0, 0.14);
+  --sf-hub-glow-pulse: rgba(255, 199, 0, 0.5);
+  --sf-hub-glow-hover: rgba(255, 199, 0, 0.45);
+  --sf-nav-summary-hover: rgba(255, 255, 255, 0.04);
+  --sf-shadow-drop: rgba(0, 0, 0, 0.45);
 }
 
 html[data-sf-mode="nite"] {
@@ -32,6 +76,50 @@ html[data-sf-mode="nite"] {
   --sf-nav-bg: rgba(8, 0, 0, 0.94);
   --sf-panel-hover: rgba(170, 32, 32, 0.08);
   --sf-cta-hover: rgba(170, 32, 32, 0.1);
+  --sf-storm-floor: rgba(40, 0, 0, 0.4);
+  --sf-storm-top: #060000;
+  --sf-storm-mid: #080000;
+  --sf-storm-bottom: #040000;
+  --sf-storm-sky: rgba(120, 20, 20, 0.04);
+  --sf-bolt-a1: rgba(0, 0, 0, 0);
+  --sf-bolt-a2: rgba(0, 0, 0, 0);
+  --sf-bolt-a3: rgba(0, 0, 0, 0);
+  --sf-bolt-b1: rgba(0, 0, 0, 0);
+  --sf-bolt-b2: rgba(0, 0, 0, 0);
+  --sf-bolt-b3: rgba(0, 0, 0, 0);
+  --sf-bolt-c1: rgba(0, 0, 0, 0);
+  --sf-cloud-1: #140808;
+  --sf-cloud-2: #120606;
+  --sf-cloud-3: #100404;
+  --sf-cloud-m1: #1a0a0a;
+  --sf-cloud-m2: #160808;
+  --sf-cloud-m3: #180909;
+  --sf-cloud-f1: #220c0c;
+  --sf-cloud-f2: #1c0a0a;
+  --sf-cloud-f3: #1e0b0b;
+  --sf-vignette-mid: rgba(0, 0, 0, 0.45);
+  --sf-vignette-edge: rgba(0, 0, 0, 0.78);
+  --sf-vignette-top: rgba(0, 0, 0, 0.2);
+  --sf-vignette-bottom: rgba(0, 0, 0, 0.5);
+  --sf-logo-glow-white: rgba(170, 32, 32, 0.08);
+  --sf-logo-glow-accent: rgba(170, 32, 32, 0.1);
+  --sf-heading-glow-white: rgba(170, 32, 32, 0.06);
+  --sf-heading-glow-accent: rgba(170, 32, 32, 0.14);
+  --sf-sub-glow: rgba(170, 32, 32, 0.18);
+  --sf-btn-on-accent: #080000;
+  --sf-glow-strong: rgba(170, 32, 32, 0.4);
+  --sf-glow-mid: rgba(170, 32, 32, 0.16);
+  --sf-glow-hover-strong: rgba(204, 51, 51, 0.28);
+  --sf-glow-hover-mid: rgba(170, 32, 32, 0.1);
+  --sf-glow-pulse-strong: rgba(170, 32, 32, 0.52);
+  --sf-glow-pulse-mid: rgba(170, 32, 32, 0.18);
+  --sf-panel-glow: rgba(170, 32, 32, 0.08);
+  --sf-hub-glow: rgba(170, 32, 32, 0.32);
+  --sf-hub-glow-soft: rgba(170, 32, 32, 0.12);
+  --sf-hub-glow-pulse: rgba(204, 51, 51, 0.42);
+  --sf-hub-glow-hover: rgba(170, 32, 32, 0.4);
+  --sf-nav-summary-hover: rgba(170, 32, 32, 0.06);
+  --sf-shadow-drop: rgba(0, 0, 0, 0.55);
 }
 
 html[data-sf-mode="nvg"] {
@@ -48,6 +136,50 @@ html[data-sf-mode="nvg"] {
   --sf-nav-bg: rgba(6, 8, 10, 0.94);
   --sf-panel-hover: rgba(74, 104, 120, 0.12);
   --sf-cta-hover: rgba(74, 104, 120, 0.14);
+  --sf-storm-floor: rgba(10, 20, 28, 0.35);
+  --sf-storm-top: #050608;
+  --sf-storm-mid: #06080a;
+  --sf-storm-bottom: #040506;
+  --sf-storm-sky: rgba(74, 104, 120, 0.03);
+  --sf-bolt-a1: rgba(0, 0, 0, 0);
+  --sf-bolt-a2: rgba(0, 0, 0, 0);
+  --sf-bolt-a3: rgba(0, 0, 0, 0);
+  --sf-bolt-b1: rgba(0, 0, 0, 0);
+  --sf-bolt-b2: rgba(0, 0, 0, 0);
+  --sf-bolt-b3: rgba(0, 0, 0, 0);
+  --sf-bolt-c1: rgba(0, 0, 0, 0);
+  --sf-cloud-1: #0c1014;
+  --sf-cloud-2: #0a0e12;
+  --sf-cloud-3: #080c10;
+  --sf-cloud-m1: #12181c;
+  --sf-cloud-m2: #101418;
+  --sf-cloud-m3: #11161a;
+  --sf-cloud-f1: #1a2024;
+  --sf-cloud-f2: #161c20;
+  --sf-cloud-f3: #181e22;
+  --sf-vignette-mid: rgba(0, 0, 0, 0.42);
+  --sf-vignette-edge: rgba(0, 0, 0, 0.8);
+  --sf-vignette-top: rgba(0, 0, 0, 0.18);
+  --sf-vignette-bottom: rgba(0, 0, 0, 0.52);
+  --sf-logo-glow-white: rgba(74, 104, 120, 0.06);
+  --sf-logo-glow-accent: rgba(74, 104, 120, 0.08);
+  --sf-heading-glow-white: rgba(74, 104, 120, 0.04);
+  --sf-heading-glow-accent: rgba(74, 104, 120, 0.1);
+  --sf-sub-glow: rgba(74, 104, 120, 0.12);
+  --sf-btn-on-accent: #06080a;
+  --sf-glow-strong: rgba(74, 104, 120, 0.28);
+  --sf-glow-mid: rgba(74, 104, 120, 0.1);
+  --sf-glow-hover-strong: rgba(90, 120, 136, 0.22);
+  --sf-glow-hover-mid: rgba(74, 104, 120, 0.08);
+  --sf-glow-pulse-strong: rgba(74, 104, 120, 0.36);
+  --sf-glow-pulse-mid: rgba(74, 104, 120, 0.12);
+  --sf-panel-glow: rgba(74, 104, 120, 0.08);
+  --sf-hub-glow: rgba(74, 104, 120, 0.22);
+  --sf-hub-glow-soft: rgba(74, 104, 120, 0.08);
+  --sf-hub-glow-pulse: rgba(90, 120, 136, 0.3);
+  --sf-hub-glow-hover: rgba(74, 104, 120, 0.28);
+  --sf-nav-summary-hover: rgba(74, 104, 120, 0.08);
+  --sf-shadow-drop: rgba(0, 0, 0, 0.6);
 }
 
 html[data-sf-mode="light"] {
@@ -64,6 +196,57 @@ html[data-sf-mode="light"] {
   --sf-nav-bg: rgba(236, 232, 220, 0.94);
   --sf-panel-hover: rgba(160, 120, 0, 0.08);
   --sf-cta-hover: rgba(160, 120, 0, 0.1);
+  --sf-storm-floor: rgba(160, 120, 0, 0.08);
+  --sf-storm-top: #e8e4d8;
+  --sf-storm-mid: #ece8dc;
+  --sf-storm-bottom: #e0dcd0;
+  --sf-storm-sky: rgba(255, 255, 255, 0.5);
+  --sf-bolt-a1: rgba(0, 0, 0, 0);
+  --sf-bolt-a2: rgba(0, 0, 0, 0);
+  --sf-bolt-a3: rgba(0, 0, 0, 0);
+  --sf-bolt-b1: rgba(0, 0, 0, 0);
+  --sf-bolt-b2: rgba(0, 0, 0, 0);
+  --sf-bolt-b3: rgba(0, 0, 0, 0);
+  --sf-bolt-c1: rgba(0, 0, 0, 0);
+  --sf-cloud-1: #d8d4c8;
+  --sf-cloud-2: #d4d0c4;
+  --sf-cloud-3: #d0ccc0;
+  --sf-cloud-m1: #e0dcd0;
+  --sf-cloud-m2: #dcd8cc;
+  --sf-cloud-m3: #dedad0;
+  --sf-cloud-f1: #ece8dc;
+  --sf-cloud-f2: #e8e4d8;
+  --sf-cloud-f3: #eae6da;
+  --sf-vignette-mid: rgba(160, 120, 0, 0.06);
+  --sf-vignette-edge: rgba(26, 24, 20, 0.12);
+  --sf-vignette-top: rgba(255, 255, 255, 0.35);
+  --sf-vignette-bottom: rgba(26, 24, 20, 0.08);
+  --sf-logo-glow-white: rgba(26, 24, 20, 0.06);
+  --sf-logo-glow-accent: rgba(160, 120, 0, 0.1);
+  --sf-heading-glow-white: rgba(26, 24, 20, 0.04);
+  --sf-heading-glow-accent: rgba(160, 120, 0, 0.12);
+  --sf-sub-glow: rgba(160, 120, 0, 0.14);
+  --sf-btn-on-accent: #1a1814;
+  --sf-glow-strong: rgba(160, 120, 0, 0.28);
+  --sf-glow-mid: rgba(160, 120, 0, 0.12);
+  --sf-glow-hover-strong: rgba(160, 120, 0, 0.22);
+  --sf-glow-hover-mid: rgba(160, 120, 0, 0.08);
+  --sf-glow-pulse-strong: rgba(160, 120, 0, 0.36);
+  --sf-glow-pulse-mid: rgba(160, 120, 0, 0.14);
+  --sf-panel-glow: rgba(160, 120, 0, 0.08);
+  --sf-hub-glow: rgba(160, 120, 0, 0.22);
+  --sf-hub-glow-soft: rgba(160, 120, 0, 0.08);
+  --sf-hub-glow-pulse: rgba(160, 120, 0, 0.3);
+  --sf-hub-glow-hover: rgba(160, 120, 0, 0.28);
+  --sf-nav-summary-hover: rgba(26, 24, 20, 0.04);
+  --sf-shadow-drop: rgba(26, 24, 20, 0.12);
+}
+
+/* No green lightning flashes in tactical / NVG modes */
+html[data-sf-mode="nite"] .lightning,
+html[data-sf-mode="nvg"] .lightning,
+html[data-sf-mode="light"] .lightning {
+  display: none;
 }
 
 .sf-mode-bar {

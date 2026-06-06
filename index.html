@@ -48,14 +48,14 @@
       pointer-events: none;
       overflow: hidden;
       background:
-        radial-gradient(ellipse 120% 80% at 50% 110%, rgba(0, 40, 18, 0.35) 0%, transparent 55%),
-        linear-gradient(180deg, #080808 0%, #0a0a0a 42%, #060606 100%);
+        radial-gradient(ellipse 120% 80% at 50% 110%, var(--sf-storm-floor) 0%, transparent 55%),
+        linear-gradient(180deg, var(--sf-storm-top) 0%, var(--sf-storm-mid) 42%, var(--sf-storm-bottom) 100%);
     }
     .storm-sky {
       position: absolute;
       inset: -8%;
       background:
-        radial-gradient(ellipse 55% 38% at 50% 22%, rgba(255, 255, 255, 0.035) 0%, transparent 70%);
+        radial-gradient(ellipse 55% 38% at 50% 22%, var(--sf-storm-sky) 0%, transparent 70%);
       animation: sky-breathe 22s ease-in-out infinite;
     }
     .lightning {
@@ -67,22 +67,22 @@
     }
     .lightning-a {
       background:
-        radial-gradient(ellipse 38% 22% at 68% 18%, rgba(180, 255, 200, 0.55) 0%, rgba(0, 255, 65, 0.28) 38%, transparent 72%),
-        radial-gradient(ellipse 70% 35% at 50% 55%, rgba(0, 255, 65, 0.12) 0%, transparent 68%);
+        radial-gradient(ellipse 38% 22% at 68% 18%, var(--sf-bolt-a1) 0%, var(--sf-bolt-a2) 38%, transparent 72%),
+        radial-gradient(ellipse 70% 35% at 50% 55%, var(--sf-bolt-a3) 0%, transparent 68%);
       filter: blur(18px);
       animation: bolt-a 9.5s ease-out infinite;
     }
     .lightning-b {
       background:
-        radial-gradient(ellipse 32% 18% at 22% 24%, rgba(190, 255, 210, 0.5) 0%, rgba(0, 255, 65, 0.22) 42%, transparent 76%),
-        radial-gradient(ellipse 48% 24% at 78% 32%, rgba(160, 255, 185, 0.35) 0%, transparent 70%);
+        radial-gradient(ellipse 32% 18% at 22% 24%, var(--sf-bolt-b1) 0%, var(--sf-bolt-b2) 42%, transparent 76%),
+        radial-gradient(ellipse 48% 24% at 78% 32%, var(--sf-bolt-b3) 0%, transparent 70%);
       filter: blur(22px);
       animation: bolt-b 13s ease-out infinite;
       animation-delay: -4.2s;
     }
     .lightning-c {
       background:
-        radial-gradient(ellipse 90% 40% at 50% 40%, rgba(0, 255, 65, 0.18) 0%, transparent 62%);
+        radial-gradient(ellipse 90% 40% at 50% 40%, var(--sf-bolt-c1) 0%, transparent 62%);
       filter: blur(28px);
       animation: bolt-c 17s ease-out infinite;
       animation-delay: -9.8s;
@@ -97,27 +97,27 @@
       z-index: 2;
       opacity: 0.55;
       background:
-        radial-gradient(ellipse 55% 38% at 28% 38%, #1a1a1a 0%, transparent 68%),
-        radial-gradient(ellipse 48% 32% at 72% 48%, #171717 0%, transparent 65%),
-        radial-gradient(ellipse 62% 40% at 50% 22%, #141414 0%, transparent 62%);
+        radial-gradient(ellipse 55% 38% at 28% 38%, var(--sf-cloud-1) 0%, transparent 68%),
+        radial-gradient(ellipse 48% 32% at 72% 48%, var(--sf-cloud-2) 0%, transparent 65%),
+        radial-gradient(ellipse 62% 40% at 50% 22%, var(--sf-cloud-3) 0%, transparent 62%);
       animation: cloud-drift-a 48s ease-in-out infinite alternate;
     }
     .cloud-mid {
       z-index: 3;
       opacity: 0.78;
       background:
-        radial-gradient(ellipse 58% 36% at 62% 34%, #222 0%, transparent 66%),
-        radial-gradient(ellipse 44% 28% at 18% 52%, #1c1c1c 0%, transparent 64%),
-        radial-gradient(ellipse 50% 30% at 84% 58%, #1e1e1e 0%, transparent 62%);
+        radial-gradient(ellipse 58% 36% at 62% 34%, var(--sf-cloud-m1) 0%, transparent 66%),
+        radial-gradient(ellipse 44% 28% at 18% 52%, var(--sf-cloud-m2) 0%, transparent 64%),
+        radial-gradient(ellipse 50% 30% at 84% 58%, var(--sf-cloud-m3) 0%, transparent 62%);
       animation: cloud-drift-b 36s ease-in-out infinite alternate-reverse;
     }
     .cloud-front {
       z-index: 4;
       opacity: 0.92;
       background:
-        radial-gradient(ellipse 70% 42% at 48% 42%, #252525 0%, transparent 58%),
-        radial-gradient(ellipse 38% 24% at 12% 62%, #1f1f1f 0%, transparent 60%),
-        radial-gradient(ellipse 42% 26% at 88% 38%, #202020 0%, transparent 58%);
+        radial-gradient(ellipse 70% 42% at 48% 42%, var(--sf-cloud-f1) 0%, transparent 58%),
+        radial-gradient(ellipse 38% 24% at 12% 62%, var(--sf-cloud-f2) 0%, transparent 60%),
+        radial-gradient(ellipse 42% 26% at 88% 38%, var(--sf-cloud-f3) 0%, transparent 58%);
       animation: cloud-drift-c 52s ease-in-out infinite alternate;
     }
     .storm-vignette {
@@ -126,8 +126,8 @@
       z-index: 5;
       pointer-events: none;
       background:
-        radial-gradient(ellipse 85% 70% at 50% 45%, transparent 0%, rgba(0, 0, 0, 0.35) 72%, rgba(0, 0, 0, 0.72) 100%),
-        linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, transparent 28%, rgba(0, 0, 0, 0.45) 100%);
+        radial-gradient(ellipse 85% 70% at 50% 45%, transparent 0%, var(--sf-vignette-mid) 72%, var(--sf-vignette-edge) 100%),
+        linear-gradient(180deg, var(--sf-vignette-top) 0%, transparent 28%, var(--sf-vignette-bottom) 100%);
     }
     @keyframes sky-breathe {
       0%, 100% { opacity: 0.85; transform: scale(1); }
@@ -180,16 +180,16 @@
       height: auto;
       margin-bottom: clamp(0.8rem, 2vh, 1.25rem);
       opacity: 0.96;
-      filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.12)) drop-shadow(0 0 36px rgba(0, 255, 65, 0.14));
+      filter: drop-shadow(0 0 24px var(--sf-logo-glow-white)) drop-shadow(0 0 36px var(--sf-logo-glow-accent));
     }
     .hero h1 {
       font-size: clamp(2rem, 7vw, 3.45rem);
       font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #fff;
+      color: var(--heading);
       line-height: 1.05;
-      text-shadow: 0 0 24px rgba(255,255,255,0.08), 0 0 44px rgba(255,199,0,0.18);
+      text-shadow: 0 0 24px var(--sf-heading-glow-white), 0 0 44px var(--sf-heading-glow-accent);
     }
     .hero-sub {
       margin-top: 0.45rem;
@@ -197,7 +197,7 @@
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--amber);
-      text-shadow: 0 0 22px rgba(255,199,0,0.22);
+      text-shadow: 0 0 22px var(--sf-sub-glow);
     }
     .hero-desc {
       margin-top: clamp(0.85rem, 2vh, 1.2rem);
@@ -246,7 +246,7 @@
     }
     .btn-primary:hover {
       background: var(--bg2);
-      color: #fff;
+      color: var(--heading);
       opacity: 1;
       border-color: var(--amber);
     }
@@ -254,23 +254,23 @@
     /* Highlighted glowing button for the hosted hub */
     .btn-glow {
       background: var(--amber);
-      color: #0a0a0a;
+      color: var(--sf-btn-on-accent);
       border-color: var(--amber);
       font-weight: 700;
-      box-shadow: 0 0 16px 2px rgba(255,199,0,0.45), 0 0 32px 8px rgba(255,199,0,0.18);
+      box-shadow: 0 0 16px 2px var(--sf-glow-strong), 0 0 32px 8px var(--sf-glow-mid);
       animation: glow-pulse 2.8s ease-in-out infinite;
       position: relative;
       z-index: 2;
     }
     .btn-glow:hover {
-      background: #ffda47;
-      color: #0a0a0a;
-      box-shadow: 0 0 32px 8px rgba(255,199,0,0.32), 0 0 64px 16px rgba(255,199,0,0.12);
+      background: var(--amber-bright);
+      color: var(--sf-btn-on-accent);
+      box-shadow: 0 0 32px 8px var(--sf-glow-hover-strong), 0 0 64px 16px var(--sf-glow-hover-mid);
       animation: none;
     }
     @keyframes glow-pulse {
-      0%, 100% { box-shadow: 0 0 16px 2px rgba(255,199,0,0.45), 0 0 32px 8px rgba(255,199,0,0.18); }
-      50% { box-shadow: 0 0 28px 6px rgba(255,199,0,0.58), 0 0 48px 12px rgba(255,199,0,0.2); }
+      0%, 100% { box-shadow: 0 0 16px 2px var(--sf-glow-strong), 0 0 32px 8px var(--sf-glow-mid); }
+      50% { box-shadow: 0 0 28px 6px var(--sf-glow-pulse-strong), 0 0 48px 12px var(--sf-glow-pulse-mid); }
     }
 
     .btn-ghost {
@@ -302,7 +302,7 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #fff;
+      color: var(--heading);
       margin-bottom: 1.2rem;
     }
     p { color: var(--muted); font-size: 0.92rem; margin-bottom: 0.9rem; }
@@ -362,7 +362,7 @@
       transition: border-color 0.15s, box-shadow 0.15s;
       cursor: pointer;
     }
-    .dl-btn:hover { border-color: var(--amber); box-shadow: 0 0 10px rgba(255,199,0,0.1); }
+    .dl-btn:hover { border-color: var(--amber); box-shadow: 0 0 10px var(--sf-panel-glow); }
     .dl-btn .dl-platform { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); }
     .dl-btn .dl-file { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; word-break: break-all; }
     .dl-status { font-size: 0.78rem; color: var(--muted); }
@@ -798,7 +798,7 @@ multipart: audio, duration, clientId, radioSetIds=id1,id2,id3</code></pre>
       </div>
       <div class="hub-card">
         <h3>☀ LIGHT</h3>
-        <p>Daylight paper terminal — <strong>long-press DARK</strong> to enter deliberately.</p>
+        <p>Daylight paper terminal — click <strong>☀ LIGHT</strong> in the nav (or long-press DARK on touch).</p>
       </div>
     </div>
     <p style="margin-top:1rem;">

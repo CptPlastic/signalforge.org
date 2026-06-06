@@ -1,10 +1,10 @@
 (function () {
   var MODE_BAR =
     '<div class="sf-mode-bar" aria-label="Display mode">' +
-    '<button type="button" class="sf-mode-btn" data-sf-mode-btn="dark" title="Tap to select · tap again to cycle · hold for LIGHT">◑ DARK</button>' +
+    '<button type="button" class="sf-mode-btn" data-sf-mode-btn="dark" title="Select DARK · tap again to cycle DARK→NITE→NVG · hold for LIGHT (touch)">◑ DARK</button>' +
     '<button type="button" class="sf-mode-btn" data-sf-mode-btn="nite">▌ NITE</button>' +
     '<button type="button" class="sf-mode-btn" data-sf-mode-btn="nvg">◈ NVG</button>' +
-    '<button type="button" class="sf-mode-btn" data-sf-mode-btn="light" title="Tap to exit LIGHT mode">☀ LIGHT</button>' +
+    '<button type="button" class="sf-mode-btn" data-sf-mode-btn="light" title="Daylight mode · click again for DARK">☀ LIGHT</button>' +
     '</div>';
 
   function pageId() {

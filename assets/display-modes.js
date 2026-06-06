@@ -61,7 +61,7 @@
         }
         var current = getStored();
         if (target === 'light') {
-          if (current === 'light') apply('dark');
+          apply(current === 'light' ? 'dark' : 'light');
           return;
         }
         if (current === target) {

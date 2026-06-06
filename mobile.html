@@ -38,7 +38,7 @@
       margin: 0 auto 1.5rem;
       border-radius: 26px;
       border: 1px solid var(--border);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 12px 40px var(--sf-shadow-drop);
     }
     h1 {
       font-size: clamp(1.6rem, 5vw, 2.4rem);
@@ -90,11 +90,15 @@
     }
     .btn-glow {
       background: var(--amber);
-      color: #0a0a0a;
+      color: var(--sf-btn-on-accent);
       border-color: var(--amber);
       font-weight: 700;
+      box-shadow: 0 0 16px 2px var(--sf-glow-strong), 0 0 32px 8px var(--sf-glow-mid);
     }
-    .btn-glow:hover { background: #ffda47; }
+    .btn-glow:hover {
+      background: var(--amber-bright);
+      box-shadow: 0 0 24px 6px var(--sf-glow-hover-strong), 0 0 48px 12px var(--sf-glow-hover-mid);
+    }
     .btn-ghost { background: transparent; color: var(--muted); }
     .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
     .btn-soon {
@@ -121,7 +125,7 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #fff;
+      color: var(--heading);
       margin-bottom: 1rem;
     }
     p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.85rem; }

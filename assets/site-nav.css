@@ -65,7 +65,7 @@
 .nav-group[open] > summary,
 .nav-group > summary:hover {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--sf-nav-summary-hover);
 }
 
 .nav-panel {
@@ -75,7 +75,7 @@
   min-width: 13.5rem;
   background: var(--bg2);
   border: 1px solid var(--border);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 12px 40px var(--sf-shadow-drop);
   padding: 0.35rem 0;
   z-index: 120;
 }
@@ -111,11 +111,24 @@
   border: 1px solid var(--amber-dim);
   color: var(--amber) !important;
   font-weight: 700;
+  box-shadow: 0 0 10px 1px var(--sf-hub-glow), 0 0 20px 3px var(--sf-hub-glow-soft);
+  animation: hub-cta-pulse 2.8s ease-in-out infinite;
 }
 
 .nav-hub-cta:hover {
   border-color: var(--amber);
   background: var(--sf-cta-hover) !important;
+  box-shadow: 0 0 16px 3px var(--sf-hub-glow-hover), 0 0 32px 6px var(--sf-hub-glow-soft);
+  animation: none;
+}
+
+@keyframes hub-cta-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px 1px var(--sf-hub-glow), 0 0 20px 3px var(--sf-hub-glow-soft);
+  }
+  50% {
+    box-shadow: 0 0 16px 3px var(--sf-hub-glow-pulse), 0 0 28px 6px var(--sf-hub-glow-soft);
+  }
 }
 
 .nav-toggle {
