@@ -85,6 +85,7 @@ Luminance is intentionally crushed. No saturated amber or white UI chrome.
 |---------|-----------|
 | Website | `assets/display-modes.css` + `assets/display-modes.js` on `html[data-sf-mode]` |
 | Hub PWA | CSS vars on `html[data-sf-display-mode]` + Tailwind `console.*` → `var(--sf-*)` |
+| Public player | Same `localStorage` key + `data-sf-display-mode` on `/public/player/{token}` share pages |
 | Mobile | `DisplayModeContext` + per-screen themed `StyleSheet` |
 
 ## UI chrome
