@@ -40,16 +40,28 @@
     if (!bar || bar.dataset.sfModeWired) return;
     bar.dataset.sfModeWired = '1';
 
-    var pressTimer = null;
-
     bar.querySelectorAll('.sf-mode-btn').forEach(function (btn) {
       var target = btn.getAttribute('data-sf-mode-btn');
       if (!validMode(target)) return;
 
+      var pressTimer = null;
+      var longPressFired = false;
+
+      function clearPress() {
+        if (pressTimer) {
+          clearTimeout(pressTimer);
+          pressTimer = null;
+        }
+      }
+
       btn.addEventListener('click', function () {
+        if (longPressFired) {
+          longPressFired = false;
+          return;
+        }
         var current = getStored();
         if (target === 'light') {
-          if (current === 'light') return;
+          if (current === 'light') apply('dark');
           return;
         }
         if (current === target) {
@@ -60,33 +72,20 @@
       });
 
       if (target === 'dark') {
-        btn.addEventListener('mousedown', function () {
-          clearTimeout(pressTimer);
+        function startLongPress() {
+          clearPress();
+          longPressFired = false;
           pressTimer = setTimeout(function () {
+            longPressFired = true;
             apply('light');
           }, LONG_PRESS_MS);
-        });
-        btn.addEventListener('mouseup', function () {
-          clearTimeout(pressTimer);
-        });
-        btn.addEventListener('mouseleave', function () {
-          clearTimeout(pressTimer);
-        });
-        btn.addEventListener('touchstart', function () {
-          clearTimeout(pressTimer);
-          pressTimer = setTimeout(function () {
-            apply('light');
-          }, LONG_PRESS_MS);
-        }, { passive: true });
-        btn.addEventListener('touchend', function () {
-          clearTimeout(pressTimer);
-        });
-      }
-
-      if (target === 'light') {
-        btn.addEventListener('click', function () {
-          if (getStored() === 'light') apply('dark');
-        });
+        }
+        btn.addEventListener('mousedown', startLongPress);
+        btn.addEventListener('mouseup', clearPress);
+        btn.addEventListener('mouseleave', clearPress);
+        btn.addEventListener('touchstart', startLongPress, { passive: true });
+        btn.addEventListener('touchend', clearPress);
+        btn.addEventListener('touchcancel', clearPress);
       }
     });
   }
@@ -96,9 +95,13 @@
     document.querySelectorAll('.sf-mode-bar').forEach(wireBar);
   }
 
+  window.SF_initDisplayModes = init;
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
+
+  document.addEventListener('sf-nav-mounted', init);
 })();

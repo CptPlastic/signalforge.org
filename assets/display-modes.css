@@ -1,7 +1,8 @@
 /* SignalForge display modes — see DISPLAY-MODES.md */
+/* Use html[...] so tokens beat any stray inline :root blocks */
 
-:root,
-[data-sf-mode="dark"] {
+html,
+html[data-sf-mode="dark"] {
   --bg: #0a0a0a;
   --bg2: #111111;
   --text: #c9c9c9;
@@ -11,10 +12,13 @@
   --amber-bright: #ffda47;
   --border: #1f1f1f;
   --red: #ff4444;
+  --heading: #ffffff;
   --sf-nav-bg: rgba(10, 10, 10, 0.94);
+  --sf-panel-hover: rgba(255, 199, 0, 0.06);
+  --sf-cta-hover: rgba(255, 199, 0, 0.08);
 }
 
-[data-sf-mode="nite"] {
+html[data-sf-mode="nite"] {
   --bg: #080000;
   --bg2: #120404;
   --text: #8a3030;
@@ -24,10 +28,13 @@
   --amber-bright: #cc3333;
   --border: #2a1010;
   --red: #ff4444;
+  --heading: #cc4444;
   --sf-nav-bg: rgba(8, 0, 0, 0.94);
+  --sf-panel-hover: rgba(170, 32, 32, 0.08);
+  --sf-cta-hover: rgba(170, 32, 32, 0.1);
 }
 
-[data-sf-mode="nvg"] {
+html[data-sf-mode="nvg"] {
   --bg: #06080a;
   --bg2: #0a1014;
   --text: #5a6a72;
@@ -37,10 +44,13 @@
   --amber-bright: #5a7888;
   --border: #141c22;
   --red: #8a4a4a;
+  --heading: #6a7a82;
   --sf-nav-bg: rgba(6, 8, 10, 0.94);
+  --sf-panel-hover: rgba(74, 104, 120, 0.12);
+  --sf-cta-hover: rgba(74, 104, 120, 0.14);
 }
 
-[data-sf-mode="light"] {
+html[data-sf-mode="light"] {
   --bg: #ece8dc;
   --bg2: #f8f6f0;
   --text: #1a1814;
@@ -50,7 +60,10 @@
   --amber-bright: #c89600;
   --border: #c8c0b0;
   --red: #c02828;
+  --heading: #1a1814;
   --sf-nav-bg: rgba(236, 232, 220, 0.94);
+  --sf-panel-hover: rgba(160, 120, 0, 0.08);
+  --sf-cta-hover: rgba(160, 120, 0, 0.1);
 }
 
 .sf-mode-bar {
@@ -82,24 +95,11 @@
 .sf-mode-btn.is-active {
   color: var(--amber);
   border-color: var(--amber);
-  background: rgba(255, 199, 0, 0.06);
-}
-
-[data-sf-mode="nite"] .sf-mode-btn.is-active {
-  background: rgba(170, 32, 32, 0.08);
-}
-
-[data-sf-mode="nvg"] .sf-mode-btn.is-active {
-  background: rgba(74, 104, 120, 0.12);
-}
-
-[data-sf-mode="light"] .sf-mode-btn.is-active {
-  background: rgba(160, 120, 0, 0.08);
+  background: var(--sf-panel-hover);
 }
 
 .sf-mode-hint {
   color: var(--muted);
   font-size: 0.58rem;
   letter-spacing: 0.08em;
-  margin-left: 0.25rem;
 }

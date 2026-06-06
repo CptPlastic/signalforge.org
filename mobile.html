@@ -9,57 +9,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      try {
+        var m = localStorage.getItem('sf-display-mode');
+        if (m === 'dark' || m === 'nite' || m === 'nvg' || m === 'light') {
+          document.documentElement.setAttribute('data-sf-mode', m);
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <link rel="stylesheet" href="assets/display-modes.css" />
+  <link rel="stylesheet" href="assets/site-base.css" />
+  <link rel="stylesheet" href="assets/site-nav.css" />
+  <script src="assets/site-nav.js" defer></script>
   <script src="assets/display-modes.js" defer></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0a0a0a;
-      --bg2: #111111;
-      --text: #c9c9c9;
-      --muted: #555555;
-      --amber:     #ffc700;
-      --amber-dim: #997700;
-      --amber-bright: #ffda47;
-      --border: #1f1f1f;
-    }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-    .site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(10, 10, 10, 0.94);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 1.25rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .site-nav-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 3.25rem;
-      gap: 1rem;
-    }
-    .nav-brand { color: var(--amber); font-weight: 700; text-decoration: none; }
-    .nav-brand:hover { color: #ffda47; }
-    .nav-links { display: flex; gap: 1rem; align-items: center; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .nav-links a:hover { color: var(--text); }
     .hero {
       max-width: 900px;
       margin: 0 auto;
@@ -80,7 +45,7 @@
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #fff;
+      color: var(--heading);
       margin-bottom: 0.35rem;
     }
     .hero-sub {
@@ -218,23 +183,8 @@
     footer a:hover { text-decoration: underline; }
   </style>
 </head>
-<body>
-  <header class="site-nav">
-    <div class="site-nav-inner">
-      <a class="nav-brand" href="index.html">SignalForge</a>
-      <nav class="nav-links" aria-label="Mobile">
-        <a href="index.html">Home</a>
-        <a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Hub</a>
-        <a href="api.html">API</a>
-      </nav>
-      <div class="sf-mode-bar" aria-label="Display mode">
-        <button type="button" class="sf-mode-btn" data-sf-mode-btn="dark">◑ DARK</button>
-        <button type="button" class="sf-mode-btn" data-sf-mode-btn="nite">▌ NITE</button>
-        <button type="button" class="sf-mode-btn" data-sf-mode-btn="nvg">◈ NVG</button>
-        <button type="button" class="sf-mode-btn" data-sf-mode-btn="light">☀ LIGHT</button>
-      </div>
-    </div>
-  </header>
+<body data-sf-page="mobile">
+  <div id="sf-site-nav"></div>
 
   <div class="hero">
     <img class="app-icon" src="icon.svg" width="120" height="120" alt="SignalForge app icon" />

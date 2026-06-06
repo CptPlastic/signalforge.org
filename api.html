@@ -5,40 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="SignalForge Hub public API documentation for operators, recorder clients, and federation peers." />
   <title>SignalForge Hub API</title>
+  <script>
+    (function () {
+      try {
+        var m = localStorage.getItem('sf-display-mode');
+        if (m === 'dark' || m === 'nite' || m === 'nvg' || m === 'light') {
+          document.documentElement.setAttribute('data-sf-mode', m);
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <link rel="stylesheet" href="assets/display-modes.css" />
+  <link rel="stylesheet" href="assets/site-base.css" />
+  <link rel="stylesheet" href="assets/site-nav.css" />
+  <script src="assets/site-nav.js" defer></script>
   <script src="assets/display-modes.js" defer></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0a0a0a;
-      --bg2: #111111;
-      --text: #c9c9c9;
-      --muted: #666666;
-      --amber:     #ffc700;
-      --amber-dim: #997700;
-      --border: #1f1f1f;
-      --red: #ff4444;
-    }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: ui-monospace, 'SFMono-Regular', 'Menlo', 'Courier New', monospace;
-      line-height: 1.65;
-      min-height: 100vh;
-    }
-    nav {
-      border-bottom: 1px solid var(--border);
-      padding: 0.8rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    nav div { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-end; }
-    nav a, main a { color: var(--amber); text-decoration: none; }
-    nav a:hover, main a:hover { text-decoration: underline; }
+    main a { color: var(--amber); text-decoration: none; }
+    main a:hover { text-decoration: underline; }
     main {
       max-width: 960px;
       margin: 0 auto;
@@ -52,7 +36,7 @@
       margin-bottom: 0.6rem;
     }
     h1, h2, h3 {
-      color: #fff;
+      color: var(--heading);
       text-transform: uppercase;
       letter-spacing: 0.08em;
       line-height: 1.2;
@@ -96,21 +80,8 @@
     .warn { border-left-color: var(--red); }
   </style>
 </head>
-<body>
-  <nav style="flex-wrap:wrap; gap:0.75rem;">
-    <a href="/">SignalForge</a>
-    <div class="sf-mode-bar">
-      <button type="button" class="sf-mode-btn" data-sf-mode-btn="dark">◑ DARK</button>
-      <button type="button" class="sf-mode-btn" data-sf-mode-btn="nite">▌ NITE</button>
-      <button type="button" class="sf-mode-btn" data-sf-mode-btn="nvg">◈ NVG</button>
-      <button type="button" class="sf-mode-btn" data-sf-mode-btn="light">☀ LIGHT</button>
-    </div>
-    <div>
-      <a href="source.html">Source</a>
-      <a href="directory/hubs.json">Directory Feed</a>
-      <a href="https://github.com/CptPlastic/signalforge-node" target="_blank" rel="noopener noreferrer">GitHub</a>
-    </div>
-  </nav>
+<body data-sf-page="api">
+  <div id="sf-site-nav"></div>
   <main>
     <div class="label">// hub api</div>
     <h1>SignalForge Hub API</h1>

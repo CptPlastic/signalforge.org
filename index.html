@@ -9,168 +9,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      try {
+        var m = localStorage.getItem('sf-display-mode');
+        if (m === 'dark' || m === 'nite' || m === 'nvg' || m === 'light') {
+          document.documentElement.setAttribute('data-sf-mode', m);
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <link rel="stylesheet" href="assets/display-modes.css" />
+  <link rel="stylesheet" href="assets/site-base.css" />
+  <link rel="stylesheet" href="assets/site-nav.css" />
+  <script src="assets/site-nav.js" defer></script>
   <script src="assets/display-modes.js" defer></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:        #0a0a0a;
-      --bg2:       #111111;
-      --text:      #c9c9c9;
-      --muted:     #555555;
-      --amber:     #ffc700;
-      --amber-dim: #997700;
-      --border:    #1f1f1f;
-      --red:       #ff4444;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-
-    /* ── NAV ── */
-    .site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--sf-nav-bg, rgba(10, 10, 10, 0.94));
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 1.25rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .site-nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 3.25rem;
-      gap: 1rem;
-    }
-    .nav-brand {
-      color: var(--amber);
-      font-weight: 700;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-    .nav-brand:hover { color: #ffda47; }
-    .nav-desktop { display: flex; align-items: center; gap: 0.15rem; }
-    .nav-group { position: relative; }
-    .nav-group > summary {
-      list-style: none;
-      cursor: pointer;
-      color: var(--muted);
-      padding: 0.55rem 0.7rem;
-      border-radius: 2px;
-      transition: color 0.15s, background 0.15s;
-      user-select: none;
-    }
-    .nav-group > summary::-webkit-details-marker { display: none; }
-    .nav-group > summary::after {
-      content: "▾";
-      margin-left: 0.35rem;
-      font-size: 0.62rem;
-      opacity: 0.55;
-    }
-    .nav-group[open] > summary,
-    .nav-group > summary:hover {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.04);
-    }
-    .nav-panel {
-      position: absolute;
-      top: calc(100% + 0.35rem);
-      left: 0;
-      min-width: 13.5rem;
-      background: #111;
-      border: 1px solid var(--border);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
-      padding: 0.35rem 0;
-      z-index: 120;
-    }
-    .nav-panel a {
-      display: block;
-      padding: 0.55rem 0.9rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.12s, background 0.12s;
-      line-height: 1.35;
-    }
-    .nav-panel a:hover {
-      color: var(--amber);
-      background: rgba(0, 255, 65, 0.06);
-    }
-    .nav-panel .nav-panel-label {
-      padding: 0.45rem 0.9rem 0.25rem;
-      font-size: 0.62rem;
-      color: var(--amber-dim);
-      letter-spacing: 0.18em;
-    }
-    .nav-direct {
-      color: var(--muted);
-      text-decoration: none;
-      padding: 0.55rem 0.7rem;
-      transition: color 0.15s;
-    }
-    .nav-direct:hover { color: var(--text); }
-    .nav-hub-cta {
-      margin-left: 0.35rem;
-      padding: 0.45rem 0.85rem !important;
-      border: 1px solid var(--amber-dim);
-      color: var(--amber) !important;
-      font-weight: 700;
-    }
-    .nav-hub-cta:hover {
-      border-color: var(--amber);
-      background: rgba(0, 255, 65, 0.08) !important;
-    }
-    .nav-toggle {
-      display: none;
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.45rem 0.75rem;
-      cursor: pointer;
-    }
-    .nav-mobile {
-      display: none;
-      border-top: 1px solid var(--border);
-      padding: 0.75rem 0 1rem;
-    }
-    .nav-mobile.open { display: block; }
-    .nav-mobile-section {
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-mobile-section:last-child { border-bottom: none; }
-    .nav-mobile-title {
-      font-size: 0.62rem;
-      color: var(--amber-dim);
-      letter-spacing: 0.2em;
-      margin-bottom: 0.45rem;
-    }
-    .nav-mobile a {
-      display: block;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 0.4rem 0;
-      font-size: 0.78rem;
-    }
-    .nav-mobile a:hover { color: var(--amber); }
 
     /* ── HERO ── */
     .hero {
@@ -593,100 +447,11 @@
     @media (prefers-reduced-motion: reduce) {
       .cloud-layer, .lightning, .storm-sky { animation: none; }
     }
-    @media (max-width: 820px) {
-      .nav-desktop { display: none; }
-      .nav-toggle { display: inline-block; }
-    }
-    @media (min-width: 821px) {
-      .nav-mobile { display: none !important; }
-    }
   </style>
 </head>
-<body>
+<body data-sf-page="home">
 
-  <!-- NAV -->
-  <header class="site-nav" id="top">
-    <div class="site-nav-inner">
-      <a class="nav-brand" href="#top">SignalForge</a>
-      <nav class="nav-desktop" aria-label="Primary">
-        <details class="nav-group">
-          <summary>Get Started</summary>
-          <div class="nav-panel">
-            <a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>
-            <a href="#onboarding">Create an Account</a>
-            <a href="#recorder">Install CLI</a>
-            <a href="mobile.html">Mobile App</a>
-          </div>
-        </details>
-        <details class="nav-group">
-          <summary>Operate</summary>
-          <div class="nav-panel">
-            <a href="#run">Run Your Own Hub</a>
-            <a href="source.html">Source &amp; Build Notes</a>
-            <a href="#transcription">Transcription</a>
-            <a href="#ptt">Push-to-Talk</a>
-          </div>
-        </details>
-        <details class="nav-group">
-          <summary>Network</summary>
-          <div class="nav-panel">
-            <a href="#signalhub">SignalHub Federation</a>
-            <a href="#directory">Directory &amp; Trust</a>
-            <a href="#network">The Vision</a>
-          </div>
-        </details>
-        <a class="nav-direct" href="BRAND.md">Brand</a>
-        <a class="nav-direct" href="#mission">Mission</a>
-        <a class="nav-direct" href="api.html">API</a>
-        <a class="nav-direct nav-hub-cta" href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Hub</a>
-      </nav>
-      <div class="sf-mode-bar" aria-label="Display mode">
-        <button type="button" class="sf-mode-btn" data-sf-mode-btn="dark">◑ DARK</button>
-        <button type="button" class="sf-mode-btn" data-sf-mode-btn="nite">▌ NITE</button>
-        <button type="button" class="sf-mode-btn" data-sf-mode-btn="nvg">◈ NVG</button>
-        <button type="button" class="sf-mode-btn" data-sf-mode-btn="light">☀ LIGHT</button>
-      </div>
-      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile">Menu</button>
-    </div>
-    <div class="nav-mobile" id="nav-mobile">
-      <div class="nav-mobile-section">
-        <div class="nav-mobile-title">Get Started</div>
-        <a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>
-        <a href="#onboarding">Create an Account</a>
-        <a href="#recorder">Install CLI</a>
-        <a href="mobile.html">Mobile App</a>
-      </div>
-      <div class="nav-mobile-section">
-        <div class="nav-mobile-title">Operate</div>
-        <a href="#run">Run Your Own Hub</a>
-        <a href="source.html">Source &amp; Build Notes</a>
-        <a href="#transcription">Transcription</a>
-        <a href="#ptt">Push-to-Talk</a>
-      </div>
-      <div class="nav-mobile-section">
-        <div class="nav-mobile-title">Network</div>
-        <a href="#signalhub">SignalHub Federation</a>
-        <a href="#directory">Directory &amp; Trust</a>
-        <a href="#network">The Vision</a>
-      </div>
-      <div class="nav-mobile-section">
-        <div class="nav-mobile-title">Display</div>
-        <div class="sf-mode-bar" style="padding:0.25rem 0 0.5rem;">
-          <button type="button" class="sf-mode-btn" data-sf-mode-btn="dark">◑ DARK</button>
-          <button type="button" class="sf-mode-btn" data-sf-mode-btn="nite">▌ NITE</button>
-          <button type="button" class="sf-mode-btn" data-sf-mode-btn="nvg">◈ NVG</button>
-          <button type="button" class="sf-mode-btn" data-sf-mode-btn="light">☀ LIGHT</button>
-        </div>
-      </div>
-      <div class="nav-mobile-section">
-        <div class="nav-mobile-title">More</div>
-        <a href="BRAND.md">Brand Guide</a>
-        <a href="DISPLAY-MODES.md">Display Modes</a>
-        <a href="#mission">Mission</a>
-        <a href="api.html">API Docs</a>
-      </div>
-    </div>
-  </header>
+  <div id="sf-site-nav"></div>
 
   <!-- HERO -->
   <div class="hero">
@@ -1244,39 +1009,6 @@ multipart: audio, duration, clientId, radioSetIds=id1,id2,id3</code></pre>
     }
 
     await loadRelease();
-
-    // Mobile nav toggle
-    const navToggle = document.getElementById('nav-toggle');
-    const navMobile = document.getElementById('nav-mobile');
-    navToggle?.addEventListener('click', () => {
-      const open = navMobile?.classList.toggle('open');
-      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      navToggle.textContent = open ? 'Close' : 'Menu';
-    });
-    navMobile?.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        navMobile.classList.remove('open');
-        navToggle?.setAttribute('aria-expanded', 'false');
-        if (navToggle) navToggle.textContent = 'Menu';
-      });
-    });
-
-    // One dropdown open at a time on desktop
-    document.querySelectorAll('.nav-group').forEach((group) => {
-      group.addEventListener('toggle', () => {
-        if (!group.open) return;
-        document.querySelectorAll('.nav-group').forEach((other) => {
-          if (other !== group) other.removeAttribute('open');
-        });
-      });
-    });
-
-    // Close desktop dropdowns when clicking outside
-    document.addEventListener('click', (event) => {
-      if (!(event.target instanceof Element)) return;
-      if (event.target.closest('.nav-group')) return;
-      document.querySelectorAll('.nav-group[open]').forEach((el) => el.removeAttribute('open'));
-    });
   </script>
 
 </body>
