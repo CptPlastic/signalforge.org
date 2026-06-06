@@ -12,8 +12,8 @@
       --bg2: #111111;
       --text: #c9c9c9;
       --muted: #666666;
-      --green: #00ff41;
-      --green-dim: #006620;
+      --amber:     #ffc700;
+      --amber-dim: #997700;
       --border: #1f1f1f;
       --red: #ff4444;
     }
@@ -35,7 +35,7 @@
       text-transform: uppercase;
     }
     nav div { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-end; }
-    nav a, main a { color: var(--green); text-decoration: none; }
+    nav a, main a { color: var(--amber); text-decoration: none; }
     nav a:hover, main a:hover { text-decoration: underline; }
     main {
       max-width: 960px;
@@ -43,7 +43,7 @@
       padding: 4rem 1.5rem;
     }
     .label {
-      color: var(--green-dim);
+      color: var(--amber-dim);
       font-size: 0.72rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
@@ -57,7 +57,7 @@
     }
     h1 { font-size: clamp(1.7rem, 6vw, 3rem); margin-bottom: 1rem; }
     h2 { font-size: 1rem; margin: 2.4rem 0 0.8rem; }
-    h3 { font-size: 0.84rem; margin: 1.4rem 0 0.45rem; color: var(--green); }
+    h3 { font-size: 0.84rem; margin: 1.4rem 0 0.45rem; color: var(--amber); }
     p { color: var(--muted); margin-bottom: 1rem; }
     strong { color: var(--text); }
     table {
@@ -72,7 +72,7 @@
       text-align: left;
       vertical-align: top;
     }
-    th { color: var(--green); background: var(--bg2); text-transform: uppercase; letter-spacing: 0.08em; }
+    th { color: var(--amber); background: var(--bg2); text-transform: uppercase; letter-spacing: 0.08em; }
     td { color: var(--muted); }
     code { color: var(--text); }
     pre {
@@ -85,7 +85,7 @@
       font-size: 0.82rem;
     }
     .callout {
-      border-left: 3px solid var(--green);
+      border-left: 3px solid var(--amber);
       background: var(--bg2);
       padding: 1rem 1.25rem;
       margin: 1.5rem 0;

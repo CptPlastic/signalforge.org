@@ -16,9 +16,9 @@
       --bg2: #111111;
       --text: #c9c9c9;
       --muted: #555555;
-      --green: #00ff41;
-      --green-dim: #006620;
-      --amber: #ffb020;
+      --amber:     #ffc700;
+      --amber-dim: #997700;
+      --amber-bright: #ffda47;
       --border: #1f1f1f;
     }
     body {
@@ -49,8 +49,8 @@
       min-height: 3.25rem;
       gap: 1rem;
     }
-    .nav-brand { color: var(--green); font-weight: 700; text-decoration: none; }
-    .nav-brand:hover { color: #33ff66; }
+    .nav-brand { color: var(--amber); font-weight: 700; text-decoration: none; }
+    .nav-brand:hover { color: #ffda47; }
     .nav-links { display: flex; gap: 1rem; align-items: center; }
     .nav-links a {
       color: var(--muted);
@@ -82,7 +82,7 @@
       margin-bottom: 0.35rem;
     }
     .hero-sub {
-      color: var(--green);
+      color: var(--amber);
       font-size: 0.85rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -92,8 +92,8 @@
       display: inline-block;
       margin-bottom: 1.25rem;
       padding: 0.35rem 0.75rem;
-      border: 1px solid var(--green-dim);
-      color: var(--green);
+      border: 1px solid var(--amber-dim);
+      color: var(--amber);
       font-size: 0.72rem;
       letter-spacing: 0.18em;
     }
@@ -122,12 +122,12 @@
       transition: border-color 0.15s, color 0.15s, background 0.15s;
     }
     .btn-glow {
-      background: var(--green);
+      background: var(--amber);
       color: #0a0a0a;
-      border-color: var(--green);
+      border-color: var(--amber);
       font-weight: 700;
     }
-    .btn-glow:hover { background: #33ff66; }
+    .btn-glow:hover { background: #ffda47; }
     .btn-ghost { background: transparent; color: var(--muted); }
     .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
     .btn-soon {
@@ -146,7 +146,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--green-dim);
+      color: var(--amber-dim);
       margin-bottom: 0.6rem;
     }
     h2 {
@@ -182,7 +182,7 @@
       font-size: 0.8rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--green);
+      color: var(--amber);
       margin-bottom: 0.45rem;
     }
     .hub-card p { font-size: 0.8rem; margin-bottom: 0; }
@@ -212,7 +212,7 @@
       color: var(--muted);
       font-size: 0.75rem;
     }
-    footer a { color: var(--green); text-decoration: none; }
+    footer a { color: var(--amber); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
   </style>
 </head>
@@ -286,8 +286,9 @@
     <div class="section-label">// brand</div>
     <h2>Visual identity</h2>
     <p>
-      The mobile app uses the same mast-and-beacon mark as <a href="index.html" style="color:var(--green);">signalforge.org</a>
-      on a console-black field. Typography follows JetBrains Mono — terminal green for live traffic, amber for dispatch.
+      The mobile app uses the same mast-and-beacon mark as <a href="index.html" style="color:var(--amber);">signalforge.org</a>
+      on a console-black field. Typography follows JetBrains Mono — amber phosphor for live traffic, bright amber for dispatch/PTT-ready.
+      Hub console (PWA) uses a warmer <code>#ffaa00</code> variant — see <a href="BRAND.md" style="color:var(--amber);">BRAND.md</a>.
     </p>
     <div class="brand-swatch">
       <div class="swatch">
@@ -295,17 +296,22 @@
         Console black<br /><code>#0a0a0a</code>
       </div>
       <div class="swatch">
-        <div class="swatch-chip" style="background:#00ff41;"></div>
-        Signal green<br /><code>#00ff41</code>
+        <div class="swatch-chip" style="background:#ffc700;"></div>
+        Signal amber<br /><code>#ffc700</code>
       </div>
       <div class="swatch">
-        <div class="swatch-chip" style="background:#ffb020;"></div>
-        Dispatch amber<br /><code>#ffb020</code>
+        <div class="swatch-chip" style="background:#ffda47;"></div>
+        PTT / dispatch<br /><code>#ffda47</code>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#ffaa00;"></div>
+        Hub PWA<br /><code>#ffaa00</code>
       </div>
     </div>
     <div class="callout">
-      Logo assets: <a href="LOGO.svg" style="color:var(--amber);">LOGO.svg</a> (mark only) and
-      <a href="icon.svg" style="color:var(--amber);">icon.svg</a> (app icon source, 256×256).
+      Brand guide: <a href="BRAND.md" style="color:var(--amber);">BRAND.md</a> —
+      <a href="LOGO.svg" style="color:var(--amber);">LOGO.svg</a> (mark) and
+      <a href="icon.svg" style="color:var(--amber);">icon.svg</a> (app icon, 256×256).
     </div>
   </section>
 

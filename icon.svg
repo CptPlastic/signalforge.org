@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
   <rect width="256" height="256" fill="#0a0a0a"/>
-  <!-- Logo centered and scaled (original 120x120 → ~160x160, offset ~48,48) -->
   <g transform="translate(48,48) scale(1.333)">
-    <!-- Mast -->
-    <line x1="60" y1="15" x2="60" y2="88" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-    <!-- Upper arms -->
-    <line x1="60" y1="36" x2="38" y2="55" stroke="white" stroke-width="2" stroke-linecap="round"/>
-    <line x1="60" y1="36" x2="82" y2="55" stroke="white" stroke-width="2" stroke-linecap="round"/>
-    <!-- Lower arms -->
-    <line x1="60" y1="55" x2="22" y2="80" stroke="white" stroke-width="2" stroke-linecap="round"/>
-    <line x1="60" y1="55" x2="98" y2="80" stroke="white" stroke-width="2" stroke-linecap="round"/>
-    <!-- Base -->
-    <line x1="22" y1="80" x2="98" y2="80" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-    <!-- Radio arcs -->
-    <path d="M46,36 C55.333,26.667 64.667,26.667 74,36" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
-    <path d="M46,30 C55.333,20.667 64.667,20.667 74,30" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
-    <path d="M46,24 C55.333,14.667 64.667,14.667 74,24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <line x1="60" y1="15" x2="60" y2="88" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="60" y1="36" x2="38" y2="55" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <line x1="60" y1="36" x2="82" y2="55" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <line x1="60" y1="55" x2="22" y2="80" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <line x1="60" y1="55" x2="98" y2="80" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <line x1="22" y1="80" x2="98" y2="80" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M46,36 C55.333,26.667 64.667,26.667 74,36" fill="none" stroke="#ffc700" stroke-width="2" stroke-linecap="round"/>
+    <path d="M46,30 C55.333,20.667 64.667,20.667 74,30" fill="none" stroke="#ffc700" stroke-width="2" stroke-linecap="round"/>
+    <path d="M46,24 C55.333,14.667 64.667,14.667 74,24" fill="none" stroke="#ffc700" stroke-width="2" stroke-linecap="round"/>
   </g>
 </svg>

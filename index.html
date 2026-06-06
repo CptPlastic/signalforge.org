@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="SignalForge — community-powered radio monitoring for Yukon, Oklahoma and beyond. No towers required. Just people." />
   <title>SignalForge — Voice in the Storm</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
@@ -16,8 +17,8 @@
       --bg2:       #111111;
       --text:      #c9c9c9;
       --muted:     #555555;
-      --green:     #00ff41;
-      --green-dim: #006620;
+      --amber:     #ffc700;
+      --amber-dim: #997700;
       --border:    #1f1f1f;
       --red:       #ff4444;
     }
@@ -55,12 +56,12 @@
       gap: 1rem;
     }
     .nav-brand {
-      color: var(--green);
+      color: var(--amber);
       font-weight: 700;
       text-decoration: none;
       flex-shrink: 0;
     }
-    .nav-brand:hover { color: #33ff66; }
+    .nav-brand:hover { color: #ffda47; }
     .nav-desktop { display: flex; align-items: center; gap: 0.15rem; }
     .nav-group { position: relative; }
     .nav-group > summary {
@@ -104,13 +105,13 @@
       line-height: 1.35;
     }
     .nav-panel a:hover {
-      color: var(--green);
+      color: var(--amber);
       background: rgba(0, 255, 65, 0.06);
     }
     .nav-panel .nav-panel-label {
       padding: 0.45rem 0.9rem 0.25rem;
       font-size: 0.62rem;
-      color: var(--green-dim);
+      color: var(--amber-dim);
       letter-spacing: 0.18em;
     }
     .nav-direct {
@@ -123,12 +124,12 @@
     .nav-hub-cta {
       margin-left: 0.35rem;
       padding: 0.45rem 0.85rem !important;
-      border: 1px solid var(--green-dim);
-      color: var(--green) !important;
+      border: 1px solid var(--amber-dim);
+      color: var(--amber) !important;
       font-weight: 700;
     }
     .nav-hub-cta:hover {
-      border-color: var(--green);
+      border-color: var(--amber);
       background: rgba(0, 255, 65, 0.08) !important;
     }
     .nav-toggle {
@@ -156,7 +157,7 @@
     .nav-mobile-section:last-child { border-bottom: none; }
     .nav-mobile-title {
       font-size: 0.62rem;
-      color: var(--green-dim);
+      color: var(--amber-dim);
       letter-spacing: 0.2em;
       margin-bottom: 0.45rem;
     }
@@ -167,7 +168,7 @@
       padding: 0.4rem 0;
       font-size: 0.78rem;
     }
-    .nav-mobile a:hover { color: var(--green); }
+    .nav-mobile a:hover { color: var(--amber); }
 
     /* ── HERO ── */
     .hero {
@@ -332,15 +333,15 @@
       text-transform: uppercase;
       color: #fff;
       line-height: 1.05;
-      text-shadow: 0 0 24px rgba(255,255,255,0.08), 0 0 44px rgba(0,255,65,0.18);
+      text-shadow: 0 0 24px rgba(255,255,255,0.08), 0 0 44px rgba(255,199,0,0.18);
     }
     .hero-sub {
       margin-top: 0.45rem;
       font-size: clamp(0.72rem, 2.2vw, 0.88rem);
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: var(--green);
-      text-shadow: 0 0 22px rgba(0,255,65,0.22);
+      color: var(--amber);
+      text-shadow: 0 0 22px rgba(255,199,0,0.22);
     }
     .hero-desc {
       margin-top: clamp(0.85rem, 2vh, 1.2rem);
@@ -366,7 +367,7 @@
       text-decoration: none;
       transition: color 0.15s;
     }
-    .hero-story-link:hover { color: var(--green); }
+    .hero-story-link:hover { color: var(--amber); }
     .btn {
       display: inline-block;
       padding: 0.7rem 1.4rem;
@@ -382,7 +383,7 @@
     .btn-primary {
       background: var(--bg2);
       border-color: var(--border);
-      color: var(--green);
+      color: var(--amber);
       font-weight: 700;
       opacity: 0.7;
       transition: opacity 0.2s, background 0.2s, color 0.2s;
@@ -391,29 +392,29 @@
       background: var(--bg2);
       color: #fff;
       opacity: 1;
-      border-color: var(--green);
+      border-color: var(--amber);
     }
 
     /* Highlighted glowing button for the hosted hub */
     .btn-glow {
-      background: var(--green);
+      background: var(--amber);
       color: #0a0a0a;
-      border-color: var(--green);
+      border-color: var(--amber);
       font-weight: 700;
-      box-shadow: 0 0 16px 2px rgba(0,255,65,0.45), 0 0 32px 8px rgba(0,255,65,0.18);
+      box-shadow: 0 0 16px 2px rgba(255,199,0,0.45), 0 0 32px 8px rgba(255,199,0,0.18);
       animation: glow-pulse 2.8s ease-in-out infinite;
       position: relative;
       z-index: 2;
     }
     .btn-glow:hover {
-      background: #33ff66;
+      background: #ffda47;
       color: #0a0a0a;
-      box-shadow: 0 0 32px 8px rgba(0,255,65,0.32), 0 0 64px 16px rgba(0,255,65,0.12);
+      box-shadow: 0 0 32px 8px rgba(255,199,0,0.32), 0 0 64px 16px rgba(255,199,0,0.12);
       animation: none;
     }
     @keyframes glow-pulse {
-      0%, 100% { box-shadow: 0 0 16px 2px rgba(0,255,65,0.45), 0 0 32px 8px rgba(0,255,65,0.18); }
-      50% { box-shadow: 0 0 28px 6px rgba(0,255,65,0.58), 0 0 48px 12px rgba(0,255,65,0.2); }
+      0%, 100% { box-shadow: 0 0 16px 2px rgba(255,199,0,0.45), 0 0 32px 8px rgba(255,199,0,0.18); }
+      50% { box-shadow: 0 0 28px 6px rgba(255,199,0,0.58), 0 0 48px 12px rgba(255,199,0,0.2); }
     }
 
     .btn-ghost {
@@ -437,7 +438,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--green-dim);
+      color: var(--amber-dim);
       margin-bottom: 0.6rem;
     }
     h2 {
@@ -453,7 +454,7 @@
 
     /* ── MISSION CALLOUT ── */
     .callout {
-      border-left: 3px solid var(--green);
+      border-left: 3px solid var(--amber);
       padding: 1rem 1.25rem;
       background: var(--bg2);
       margin: 1.5rem 0;
@@ -475,7 +476,7 @@
       background: var(--bg2);
       padding: 1.25rem 1rem;
     }
-    .pillar-icon { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--green); }
+    .pillar-icon { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--amber); }
     .pillar-title {
       font-size: 0.8rem;
       font-weight: 700;
@@ -505,8 +506,8 @@
       transition: border-color 0.15s, box-shadow 0.15s;
       cursor: pointer;
     }
-    .dl-btn:hover { border-color: var(--green); box-shadow: 0 0 10px rgba(0,255,65,0.1); }
-    .dl-btn .dl-platform { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
+    .dl-btn:hover { border-color: var(--amber); box-shadow: 0 0 10px rgba(255,199,0,0.1); }
+    .dl-btn .dl-platform { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); }
     .dl-btn .dl-file { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; word-break: break-all; }
     .dl-status { font-size: 0.78rem; color: var(--muted); }
     .dl-status.error { color: var(--red); }
@@ -533,8 +534,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--green-dim);
-      color: var(--green);
+      border: 1px solid var(--amber-dim);
+      color: var(--amber);
       font-size: 0.75rem;
       font-weight: 700;
     }
@@ -556,7 +557,7 @@
       font-size: 0.82rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--green);
+      color: var(--amber);
       margin-bottom: 0.45rem;
     }
     .hub-card p { font-size: 0.8rem; margin-bottom: 0; }
@@ -585,7 +586,7 @@
     }
     footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { color: var(--text); }
-    .footer-brand { color: var(--green); font-weight: 700; margin-bottom: 0.4rem; font-size: 0.85rem; }
+    .footer-brand { color: var(--amber); font-weight: 700; margin-bottom: 0.4rem; font-size: 0.85rem; }
 
     @media (prefers-reduced-motion: reduce) {
       .cloud-layer, .lightning, .storm-sky { animation: none; }
@@ -632,6 +633,7 @@
             <a href="#network">The Vision</a>
           </div>
         </details>
+        <a class="nav-direct" href="BRAND.md">Brand</a>
         <a class="nav-direct" href="#mission">Mission</a>
         <a class="nav-direct" href="api.html">API</a>
         <a class="nav-direct nav-hub-cta" href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Hub</a>
@@ -661,6 +663,7 @@
       </div>
       <div class="nav-mobile-section">
         <div class="nav-mobile-title">More</div>
+        <a href="BRAND.md">Brand Guide</a>
         <a href="#mission">Mission</a>
         <a href="api.html">API Docs</a>
       </div>
@@ -965,7 +968,7 @@ TRANSCRIPTION_DEVICE=cpu</code></pre>
       <div class="hub-card">
         <h3>Native Mobile App</h3>
         <p>SignalForge Mobile <strong>v1.0.1</strong> — iOS and Android with live monitor, PTT, dispatcher
-          broadcast, and background playback. <a href="mobile.html" style="color:var(--green);">App Store &amp; Play coming soon</a>;
+          broadcast, and background playback. <a href="mobile.html" style="color:var(--amber);">App Store &amp; Play coming soon</a>;
           TestFlight and internal builds available now.</p>
       </div>
     </div>
