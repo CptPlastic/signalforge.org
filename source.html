@@ -116,6 +116,34 @@ curl http://localhost:8080/api/v1/health</code></pre>
     </p>
     <p>The latest public tag is published at <a href="/p7-scanner-update.json">/p7-scanner-update.json</a>.</p>
 
+    <h2 id="offgrid-cells">Off-Grid Cells</h2>
+    <p>
+      A hub can run as a <strong>closed cell</strong> with no Mailjet account, no directory refresh, and no update
+      manifest fetch. Operators sign in with email and password; the API bootstraps the first admin from environment
+      variables on startup.
+    </p>
+    <div class="callout">
+      Off-grid is a deployment posture, not a separate product. The same images and compose files work for public
+      federated hubs and for air-gapped field cells — you choose which outbound integrations to enable.
+    </div>
+    <pre><code># .env.production excerpt — off-grid cell
+AUTH_BOOTSTRAP_EMAIL=admin@local.signalforge
+AUTH_BOOTSTRAP_PASSWORD=change-me-strong
+AUTH_PASSWORD_LOGIN_ENABLED=true
+AUTH_AUTO_APPROVE_USERS=true
+
+UPDATE_CHECK_URL=
+HUB_DIRECTORY_URL=
+HUB_FEDERATION_ENABLED=false
+
+# Optional: local transcription (same worker as online hubs)
+TRANSCRIPTION_WORKER_TOKEN=generate-a-long-random-token</code></pre>
+    <p>
+      Radio sets support <strong>groups</strong> mode: pick <code>talkgroup_group</code> names seen in call metadata
+      instead of individual talkgroup IDs, then share a public player link that follows new traffic in those groups
+      automatically. Federation and directory listing remain optional when the cell later joins a wider network.
+    </p>
+
     <h2>Hub API</h2>
     <p>
       Each hub exposes the same API surface for recorder ingest, public players, federation,

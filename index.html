@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SignalForge — community-powered radio monitoring for Yukon, Oklahoma and beyond. No towers required. Just people." />
+  <meta name="description" content="SignalForge — community-powered radio monitoring for Yukon, Oklahoma and beyond. Run online hubs or closed off-grid cells. No towers required." />
   <title>SignalForge — Voice in the Storm</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -488,7 +488,8 @@
       <div class="hero-sub">Voice in the Storm</div>
       <p class="hero-desc">
         Community-powered radio monitoring for Yukon, Oklahoma and beyond.
-        Run a hub, add a recorder, and share trusted local signals without towers or gatekeepers.
+        Run a hub, add a recorder, and share trusted local signals without towers or gatekeepers —
+        including <strong>off-grid cells</strong> that never phone home to the cloud.
       </p>
       <div class="hero-cta">
         <a href="https://p7hub.projectseven.us/" class="btn btn-glow" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>
@@ -649,8 +650,80 @@ curl http://localhost:8080/api/v1/health</code></pre>
       </div>
     </div>
     <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
-      <a href="source.html#fastest-operator-path" class="btn btn-primary">Install Notes</a>
+      <a href="#offgrid" class="btn btn-primary">Off-Grid Cells</a>
+      <a href="source.html#fastest-operator-path" class="btn btn-ghost">Install Notes</a>
       <a href="https://github.com/CptPlastic/signalforge-node" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Hub Source GitHub</a>
+    </div>
+  </section>
+
+  <!-- OFF-GRID -->
+  <section id="offgrid">
+    <div class="section-label">// off-grid</div>
+    <h2>Off-Grid Hub Cells</h2>
+    <p>
+      Not every deployment should depend on Mailjet, a public directory, or an update manifest on the internet.
+      SignalForge hubs can run as <strong>closed off-grid cells</strong> — a local PostgreSQL stack, password sign-in,
+      recorder ingest, public radio-set players, and optional on-box transcription, with no outbound cloud services required.
+    </p>
+    <div class="callout">
+      Built for field ops, private networks, EOC laptops, and community cells that need to keep working when
+      DNS, email, and the wider internet do not.
+    </div>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>Password Sign-In</h3>
+        <p>Bootstrap an admin with <strong>AUTH_BOOTSTRAP_EMAIL</strong> and <strong>AUTH_BOOTSTRAP_PASSWORD</strong>.
+          Enable <strong>AUTH_PASSWORD_LOGIN_ENABLED</strong> so the web console and mobile app sign in without magic links.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Closed User Roster</h3>
+        <p>Set <strong>AUTH_AUTO_APPROVE_USERS=true</strong> for small trusted cells, or keep approval on and manage
+          accounts locally from the hub console.</p>
+      </div>
+      <div class="hub-card">
+        <h3>No Phone Home</h3>
+        <p>Leave Mailjet blank, set <strong>UPDATE_CHECK_URL=</strong> and <strong>HUB_DIRECTORY_URL=</strong> empty,
+          and keep <strong>HUB_FEDERATION_ENABLED=false</strong> until you deliberately peer with another hub.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Group Playsets</h3>
+        <p>Radio sets can follow <strong>talkgroup groups</strong> instead of hand-picked TG IDs — useful when your
+          recorder tags traffic by agency or discipline and you want a share link that stays current automatically.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Local Speech-to-Text</h3>
+        <p>The optional transcriber worker runs faster-whisper on your hardware. Audio never leaves the cell.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Capability Discovery</h3>
+        <p>Clients call <strong>GET /api/v1/auth/capabilities</strong> to learn whether password login, email codes,
+          or both are available before showing a sign-in screen.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.2rem;">
+      Minimal off-grid environment for a Compose stack:
+    </p>
+    <div class="install-panel">
+      <pre><code># Bootstrap admin (created or updated on API startup)
+AUTH_BOOTSTRAP_EMAIL=admin@local.signalforge
+AUTH_BOOTSTRAP_PASSWORD=change-me-strong
+AUTH_PASSWORD_LOGIN_ENABLED=true
+AUTH_AUTO_APPROVE_USERS=true
+
+# Stay local — no cloud callbacks
+UPDATE_CHECK_URL=
+HUB_DIRECTORY_URL=
+HUB_FEDERATION_ENABLED=false
+
+# Mailjet can stay blank; magic-link sign-in is simply unavailable</code></pre>
+    </div>
+    <p>
+      After the stack starts, open the hub console <strong>Account</strong> tab and sign in with the bootstrap email and password.
+      The mobile app reads the same capabilities endpoint and switches to password mode when email delivery is not configured.
+    </p>
+    <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
+      <a href="source.html#offgrid-cells" class="btn btn-primary">Operator Notes</a>
+      <a href="api.html#auth" class="btn btn-ghost">Auth API</a>
     </div>
   </section>
 

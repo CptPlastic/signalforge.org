@@ -109,6 +109,29 @@
       </tbody>
     </table>
 
+    <h2 id="auth">Authentication</h2>
+    <p>
+      Hubs advertise available sign-in methods through <code>GET /api/v1/auth/capabilities</code>. Online hubs with
+      Mailjet configured offer magic-link email codes; <strong>off-grid cells</strong> typically enable password login
+      and leave email delivery disabled.
+    </p>
+    <table>
+      <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>GET</td><td><code>/api/v1/auth/capabilities</code></td><td>Password login, magic link, and email-delivery flags.</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/auth/login</code></td><td>Email + password session (when <code>AUTH_PASSWORD_LOGIN_ENABLED</code>).</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/auth/magic-link</code></td><td>Request a sign-in code by email (when Mailjet is configured).</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/auth/verify-code</code></td><td>Complete magic-link sign-in with a 6-digit code.</td></tr>
+        <tr><td>GET</td><td><code>/api/v1/auth/me</code></td><td>Current session user.</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/auth/logout</code></td><td>Revoke the session cookie or bearer token.</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Bootstrap admin credentials are set with <strong>AUTH_BOOTSTRAP_EMAIL</strong> and
+      <strong>AUTH_BOOTSTRAP_PASSWORD</strong> in the API environment. See
+      <a href="index.html#offgrid">Off-Grid Hub Cells</a> on the main site.
+    </p>
+
     <h2>System Endpoints</h2>
     <table>
       <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
@@ -155,6 +178,7 @@
         <tr><td>PUT</td><td><code>/api/v1/sources</code></td><td>Create or update a source profile.</td></tr>
         <tr><td>POST</td><td><code>/api/v1/sources/{id}/keys</code></td><td>Generate a source upload key.</td></tr>
         <tr><td>GET</td><td><code>/api/v1/radio-sets</code></td><td>List saved radio sets.</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/radio-sets</code></td><td>Create a set by talkgroup IDs or by <code>talkgroup_group</code> names (<code>selectionMode: "groups"</code>).</td></tr>
         <tr><td>POST</td><td><code>/api/v1/radio-sets/{id}/share</code></td><td>Generate a public player share token.</td></tr>
       </tbody>
     </table>
