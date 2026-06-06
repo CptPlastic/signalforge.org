@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/display-modes.css" />
+  <script src="assets/display-modes.js" defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -38,7 +40,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(10, 10, 10, 0.94);
+      background: var(--sf-nav-bg, rgba(10, 10, 10, 0.94));
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       padding: 0 1.25rem;
@@ -638,6 +640,12 @@
         <a class="nav-direct" href="api.html">API</a>
         <a class="nav-direct nav-hub-cta" href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Hub</a>
       </nav>
+      <div class="sf-mode-bar" aria-label="Display mode">
+        <button type="button" class="sf-mode-btn" data-sf-mode-btn="dark">◑ DARK</button>
+        <button type="button" class="sf-mode-btn" data-sf-mode-btn="nite">▌ NITE</button>
+        <button type="button" class="sf-mode-btn" data-sf-mode-btn="nvg">◈ NVG</button>
+        <button type="button" class="sf-mode-btn" data-sf-mode-btn="light">☀ LIGHT</button>
+      </div>
       <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile">Menu</button>
     </div>
     <div class="nav-mobile" id="nav-mobile">
@@ -662,8 +670,18 @@
         <a href="#network">The Vision</a>
       </div>
       <div class="nav-mobile-section">
+        <div class="nav-mobile-title">Display</div>
+        <div class="sf-mode-bar" style="padding:0.25rem 0 0.5rem;">
+          <button type="button" class="sf-mode-btn" data-sf-mode-btn="dark">◑ DARK</button>
+          <button type="button" class="sf-mode-btn" data-sf-mode-btn="nite">▌ NITE</button>
+          <button type="button" class="sf-mode-btn" data-sf-mode-btn="nvg">◈ NVG</button>
+          <button type="button" class="sf-mode-btn" data-sf-mode-btn="light">☀ LIGHT</button>
+        </div>
+      </div>
+      <div class="nav-mobile-section">
         <div class="nav-mobile-title">More</div>
         <a href="BRAND.md">Brand Guide</a>
+        <a href="DISPLAY-MODES.md">Display Modes</a>
         <a href="#mission">Mission</a>
         <a href="api.html">API Docs</a>
       </div>
@@ -987,6 +1005,40 @@ multipart: audio, duration, clientId, radioSetIds=id1,id2,id3</code></pre>
     <p>
       Both endpoints require an active session with <strong>tx_enabled</strong> (and
       <strong>dispatcher_enabled</strong> for the broadcast endpoint). Guests cannot transmit.
+    </p>
+  </section>
+
+  <!-- DISPLAY MODES -->
+  <section id="display-modes">
+    <div class="section-label">// operator display</div>
+    <h2>Built for operators who work in the dark</h2>
+    <p>
+      SignalForge web, hub console, and mobile app share a tactical display cycle —
+      <strong>DARK → NITE → NVG</strong> — modeled after field coordination tools like
+      <a href="https://schedkit.net/" target="_blank" rel="noopener noreferrer" style="color:var(--amber);">SchedKit</a>.
+      The cycle never passes through full brightness, so you won't flash-blind NVG or night-adapted eyes mid-op.
+    </p>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>◑ DARK</h3>
+        <p>Default amber phosphor on CRT black — console monitoring and PTT.</p>
+      </div>
+      <div class="hub-card">
+        <h3>▌ NITE</h3>
+        <p>Dim red palette for naked-eye dark adaptation between screen checks.</p>
+      </div>
+      <div class="hub-card">
+        <h3>◈ NVG</h3>
+        <p>Ultra-low luminance blue-grey — minimum software glow for Gen III tubes.</p>
+      </div>
+      <div class="hub-card">
+        <h3>☀ LIGHT</h3>
+        <p>Daylight paper terminal — <strong>long-press DARK</strong> to enter deliberately.</p>
+      </div>
+    </div>
+    <p style="margin-top:1rem;">
+      Use the mode bar in the nav on any page, or read <a href="DISPLAY-MODES.md" style="color:var(--amber);">DISPLAY-MODES.md</a>
+      for palette tokens and per-product implementation notes.
     </p>
   </section>
 

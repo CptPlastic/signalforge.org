@@ -43,6 +43,10 @@ The hub uses a **warmer amber** so operators can tell the PWA from the native ap
 | Accent border glow | `rgba(255, 199, 0, 0.35)` | focus ring |
 | Hub glow | `rgba(255, 170, 0, 0.12)` | PWA panel highlight |
 
+## Display modes
+
+Operator-facing **DARK / NITE / NVG / LIGHT** palettes for field use (SchedKit-style tactical cycle). See **[DISPLAY-MODES.md](./DISPLAY-MODES.md)**.
+
 ## Typography
 
 - **Face:** JetBrains Mono (web), system monospace (mobile/PWA)

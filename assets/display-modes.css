@@ -1,0 +1,105 @@
+/* SignalForge display modes — see DISPLAY-MODES.md */
+
+:root,
+[data-sf-mode="dark"] {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --text: #c9c9c9;
+  --muted: #555555;
+  --amber: #ffc700;
+  --amber-dim: #997700;
+  --amber-bright: #ffda47;
+  --border: #1f1f1f;
+  --red: #ff4444;
+  --sf-nav-bg: rgba(10, 10, 10, 0.94);
+}
+
+[data-sf-mode="nite"] {
+  --bg: #080000;
+  --bg2: #120404;
+  --text: #8a3030;
+  --muted: #4a2020;
+  --amber: #aa2020;
+  --amber-dim: #6a1818;
+  --amber-bright: #cc3333;
+  --border: #2a1010;
+  --red: #ff4444;
+  --sf-nav-bg: rgba(8, 0, 0, 0.94);
+}
+
+[data-sf-mode="nvg"] {
+  --bg: #06080a;
+  --bg2: #0a1014;
+  --text: #5a6a72;
+  --muted: #3a4548;
+  --amber: #4a6878;
+  --amber-dim: #3a5058;
+  --amber-bright: #5a7888;
+  --border: #141c22;
+  --red: #8a4a4a;
+  --sf-nav-bg: rgba(6, 8, 10, 0.94);
+}
+
+[data-sf-mode="light"] {
+  --bg: #ece8dc;
+  --bg2: #f8f6f0;
+  --text: #1a1814;
+  --muted: #6a6458;
+  --amber: #a07800;
+  --amber-dim: #7a5c00;
+  --amber-bright: #c89600;
+  --border: #c8c0b0;
+  --red: #c02828;
+  --sf-nav-bg: rgba(236, 232, 220, 0.94);
+}
+
+.sf-mode-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sf-mode-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font: inherit;
+  padding: 0.35rem 0.5rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s, background 0.12s;
+}
+
+.sf-mode-btn:hover {
+  color: var(--amber-bright);
+  border-color: var(--amber-dim);
+}
+
+.sf-mode-btn.is-active {
+  color: var(--amber);
+  border-color: var(--amber);
+  background: rgba(255, 199, 0, 0.06);
+}
+
+[data-sf-mode="nite"] .sf-mode-btn.is-active {
+  background: rgba(170, 32, 32, 0.08);
+}
+
+[data-sf-mode="nvg"] .sf-mode-btn.is-active {
+  background: rgba(74, 104, 120, 0.12);
+}
+
+[data-sf-mode="light"] .sf-mode-btn.is-active {
+  background: rgba(160, 120, 0, 0.08);
+}
+
+.sf-mode-hint {
+  color: var(--muted);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  margin-left: 0.25rem;
+}

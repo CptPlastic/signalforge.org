@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/display-modes.css" />
+  <script src="assets/display-modes.js" defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -225,6 +227,12 @@
         <a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Hub</a>
         <a href="api.html">API</a>
       </nav>
+      <div class="sf-mode-bar" aria-label="Display mode">
+        <button type="button" class="sf-mode-btn" data-sf-mode-btn="dark">◑ DARK</button>
+        <button type="button" class="sf-mode-btn" data-sf-mode-btn="nite">▌ NITE</button>
+        <button type="button" class="sf-mode-btn" data-sf-mode-btn="nvg">◈ NVG</button>
+        <button type="button" class="sf-mode-btn" data-sf-mode-btn="light">☀ LIGHT</button>
+      </div>
     </div>
   </header>
 
