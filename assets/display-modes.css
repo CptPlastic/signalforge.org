@@ -249,6 +249,21 @@ html[data-sf-mode="light"] .lightning {
   display: none;
 }
 
+/* Inline SignalForge mark — structure + beacon arcs follow display mode */
+.sf-logo-mark .logo-mast,
+.hero-logo .logo-mast {
+  stroke: var(--heading);
+  fill: none;
+  transition: stroke 0.2s ease;
+}
+
+.sf-logo-mark .logo-signal,
+.hero-logo .logo-signal {
+  stroke: var(--amber);
+  fill: none;
+  transition: stroke 0.2s ease;
+}
+
 .sf-mode-bar {
   display: flex;
   flex-wrap: wrap;
