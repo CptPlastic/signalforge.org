@@ -30,6 +30,18 @@
       "trustExpiresAt": 0,
       "trustVerifiedAt": 1779569501,
       "lastSeenAt": 0
-    }
+    },
+    {
+      "type": "signalforge-directory-listing-request",
+      "hubId": "hub_d94c0f830653a6ad15b5584099166750364461f2f777f4cba485193d47cf4cd5",
+      "publicUrl": "https://peer.projectseven.us",
+      "name": "SignalForge Peer Hub",
+      "region": "us-central",
+      "publicKey": "ed25519:088MJsScN0WO5HRK/W7O3FU63jZn+WCm+a+xwnDeh+Y",
+      "contact": "jrj@p7n.net",
+      "software": "SignalForge Hub",
+      "version": "86da5aa"
+}
+    
   ]
 }
