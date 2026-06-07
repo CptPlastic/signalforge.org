@@ -10,7 +10,8 @@ Public site routes:
 
 - Submit form: `https://signalforge.org/register-hub.html`
 - Status tracker: `https://signalforge.org/listing.html?token=…`
-- API host: `https://directory.signalforge.org` (custom domain on this worker)
+- API host: `https://signalforge-directory.jason-johnson-633.workers.dev` (see `assets/directory-api.js`)
+- Optional pretty URL: CNAME `directory.signalforge.org` → that `workers.dev` host (DNS stays wherever you manage it)
 
 ## Prerequisites
 
@@ -37,25 +38,27 @@ Status mapping on `GET /v1/listings/:token`:
 
 ## Setup
 
+**One command** (after `npx wrangler login`):
+
+```bash
+cd workers/directory
+bash scripts/setup.sh
+```
+
+That script: checks `GITHUB_TOKEN` secret, enables email sending, creates GitHub labels, deploys the worker with `directory.signalforge.org`.
+
+Manual steps if you prefer:
+
 ```bash
 cd workers/directory
 npm install
-
-# Create KV namespace
-npx wrangler kv namespace create LISTINGS
-# Paste the id into wrangler.jsonc → kv_namespaces[0].id
-
-# Secrets
 npx wrangler secret put GITHUB_TOKEN
-
-# Email sending domain (once per zone)
 npx wrangler email sending enable signalforge.org
-
-# Custom domain route (Dashboard → Workers → signalforge-directory → Domains)
-# Add directory.signalforge.org
-
+bash scripts/setup-github-labels.sh
 npm run deploy
 ```
+
+`wrangler.jsonc` already includes the KV binding and `directory.signalforge.org` custom domain route.
 
 ## Local dev
 

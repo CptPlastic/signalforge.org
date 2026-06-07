@@ -4,6 +4,8 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
+    "setup": "bash scripts/setup.sh",
+    "setup:labels": "bash scripts/setup-github-labels.sh",
     "types": "wrangler types"
   },
   "devDependencies": {
