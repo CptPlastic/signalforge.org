@@ -100,12 +100,13 @@ Convert manually if needed:
 python tools/listing-to-feed-entry.py < listing-request.json
 ```
 
-## Review workflow (today)
+## Review workflow
 
 1. Operator submits from hub console → registration form → **Submit to Directory**
 2. Worker opens a GitHub issue labeled `directory-request` (with feed entry JSON)
-3. Paste feed entry into `directory/hubs.json`, bump `updatedAt`, run `python tools/validate-directory.py`
-4. Label issue `directory-approved` and close
-5. Operator refreshes status page and runs **CHECK DIRECTORY** in their hub
+3. Review the issue, then add label **`directory-approved`**
+4. Action **Directory listing approve PR** opens a PR updating `directory/hubs.json` (validate-directory runs in CI)
+5. Merge the PR, close the issue
+6. Operator refreshes status page and runs **CHECK DIRECTORY** in their hub
 
-Phase 2: GitHub Action to open the `hubs.json` PR automatically from approved issues.
+Manual fallback: `python tools/apply-directory-listing.py --issue-body issue.md`

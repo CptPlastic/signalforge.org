@@ -1,0 +1,89 @@
+name: Directory listing approve PR
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  open-directory-pr:
+    if: github.event.label.name == 'directory-approved'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Write issue body
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            fs.writeFileSync('/tmp/issue-body.md', context.payload.issue.body || '');
+
+      - name: Apply feed entry to directory/hubs.json
+        id: apply
+        run: |
+          set -euo pipefail
+          python tools/apply-directory-listing.py --issue-body /tmp/issue-body.md --meta /tmp/listing-meta.json
+          hub_id=$(python -c "import json; print(json.load(open('/tmp/listing-meta.json'))['hubId'])")
+          hub_name=$(python -c "import json; print(json.load(open('/tmp/listing-meta.json'))['name'])")
+          echo "hub_id=$hub_id" >> "$GITHUB_OUTPUT"
+          echo "hub_name=$hub_name" >> "$GITHUB_OUTPUT"
+
+      - name: Validate directory feed
+        run: python tools/validate-directory.py
+
+      - name: Create pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "directory: list ${{ steps.apply.outputs.hub_name }}"
+          title: "directory: list ${{ steps.apply.outputs.hub_name }}"
+          body: |
+            Automated directory listing PR from issue #${{ github.event.issue.number }}.
+
+            - Feed entry applied to `directory/hubs.json`
+            - `updatedAt` bumped
+            - `tools/validate-directory.py` passed in CI
+
+            After merge, close issue #${{ github.event.issue.number }} if still open.
+          branch: directory/listing-${{ github.event.issue.number }}
+          delete-branch: true
+
+      - name: Comment on issue
+        if: steps.cpr.outputs.pull-request-url != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = '${{ steps.cpr.outputs.pull-request-url }}';
+            const marker = '<!-- signalforge-directory-pr -->';
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            if (comments.data.some((c) => (c.body || '').includes(marker))) {
+              core.info('PR comment already posted.');
+              return;
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: [
+                marker,
+                '### Directory listing PR opened',
+                '',
+                `Merge ${pr} to publish this hub in the directory feed.`,
+                '',
+                'After merge, the operator can refresh their status page and run **CHECK DIRECTORY** in the hub console.',
+              ].join('\n'),
+            });
