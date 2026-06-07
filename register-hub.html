@@ -159,8 +159,13 @@
       <label for="publicKey">Public key (ed25519)</label>
       <input id="publicKey" name="publicKey" required readonly />
 
-      <label for="payload">Listing request JSON</label>
+      <label for="payload">Listing request JSON (sent for review — not the public feed)</label>
       <textarea id="payload" name="payload" readonly></textarea>
+      <p style="font-size:0.78rem;color:var(--muted);margin-top:0.5rem;">
+        After submit, the GitHub issue includes a separate <strong>feed entry</strong> block with
+        <code>directoryStatus</code>, <code>trustLevel</code>, and related fields for
+        <code>directory/hubs.json</code>. Contact email stays in the issue only.
+      </p>
 
       <div class="actions">
         <button type="submit" class="btn btn-primary" id="submit-listing">Submit to Directory</button>

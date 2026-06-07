@@ -1,3 +1,4 @@
+import { buildFeedEntry } from './feedEntry'
 import type { ListingRequest, ListingStatus } from './types'
 
 type GitHubIssue = {
@@ -12,7 +13,8 @@ export function buildIssueBody(
   health: { ok: boolean; detail: string },
   statusUrl: string,
 ): string {
-  const payload = JSON.stringify(request, null, 2)
+  const reviewPayload = JSON.stringify(request, null, 2)
+  const feedEntry = JSON.stringify(buildFeedEntry(request), null, 2)
   return [
     '## SignalForge Directory Listing Request',
     '',
@@ -22,7 +24,7 @@ export function buildIssueBody(
     `| Name | ${request.name} |`,
     `| Public URL | ${request.publicUrl} |`,
     `| Region | ${request.region} |`,
-    `| Contact | ${request.contact} |`,
+    `| Contact (review only — not in public feed) | ${request.contact} |`,
     `| Software | ${request.software ?? 'SignalForge Hub'} |`,
     `| Version | ${request.version ?? 'unknown'} |`,
     '',
@@ -32,15 +34,27 @@ export function buildIssueBody(
     '### Health check (at submit time)',
     health.ok ? `- OK — ${health.detail}` : `- FAILED — ${health.detail}`,
     '',
-    '### Listing JSON',
+    '### Paste into `directory/hubs.json` → `hubs[]`',
+    'This is the **public feed entry** (passes `tools/validate-directory.py`).',
+    'Do **not** paste the listing request JSON below into the feed.',
+    '',
     '```json',
-    payload,
+    feedEntry,
+    '```',
+    '',
+    'After adding the hub, bump top-level `updatedAt` in `directory/hubs.json` to the current unix time.',
+    'Promote to `verified` later by updating `directoryStatus`, `trustLevel`, and `trustVerifiedAt`.',
+    '',
+    '### Listing request JSON (review / audit only)',
+    '```json',
+    reviewPayload,
     '```',
     '',
     '### Review checklist',
     '- [ ] Public URL serves SignalForge Hub',
-    '- [ ] Contact email is reachable',
-    '- [ ] Add hub to `directory/hubs.json`',
+    '- [ ] Contact email is reachable (issue only — never publish contact in `hubs.json`)',
+    '- [ ] Paste **feed entry** above into `directory/hubs.json`',
+    '- [ ] Run `python tools/validate-directory.py`',
     '- [ ] Label `directory-approved` and close when live',
     '- [ ] Or label `directory-rejected` with a reason',
     '',

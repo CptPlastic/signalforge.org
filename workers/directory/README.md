@@ -85,11 +85,26 @@ GITHUB_TOKEN=ghp_...
 | `LISTINGS` | KV binding | Listing + rate-limit storage |
 | `EMAIL` | send_email binding | Receipt mail |
 
+## Two JSON shapes (important)
+
+| JSON | Purpose | Goes in `hubs.json`? |
+| --- | --- | --- |
+| **Listing request** (`type`, `contact`, `software`, `version`) | Operator intake + review | **No** |
+| **Feed entry** (`directoryStatus`, `trustLevel`, `trustIssuerHubId`, …) | Public directory | **Yes** |
+
+The GitHub issue includes a paste-ready **feed entry** block. Contact email is never published in the feed.
+
+Convert manually if needed:
+
+```bash
+python tools/listing-to-feed-entry.py < listing-request.json
+```
+
 ## Review workflow (today)
 
 1. Operator submits from hub console → registration form → **Submit to Directory**
-2. Worker opens a GitHub issue labeled `directory-request`
-3. You review, merge a PR to `directory/hubs.json`
+2. Worker opens a GitHub issue labeled `directory-request` (with feed entry JSON)
+3. Paste feed entry into `directory/hubs.json`, bump `updatedAt`, run `python tools/validate-directory.py`
 4. Label issue `directory-approved` and close
 5. Operator refreshes status page and runs **CHECK DIRECTORY** in their hub
 

@@ -1,4 +1,5 @@
 import { sendReceiptEmail } from './email'
+import { buildFeedEntry } from './feedEntry'
 import {
   buildIssueBody,
   createDirectoryIssue,
@@ -137,6 +138,7 @@ async function handleSubmit(request: Request, env: Env, cors: HeadersInit): Prom
       issueUrl: issue.html_url,
       statusUrl,
       emailSent,
+      feedEntry: buildFeedEntry(listingRequest),
     },
     201,
     cors,
