@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Track your SignalForge hub directory listing request." />
+  <title>Listing Status — SignalForge Directory</title>
+  <script>
+    (function () {
+      try {
+        var m = localStorage.getItem('sf-display-mode');
+        if (m === 'dark' || m === 'nite' || m === 'nvg' || m === 'light') {
+          document.documentElement.setAttribute('data-sf-mode', m);
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/display-modes.css" />
+  <link rel="stylesheet" href="assets/site-base.css" />
+  <link rel="stylesheet" href="assets/site-nav.css" />
+  <script src="assets/site-nav.js" defer></script>
+  <script src="assets/display-modes.js" defer></script>
+  <style>
+    main a { color: var(--amber); text-decoration: none; }
+    main a:hover { text-decoration: underline; }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 5rem;
+    }
+    .label {
+      color: var(--amber-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    h1 {
+      font-size: clamp(1.3rem, 4.5vw, 2rem);
+      color: var(--heading);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+    p { color: var(--muted); margin-bottom: 1rem; line-height: 1.65; font-size: 0.9rem; }
+    strong { color: var(--text); }
+    .status-card {
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .status-pill {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.6rem;
+      border: 1px solid var(--border);
+      margin-bottom: 0.85rem;
+    }
+    .status-pill.pending { color: var(--amber); border-color: var(--amber-dim); }
+    .status-pill.listed { color: var(--heading); border-color: var(--amber); }
+    .status-pill.rejected { color: var(--red, #c44); border-color: var(--red, #c44); }
+    .meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .meta dt {
+      color: var(--amber-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.65rem;
+      margin-top: 0.65rem;
+    }
+    .meta dd { margin: 0.15rem 0 0; color: var(--text); word-break: break-word; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1.25rem; }
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.1rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: transparent;
+    }
+    .btn:hover { border-color: var(--amber); color: var(--text); }
+    .error { color: var(--red, #c44); font-size: 0.82rem; }
+  </style>
+</head>
+<body data-sf-page="listing">
+
+  <div id="sf-site-nav"></div>
+
+  <main>
+    <div class="label">// directory</div>
+    <h1>Listing Status</h1>
+    <p id="intro">Loading your directory listing…</p>
+
+    <div id="panel" class="status-card" hidden>
+      <div id="pill" class="status-pill pending">pending</div>
+      <p id="message"></p>
+      <dl class="meta">
+        <dt>Hub</dt><dd id="name">—</dd>
+        <dt>Hub ID</dt><dd id="hubId">—</dd>
+        <dt>Region</dt><dd id="region">—</dd>
+        <dt>Public URL</dt><dd id="publicUrl">—</dd>
+        <dt>Submitted</dt><dd id="createdAt">—</dd>
+        <dt>Health at submit</dt><dd id="health">—</dd>
+      </dl>
+      <div class="actions">
+        <a id="issueLink" class="btn" href="#" target="_blank" rel="noopener noreferrer">View GitHub Issue</a>
+        <a class="btn" href="register-hub.html">Register Another Hub</a>
+        <a class="btn" href="index.html#directory">Directory Guide</a>
+      </div>
+    </div>
+
+    <p id="error" class="error" hidden></p>
+  </main>
+
+  <script>
+    (function () {
+      var DIRECTORY_API = 'https://directory.signalforge.org';
+      var params = new URLSearchParams(window.location.search);
+      var token = (params.get('token') || '').trim();
+
+      var intro = document.getElementById('intro');
+      var panel = document.getElementById('panel');
+      var error = document.getElementById('error');
+
+      if (!/^[a-f0-9]{32}$/.test(token)) {
+        intro.hidden = true;
+        error.hidden = false;
+        error.textContent = 'Missing or invalid tracking token. Use the link from your receipt email.';
+        return;
+      }
+
+      fetch(DIRECTORY_API + '/v1/listings/' + token, { headers: { Accept: 'application/json' } })
+        .then(function (res) { return res.json().then(function (body) { return { res: res, body: body }; }); })
+        .then(function (result) {
+          if (!result.res.ok || !result.body.ok || !result.body.listing) {
+            throw new Error(result.body.error || 'Could not load listing');
+          }
+          var listing = result.body.listing;
+          intro.hidden = true;
+          panel.hidden = false;
+
+          var pill = document.getElementById('pill');
+          pill.textContent = listing.status;
+          pill.className = 'status-pill ' + listing.status;
+
+          document.getElementById('message').textContent = listing.statusMessage;
+          document.getElementById('name').textContent = listing.name;
+          document.getElementById('hubId').textContent = listing.hubId;
+          document.getElementById('region').textContent = listing.region;
+          document.getElementById('publicUrl').innerHTML =
+            '<a href="' + listing.publicUrl + '" target="_blank" rel="noopener noreferrer">' + listing.publicUrl + '</a>';
+          document.getElementById('createdAt').textContent = new Date(listing.createdAt).toLocaleString();
+          document.getElementById('health').textContent = listing.healthDetail;
+          document.getElementById('issueLink').href = listing.issueUrl;
+          document.getElementById('issueLink').textContent = 'View Issue #' + listing.issueNumber;
+        })
+        .catch(function (err) {
+          intro.hidden = true;
+          error.hidden = false;
+          error.textContent = err instanceof Error ? err.message : 'Could not load listing status.';
+        });
+    })();
+  </script>
+</body>
+</html>

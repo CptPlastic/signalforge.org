@@ -12,6 +12,8 @@ See [SOURCE.md](SOURCE.md) for the public hub source policy and build paths. The
 
 The static directory feed lives at <https://signalforge.org/directory/hubs.json>. Hub operators can point `HUB_DIRECTORY_URL` at this feed and use the admin console's directory refresh action to update local directory and trust status.
 
+**Register a hub:** complete the checklist in the hub admin console (**HUB** tab), then submit at <https://signalforge.org/register-hub.html>. The directory worker (`workers/directory/`) opens a GitHub issue for review and emails a link to track status at `listing.html?token=…`. Deploy notes: [workers/directory/README.md](workers/directory/README.md).
+
 Directory status answers whether a hub is present and verified by the directory. Trust level answers how much SignalForge vouches for the hub.
 
 - `community`: default local trust; not reviewed by the directory.

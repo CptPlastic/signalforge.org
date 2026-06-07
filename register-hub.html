@@ -115,6 +115,9 @@
       color: var(--amber-dim);
       margin-top: 0.75rem;
     }
+    .status.ok { color: var(--amber); }
+    .status.err { color: var(--red, #c44); }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
   </style>
 </head>
 <body data-sf-page="register-hub">
@@ -159,11 +162,13 @@
       <textarea id="payload" name="payload" readonly></textarea>
 
       <div class="actions">
-        <button type="button" class="btn btn-primary" id="copy-json">Copy JSON</button>
-        <button type="button" class="btn" id="copy-mail">Email Request</button>
+        <button type="submit" class="btn btn-primary" id="submit-listing">Submit to Directory</button>
+        <button type="button" class="btn" id="copy-json">Copy JSON</button>
+        <button type="button" class="btn" id="copy-mail">Email Fallback</button>
         <a class="btn" href="index.html#directory">Directory Guide</a>
       </div>
       <p class="status" id="status" aria-live="polite"></p>
+      <p class="status" id="status-link" hidden></p>
     </form>
 
     <h2 style="font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--heading);margin:2.5rem 0 0.75rem;">After you submit</h2>
@@ -177,9 +182,11 @@
 
   <script>
     (function () {
+      var DIRECTORY_API = 'https://directory.signalforge.org';
       var params = new URLSearchParams(window.location.search);
       var fields = ['hubId', 'publicUrl', 'name', 'region', 'publicKey', 'contact', 'version'];
       var data = { type: 'signalforge-directory-listing-request', software: 'SignalForge Hub' };
+      var busy = false;
 
       fields.forEach(function (key) {
         var value = params.get(key) || '';
@@ -208,9 +215,81 @@
 
       rebuildPayload();
 
-      function setStatus(msg) {
-        document.getElementById('status').textContent = msg;
+      function setStatus(msg, kind) {
+        var el = document.getElementById('status');
+        el.textContent = msg;
+        el.className = 'status' + (kind ? ' ' + kind : '');
       }
+
+      function validateReady() {
+        if (!data.hubId || !data.hubId.startsWith('hub_')) return 'Hub ID is missing — open this form from your hub console.';
+        if (!data.publicUrl) return 'Public URL is required.';
+        if (!data.name) return 'Display name is required.';
+        if (!data.region) return 'Region is required.';
+        if (!data.contact || data.contact.indexOf('@') < 0) return 'Contact email is required.';
+        if (!data.publicKey || data.publicKey.indexOf('ed25519:') !== 0) return 'Generate a hub keypair before submitting.';
+        return '';
+      }
+
+      document.getElementById('register-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (busy) return;
+        rebuildPayload();
+        var validationError = validateReady();
+        if (validationError) {
+          setStatus(validationError, 'err');
+          return;
+        }
+        busy = true;
+        var submitBtn = document.getElementById('submit-listing');
+        submitBtn.disabled = true;
+        setStatus('Submitting listing request…');
+        document.getElementById('status-link').hidden = true;
+
+        fetch(DIRECTORY_API + '/v1/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        })
+          .then(function (res) {
+            return res.json().then(function (body) {
+              return { res: res, body: body };
+            });
+          })
+          .then(function (result) {
+            if (!result.res.ok || !result.body.ok) {
+              throw new Error(result.body.error || 'Submit failed');
+            }
+            var statusUrl = result.body.statusUrl;
+            var issueUrl = result.body.issueUrl;
+            var emailNote = result.body.emailSent ? ' A receipt email is on the way.' : '';
+            var statusEl = document.getElementById('status');
+            statusEl.className = 'status ok';
+            statusEl.innerHTML =
+              'Submitted — <a href="' + issueUrl + '">issue #' + result.body.issueNumber + '</a> created.' + emailNote;
+            if (statusUrl) {
+              var linkEl = document.getElementById('status-link');
+              linkEl.hidden = false;
+              linkEl.innerHTML = 'Track status: <a href="' + statusUrl + '">' + statusUrl + '</a>';
+              if (!result.body.alreadySubmitted) {
+                window.setTimeout(function () {
+                  window.location.href = statusUrl;
+                }, 1800);
+              }
+            }
+          })
+          .catch(function (err) {
+            setStatus(
+              (err && err.message ? err.message : 'Submit failed') +
+                ' Use Email Fallback or Copy JSON if the directory API is not live yet.',
+              'err'
+            );
+          })
+          .finally(function () {
+            busy = false;
+            submitBtn.disabled = false;
+          });
+      });
 
       document.getElementById('copy-json').addEventListener('click', function () {
         var json = rebuildPayload();

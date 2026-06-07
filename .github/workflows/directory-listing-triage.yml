@@ -1,0 +1,55 @@
+name: Directory listing triage
+
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  issues: write
+
+jobs:
+  triage-comment:
+    if: contains(github.event.issue.labels.*.name, 'directory-request')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post review checklist
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const marker = '<!-- signalforge-directory-triage -->';
+            if ((issue.body || '').includes(marker)) {
+              core.info('Triage comment already present in issue body.');
+              return;
+            }
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              per_page: 100,
+            });
+            if (comments.data.some((comment) => (comment.body || '').includes(marker))) {
+              core.info('Triage comment already posted.');
+              return;
+            }
+            const body = [
+              marker,
+              '### Directory review queue',
+              '',
+              'Thanks for submitting a hub listing request.',
+              '',
+              '**Reviewer steps**',
+              '1. Verify the public URL serves SignalForge Hub.',
+              '2. Confirm operator contact email.',
+              '3. Open a PR that adds the hub to `directory/hubs.json`.',
+              '4. Label this issue `directory-approved` and close when the PR merges.',
+              '5. Or label `directory-rejected` with a short reason.',
+              '',
+              'The operator status page is linked in the issue body.',
+            ].join('\n');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body,
+            });
