@@ -49,6 +49,8 @@
       '<details class="nav-group"><summary>Network</summary><div class="nav-panel">' +
       '<a href="' + home('#signalhub') + '">SignalHub Federation</a>' +
       '<a href="' + home('#directory') + '">Directory &amp; Trust</a>' +
+      '<a href="register-hub.html"' + activeAttr('register-hub') + '>Register Hub</a>' +
+      '<a href="' + home('#roadmap') + '">Roadmap</a>' +
       '<a href="' + home('#network') + '">The Vision</a>' +
       '</div></details>' +
       '<a class="nav-direct" href="BRAND.md">Brand</a>' +
@@ -75,6 +77,8 @@
       '<div class="nav-mobile-section"><div class="nav-mobile-title">Network</div>' +
       '<a href="' + home('#signalhub') + '">SignalHub Federation</a>' +
       '<a href="' + home('#directory') + '">Directory &amp; Trust</a>' +
+      '<a href="register-hub.html"' + activeAttr('register-hub') + '>Register Hub</a>' +
+      '<a href="' + home('#roadmap') + '">Roadmap</a>' +
       '<a href="' + home('#network') + '">The Vision</a></div>' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">Display</div>' + MODE_BAR + '</div>' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">More</div>' +

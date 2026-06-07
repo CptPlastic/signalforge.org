@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Register your SignalForge hub in the public directory for mobile discovery and trust metadata." />
+  <title>Register Hub — SignalForge Directory</title>
+  <script>
+    (function () {
+      try {
+        var m = localStorage.getItem('sf-display-mode');
+        if (m === 'dark' || m === 'nite' || m === 'nvg' || m === 'light') {
+          document.documentElement.setAttribute('data-sf-mode', m);
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/display-modes.css" />
+  <link rel="stylesheet" href="assets/site-base.css" />
+  <link rel="stylesheet" href="assets/site-nav.css" />
+  <script src="assets/site-nav.js" defer></script>
+  <script src="assets/display-modes.js" defer></script>
+  <style>
+    main a { color: var(--amber); text-decoration: none; }
+    main a:hover { text-decoration: underline; }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 5rem;
+    }
+    .label {
+      color: var(--amber-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    h1 {
+      font-size: clamp(1.4rem, 5vw, 2.2rem);
+      color: var(--heading);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+    p { color: var(--muted); margin-bottom: 1rem; line-height: 1.65; font-size: 0.9rem; }
+    strong { color: var(--text); }
+    label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin: 1rem 0 0.35rem;
+    }
+    input, textarea {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.82rem;
+      padding: 0.65rem 0.75rem;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--amber);
+    }
+    textarea {
+      min-height: 11rem;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.25rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.1rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid;
+      background: transparent;
+      color: var(--muted);
+      border-color: var(--border);
+    }
+    .btn:hover { border-color: var(--amber); color: var(--text); }
+    .btn-primary {
+      background: var(--amber);
+      color: var(--sf-btn-on-accent, #0a0a0a);
+      border-color: var(--amber);
+      font-weight: 700;
+    }
+    .btn-primary:hover { opacity: 0.92; color: var(--sf-btn-on-accent, #0a0a0a); }
+    .callout {
+      border-left: 3px solid var(--amber);
+      background: var(--bg2);
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      color: var(--text);
+      font-size: 0.86rem;
+      line-height: 1.65;
+    }
+    .steps { margin: 1.5rem 0; }
+    .steps li { color: var(--muted); font-size: 0.86rem; margin-bottom: 0.55rem; }
+    .status {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--amber-dim);
+      margin-top: 0.75rem;
+    }
+  </style>
+</head>
+<body data-sf-page="register-hub">
+
+  <div id="sf-site-nav"></div>
+
+  <main>
+    <div class="label">// directory</div>
+    <h1>Register Your Hub</h1>
+    <p>
+      Use this form after completing the <strong>Register in Directory</strong> checklist in your hub admin console
+      (<strong>HUB</strong> tab). We review listing requests manually, add approved hubs to
+      <a href="directory/hubs.json">directory/hubs.json</a>, and you refresh trust from the console with
+      <strong>CHECK DIRECTORY</strong>.
+    </p>
+
+    <div class="callout">
+      Fastest path: open your hub → <strong>HUB</strong> → fill identity → <strong>GENERATE KEY</strong> →
+      <strong>CHECK REACHABILITY</strong> → <strong>OPEN REGISTRATION FORM</strong>. Fields below pre-fill from that link.
+    </div>
+
+    <form id="register-form" novalidate>
+      <label for="name">Display name</label>
+      <input id="name" name="name" required placeholder="Yukon Community Hub" />
+
+      <label for="publicUrl">Public URL</label>
+      <input id="publicUrl" name="publicUrl" type="url" required placeholder="https://hub.example.com" />
+
+      <label for="region">Region</label>
+      <input id="region" name="region" required placeholder="Yukon, OK" />
+
+      <label for="contact">Contact email</label>
+      <input id="contact" name="contact" type="email" required placeholder="you@example.com" />
+
+      <label for="hubId">Hub ID</label>
+      <input id="hubId" name="hubId" required readonly />
+
+      <label for="publicKey">Public key (ed25519)</label>
+      <input id="publicKey" name="publicKey" required readonly />
+
+      <label for="payload">Listing request JSON</label>
+      <textarea id="payload" name="payload" readonly></textarea>
+
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="copy-json">Copy JSON</button>
+        <button type="button" class="btn" id="copy-mail">Email Request</button>
+        <a class="btn" href="index.html#directory">Directory Guide</a>
+      </div>
+      <p class="status" id="status" aria-live="polite"></p>
+    </form>
+
+    <h2 style="font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--heading);margin:2.5rem 0 0.75rem;">After you submit</h2>
+    <ol class="steps">
+      <li>We verify your public URL and contact email.</li>
+      <li>Your hub is added to the directory feed (usually <strong>listed</strong> first, <strong>verified</strong> after review).</li>
+      <li>In your hub console, click <strong>CHECK DIRECTORY</strong> to pull trust metadata.</li>
+      <li>Listed hubs appear in the SignalForge mobile app directory picker.</li>
+    </ol>
+  </main>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var fields = ['hubId', 'publicUrl', 'name', 'region', 'publicKey', 'contact', 'version'];
+      var data = { type: 'signalforge-directory-listing-request', software: 'SignalForge Hub' };
+
+      fields.forEach(function (key) {
+        var value = params.get(key) || '';
+        var el = document.getElementById(key === 'version' ? null : key);
+        if (el && value) el.value = value;
+        if (value) data[key] = value;
+      });
+
+      if (!data.version) data.version = params.get('version') || 'unknown';
+
+      function rebuildPayload() {
+        data.name = document.getElementById('name').value.trim();
+        data.publicUrl = document.getElementById('publicUrl').value.trim();
+        data.region = document.getElementById('region').value.trim();
+        data.contact = document.getElementById('contact').value.trim();
+        data.hubId = document.getElementById('hubId').value.trim();
+        data.publicKey = document.getElementById('publicKey').value.trim();
+        var json = JSON.stringify(data, null, 2);
+        document.getElementById('payload').value = json;
+        return json;
+      }
+
+      ['name', 'publicUrl', 'region', 'contact'].forEach(function (id) {
+        document.getElementById(id).addEventListener('input', rebuildPayload);
+      });
+
+      rebuildPayload();
+
+      function setStatus(msg) {
+        document.getElementById('status').textContent = msg;
+      }
+
+      document.getElementById('copy-json').addEventListener('click', function () {
+        var json = rebuildPayload();
+        navigator.clipboard.writeText(json).then(function () {
+          setStatus('Listing JSON copied to clipboard.');
+        }).catch(function () {
+          setStatus('Could not copy — select the JSON and copy manually.');
+        });
+      });
+
+      document.getElementById('copy-mail').addEventListener('click', function () {
+        var json = rebuildPayload();
+        var subject = encodeURIComponent('SignalForge Directory Listing — ' + (data.name || data.hubId || 'hub'));
+        var body = encodeURIComponent(
+          'Please add this hub to the SignalForge directory.\n\n' +
+          'Contact: ' + (data.contact || '') + '\n\n' +
+          json
+        );
+        window.location.href = 'mailto:info@projectseven.us?subject=' + subject + '&body=' + body;
+        setStatus('Opening your email client with the listing request.');
+      });
+    })();
+  </script>
+</body>
+</html>

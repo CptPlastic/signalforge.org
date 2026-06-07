@@ -717,15 +717,42 @@
 
     <div class="install-panel" style="margin-top:1.4rem;">
       <pre><code>brew tap CptPlastic/signalforge
-    brew install signalforge
+brew install signalforge
 
-    scoop bucket add signalforge https://github.com/CptPlastic/scoop-signalforge
-    scoop install signalforge
+scoop bucket add signalforge https://github.com/CptPlastic/scoop-signalforge
+scoop install signalforge
 
-    sf recorder check --source-key sk_live_REPLACE_WITH_SOURCE_KEY
-  sf recorder inspect --input ./calls
-    sf recorder watch --input ./calls --source-key sk_live_REPLACE_WITH_SOURCE_KEY
-    sf update check</code></pre>
+sf onboard
+sf rec check --source-key sk_live_REPLACE_WITH_SOURCE_KEY
+sf rec inspect --input ./Input
+sf rec w --input ./Input --source-key sk_live_REPLACE_WITH_SOURCE_KEY
+sf update check</code></pre>
+    </div>
+
+    <h3 style="font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--heading);margin:2rem 0 0.75rem;">Monitoring modes</h3>
+    <p>Pick one mode when you run <strong>sf rec w</strong> (folder watch). Profile settings live in
+      <code>~/Library/Application Support/signalforge/profile.json</code> on macOS.</p>
+    <div class="hub-grid" style="margin-top:1rem;">
+      <div class="hub-card">
+        <h3>Mode 1 — Folder only</h3>
+        <p>Watch your ingest folder and upload new audio as calls land. No heartbeat clips.</p>
+        <pre style="margin-top:0.75rem;font-size:0.72rem;"><code>sf rec w --input ./Input</code></pre>
+      </div>
+      <div class="hub-card">
+        <h3>Mode 2 — Canary only</h3>
+        <p>Upload an audible pip on an interval so the hub knows the recorder is alive. Minimum interval is 30s.</p>
+        <pre style="margin-top:0.75rem;font-size:0.72rem;"><code>sf rec w --canary --canary-interval 2m</code></pre>
+      </div>
+      <div class="hub-card">
+        <h3>Mode 3 — Folder + canary</h3>
+        <p>Real traffic from the folder plus a periodic heartbeat. Use <strong>sf rec stop</strong> to end a watch session cleanly.</p>
+        <pre style="margin-top:0.75rem;font-size:0.72rem;"><code>sf rec w --input ./Input --canary --canary-interval 2m</code></pre>
+      </div>
+      <div class="hub-card">
+        <h3>Beacon (optional)</h3>
+        <p>Re-upload a fixed audio clip on a schedule (separate from the canary pip). Handy for scheduled check-ins.</p>
+        <pre style="margin-top:0.75rem;font-size:0.72rem;"><code>sf rec w --beacon --beacon-file ./beacon.wav --beacon-interval 30m</code></pre>
+      </div>
     </div>
 
   </section>
@@ -739,11 +766,11 @@
       before running your own hub.
     </p>
     <ol style="margin-left:1.2em; color:var(--muted); font-size:0.97em;">
-      <li style="margin-bottom:0.7em;">Open the main hub at <a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">p7hub.projectseven.us</a>.</li>
-      <li style="margin-bottom:0.7em;">Click <strong>Account</strong> in the top navigation bar.</li>
-      <li style="margin-bottom:0.7em;">Enter your email address and request a magic link.</li>
-      <li style="margin-bottom:0.7em;">Check your email for the login link or token. If you do not see it, check spam or junk.</li>
-      <li style="margin-bottom:0.7em;">Paste the token into the site to complete sign-in.</li>
+      <li style="margin-bottom:0.7em;">Open the main hub at <a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">p7hub.projectseven.us</a> or pick a hub from the mobile app directory.</li>
+      <li style="margin-bottom:0.7em;">Click <strong>Account</strong> in the top navigation bar (web) or sign in on the mobile app.</li>
+      <li style="margin-bottom:0.7em;"><strong>Password hubs:</strong> enter your email and password when the hub has password login enabled.</li>
+      <li style="margin-bottom:0.7em;"><strong>Email hubs:</strong> request a magic link, check your inbox, then paste the token or 6-digit code.</li>
+      <li style="margin-bottom:0.7em;">After sign-in, open <strong>Radio Sets</strong> to listen live or create your own set.</li>
     </ol>
     <div class="callout" style="margin-top:1.2em;">
       Need help or want to connect with other contributors? <br>
@@ -1138,10 +1165,48 @@ multipart: audio, duration, clientId, radioSetIds=id1,id2,id3</code></pre>
         <p>A listed hub that should not currently be used for trust or discovery.</p>
       </div>
     </div>
-    <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
-      <a href="directory/hubs.json" class="btn btn-primary">Directory Feed</a>
-      <a href="mailto:info@projectseven.us?subject=SignalForge%20Directory%20Listing" class="btn btn-ghost">Request Listing</a>
+    <div class="callout" style="margin-top:1.25rem;">
+      <strong>Register your hub:</strong> in the hub admin console, open the <strong>HUB</strong> tab and use
+      <strong>Register in Directory</strong> — complete the checklist, then open the registration form to submit
+      your listing request.
     </div>
+    <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
+      <a href="register-hub.html" class="btn btn-primary">Register Hub</a>
+      <a href="directory/hubs.json" class="btn btn-ghost">Directory Feed</a>
+      <a href="mailto:info@projectseven.us?subject=SignalForge%20Directory%20Listing" class="btn btn-ghost">Email Listing</a>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap">
+    <div class="section-label">// roadmap</div>
+    <h2>What We Are Building Next</h2>
+    <p>
+      SignalForge is intentionally layered: run a cell today, list it in the directory when you are ready,
+      federate with peers when you want shared sources. These are the active platform tracks.
+    </p>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>Operator polish</h3>
+        <p>Monitoring mode docs, password/off-grid onboarding, admin user management, and hub registration wizard in the console.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Directory &amp; discovery</h3>
+        <p>Public <code>hubs.json</code> feed, mobile directory picker, trust levels, and the register-hub intake flow.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Federation</h3>
+        <p>Peer invites, shared sources, imported remote calls — optional mesh between cells without a central tower.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Platform (later)</h3>
+        <p>Custom RSS/JSON feeds, multi-protocol ingest, API key scoping, export tooling, and operator monitoring dashboards.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.25rem;">
+      Want to help shape priority? <a href="mailto:info@projectseven.us">Reach out</a> — especially if you are running
+      a hub cell and want directory listing or federation with Yukon.
+    </p>
   </section>
 
   <!-- NETWORK -->
