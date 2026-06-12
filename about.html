@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SignalForge — community-powered radio monitoring. Hubs, recorders, mobile PTT, and off-grid cells. Voice in the Storm." />
+  <title>About — SignalForge</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      try {
+        var m = localStorage.getItem('sf-display-mode');
+        if (m === 'dark' || m === 'nite' || m === 'nvg' || m === 'light') {
+          document.documentElement.setAttribute('data-sf-mode', m);
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/display-modes.css" />
+  <link rel="stylesheet" href="assets/site-base.css" />
+  <link rel="stylesheet" href="assets/site-nav.css" />
+  <script src="assets/site-nav.js" defer></script>
+  <script src="assets/display-modes.js" defer></script>
+  <style>
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(2.5rem, 6vh, 4rem) 1.5rem 3rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-logo {
+      width: min(100px, 26vw);
+      height: auto;
+      margin: 0 auto 1.25rem;
+      opacity: 0.96;
+      filter: drop-shadow(0 0 20px var(--sf-logo-glow-white)) drop-shadow(0 0 32px var(--sf-logo-glow-accent));
+    }
+    h1 {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--heading);
+      margin-bottom: 0.35rem;
+    }
+    .hero-sub {
+      color: var(--amber);
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      max-width: 40rem;
+      margin: 0 auto 1.75rem;
+      line-height: 1.65;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.2rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .btn-glow {
+      background: var(--amber);
+      color: var(--sf-btn-on-accent);
+      border-color: var(--amber);
+      font-weight: 700;
+      box-shadow: 0 0 16px 2px var(--sf-glow-strong), 0 0 32px 8px var(--sf-glow-mid);
+    }
+    .btn-glow:hover {
+      background: var(--amber-bright);
+      box-shadow: 0 0 24px 6px var(--sf-glow-hover-strong), 0 0 48px 12px var(--sf-glow-hover-mid);
+    }
+    .btn-ghost { background: transparent; color: var(--muted); }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--heading);
+      margin-bottom: 1rem;
+    }
+    p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.85rem; line-height: 1.65; }
+    p strong { color: var(--text); }
+    section a { color: var(--amber); text-decoration: none; }
+    section a:hover { text-decoration: underline; }
+    .callout {
+      border-left: 3px solid var(--amber);
+      padding: 1rem 1.25rem;
+      background: var(--bg2);
+      margin: 1.25rem 0;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+    .hub-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 1rem;
+    }
+    .hub-card h3 {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.45rem;
+    }
+    .hub-card p { font-size: 0.8rem; margin-bottom: 0; }
+    .surface-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.25rem;
+      font-size: 0.8rem;
+    }
+    .surface-table th,
+    .surface-table td {
+      border: 1px solid var(--border);
+      padding: 0.65rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .surface-table th {
+      background: var(--bg2);
+      color: var(--amber);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .surface-table td { color: var(--muted); }
+    .surface-table code { color: var(--text); }
+    .brand-swatch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .swatch {
+      flex: 1 1 140px;
+      border: 1px solid var(--border);
+      padding: 0.85rem;
+      background: var(--bg2);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .swatch-chip {
+      width: 100%;
+      height: 2.5rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid var(--border);
+    }
+    footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem 3rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+    footer a { color: var(--amber); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-brand { color: var(--amber); font-weight: 700; margin-bottom: 0.4rem; font-size: 0.85rem; }
+  </style>
+</head>
+<body data-sf-page="about">
+  <div id="sf-site-nav"></div>
+
+  <div class="hero">
+    <svg class="hero-logo sf-logo-mark" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="SignalForge">
+      <path class="logo-mast" d="M60,15L60,88" stroke-width="2.5"/>
+      <path class="logo-mast" d="M60,36L38,55" stroke-width="2"/>
+      <path class="logo-mast" d="M60,36L82,55" stroke-width="2"/>
+      <path class="logo-mast" d="M60,55L22,80" stroke-width="2"/>
+      <path class="logo-mast" d="M60,55L98,80" stroke-width="2"/>
+      <path class="logo-mast" d="M22,80L98,80" stroke-width="1.5"/>
+      <g transform="translate(0,8)"><path class="logo-signal" d="M46,28C55.333,18.667 64.667,18.667 74,28" stroke-width="2"/></g>
+      <g transform="translate(0,2)"><path class="logo-signal" d="M46,28C55.333,18.667 64.667,18.667 74,28" stroke-width="2"/></g>
+      <g transform="translate(0,-4)"><path class="logo-signal" d="M46,28C55.333,18.667 64.667,18.667 74,28" stroke-width="2"/></g>
+    </svg>
+    <h1>SignalForge</h1>
+    <div class="hero-sub">Voice in the Storm</div>
+    <p class="hero-desc">
+      Community-powered radio monitoring for Yukon, Oklahoma and beyond.
+      Run hubs, share local scanner and repeater audio, and stay on the air when towers and gatekeepers fail you —
+      including <strong>off-grid cells</strong> that never phone home to the cloud.
+    </p>
+    <div class="btn-row">
+      <a href="https://p7hub.projectseven.us/" class="btn btn-glow" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>
+      <a href="mobile.html" class="btn btn-ghost">Mobile App</a>
+      <a href="source.html" class="btn btn-ghost">Hub Source</a>
+    </div>
+  </div>
+
+  <section id="product">
+    <div class="section-label">// product</div>
+    <h2>What SignalForge Is</h2>
+    <p>
+      SignalForge is a distributed radio monitoring platform. A <strong>hub</strong> ingests and plays back calls.
+      A <strong>CLI recorder</strong> uploads audio from your scanner, SDR, or repeater setup.
+      A <strong>native mobile app</strong> lets you monitor and push-to-talk from the field.
+      Hubs can run online, fully off-grid, or federate with trusted peers through SignalHub.
+    </p>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>Listen</h3>
+        <p>Live monitor playback, embeddable public players, and background audio on mobile.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Contribute</h3>
+        <p>Point the SignalForge CLI at a folder or stream and upload calls to any hub you trust.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Operate</h3>
+        <p>Run your own Compose stack, own your PostgreSQL data, and stay off-grid when you need to.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Coordinate</h3>
+        <p>Push-to-talk and dispatcher broadcast inside radio sets — permissions controlled per hub account.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="section-label">// stack</div>
+    <h2>How It Fits Together</h2>
+    <table class="surface-table" aria-label="SignalForge product surfaces">
+      <thead>
+        <tr>
+          <th scope="col">Surface</th>
+          <th scope="col">Role</th>
+          <th scope="col">Accent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--text);">signalforge.org</strong></td>
+          <td>Marketing, docs, directory intake</td>
+          <td><code>#ffc700</code></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text);">SignalForge Hub</strong></td>
+          <td>Go API, web console, PostgreSQL, optional transcription</td>
+          <td><code>#ffaa00</code> (PWA)</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text);">SignalForge Mobile</strong></td>
+          <td>iOS / Android monitor, PTT, dispatcher</td>
+          <td><code>#ffc700</code></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text);">SignalForge CLI</strong></td>
+          <td>Folder watch, canary, beacon — recorder ingest</td>
+          <td>Terminal chrome</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1.25rem;">
+      Public hub source: <a href="https://github.com/CptPlastic/signalforge-node" target="_blank" rel="noopener noreferrer">signalforge-node</a>.
+      Operator install notes live on <a href="source.html">Source &amp; Build</a> and the <a href="index.html">home page</a>.
+    </p>
+  </section>
+
+  <section id="origin">
+    <div class="section-label">// origin</div>
+    <h2>Why We're Here</h2>
+    <p>
+      This started with a simple idea: Yukon deserved a <strong>public GMRS repeater</strong> — a reliable community
+      radio hub that would keep neighborhoods connected when cell towers go dark and power grids fail.
+      We put together the proposal, found the tower, reached out to the city.
+    </p>
+    <p>
+      The city didn't answer. The tower owner went quiet. The project stalled.
+    </p>
+    <div class="callout">
+      Getting ghosted didn't kill the idea. It sharpened it.
+      If we couldn't own the infrastructure, we'd build something that didn't need it.
+    </div>
+    <p>
+      <strong>SignalForge Hub</strong> is what came next — a software-defined monitoring platform where community
+      members contribute scanner, repeater, SDR, or streamed audio sources. No tower lease. No committee.
+      Every person who runs a recorder expands the network.
+    </p>
+    <p>
+      The original goal was a repeater at every Yukon landmark — a cohesive signal network stitched across the city.
+      The hardware approach hit walls. The software approach has no walls.
+    </p>
+    <div class="callout">
+      The city didn't give us the tower. So we built something that doesn't need one.
+    </div>
+  </section>
+
+  <section id="brand">
+    <div class="section-label">// brand</div>
+    <h2>Visual Identity</h2>
+    <p>
+      Retro terminal aesthetic: <strong>amber phosphor on console black</strong>. Monospace type, ASCII borders,
+      minimal chrome. The mark is a radio mast with three beacon arcs — white structure, amber signal emission
+      on a <code>#0a0a0a</code> field.
+    </p>
+    <div class="brand-swatch">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#0a0a0a;"></div>
+        Console black<br /><code>#0a0a0a</code>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#ffc700;"></div>
+        Signal amber<br /><code>#ffc700</code>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#ffda47;"></div>
+        PTT / dispatch<br /><code>#ffda47</code>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#c9c9c9;"></div>
+        Body copy<br /><code>#c9c9c9</code>
+      </div>
+    </div>
+    <div class="callout">
+      Full brand system: <a href="BRAND.md">BRAND.md</a> —
+      <a href="LOGO.svg">LOGO.svg</a> (mark) and
+      <a href="icon.svg">icon.svg</a> (app icon).
+      Display modes (DARK / NITE / NVG / LIGHT): <a href="DISPLAY-MODES.md">DISPLAY-MODES.md</a>.
+    </div>
+  </section>
+
+  <section id="company">
+    <div class="section-label">// operator</div>
+    <h2>Who Builds It</h2>
+    <p>
+      SignalForge is built by <strong>projectseven co ltd</strong> in Yukon, Oklahoma.
+      The platform is community infrastructure — operators run their own cells, contributors feed audio,
+      and listeners tune in from the web or mobile app.
+    </p>
+    <p>
+      Want to contribute a scanner source, run a hub, or list your cell in the directory?
+      Reach out — especially if you're operating a field cell and want federation or directory listing with Yukon.
+    </p>
+    <div class="btn-row" style="margin-top:1.5rem;">
+      <a href="mailto:info@projectseven.us" class="btn btn-ghost">Get Involved</a>
+      <a href="register-hub.html" class="btn btn-ghost">Register Hub</a>
+      <a href="index.html#live" class="btn btn-ghost">Listen Live</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">SignalForge</div>
+    <div>Yukon, Oklahoma &mdash; projectseven co ltd</div>
+    <div style="margin-top:0.5rem;">
+      <a href="mailto:info@projectseven.us">info@projectseven.us</a>
+    </div>
+  </footer>
+</body>
+</html>

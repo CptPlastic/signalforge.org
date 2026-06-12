@@ -53,6 +53,7 @@
       '<a href="' + home('#roadmap') + '">Roadmap</a>' +
       '<a href="' + home('#network') + '">The Vision</a>' +
       '</div></details>' +
+      '<a class="nav-direct" href="about.html"' + activeAttr('about') + '>About</a>' +
       '<a class="nav-direct" href="BRAND.md">Brand</a>' +
       '<a class="nav-direct" href="' + home('#mission') + '">Mission</a>' +
       '<a class="nav-direct' + (pageId() === 'api' ? ' is-active' : '') + '" href="api.html">API</a>' +
@@ -82,6 +83,7 @@
       '<a href="' + home('#network') + '">The Vision</a></div>' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">Display</div>' + MODE_BAR + '</div>' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">More</div>' +
+      '<a href="about.html"' + activeAttr('about') + '>About</a>' +
       '<a href="BRAND.md">Brand Guide</a>' +
       '<a href="DISPLAY-MODES.md">Display Modes</a>' +
       '<a href="' + home('#mission') + '">Mission</a>' +
