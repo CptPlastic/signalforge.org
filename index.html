@@ -500,14 +500,18 @@
     /* -- SIGNALHUB -- */
     .hub-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 0.75rem;
       margin: 1.5rem 0;
+    }
+    .hub-grid-modes {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
     .hub-card {
       background: var(--bg2);
       border: 1px solid var(--border);
       padding: 1rem;
+      min-width: 0;
     }
     .hub-card h3 {
       font-size: 0.82rem;
@@ -517,6 +521,22 @@
       margin-bottom: 0.45rem;
     }
     .hub-card p { font-size: 0.8rem; margin-bottom: 0; }
+    .hub-card pre {
+      margin-top: 0.75rem;
+      margin-bottom: 0;
+      padding: 0.55rem 0.65rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      font-size: 0.72rem;
+      line-height: 1.45;
+      overflow-x: auto;
+      max-width: 100%;
+    }
+    .hub-card pre code {
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
 
     .install-panel {
       background: var(--bg2);
@@ -732,26 +752,29 @@ sf update check</code></pre>
     <h3 style="font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--heading);margin:2rem 0 0.75rem;">Monitoring modes</h3>
     <p>Pick one mode when you run <strong>sf rec w</strong> (folder watch). Profile settings live in
       <code>~/Library/Application Support/signalforge/profile.json</code> on macOS.</p>
-    <div class="hub-grid" style="margin-top:1rem;">
+    <div class="hub-grid hub-grid-modes" style="margin-top:1rem;">
       <div class="hub-card">
         <h3>Mode 1 — Folder only</h3>
         <p>Watch your ingest folder and upload new audio as calls land. No heartbeat clips.</p>
-        <pre style="margin-top:0.75rem;font-size:0.72rem;"><code>sf rec w --input ./Input</code></pre>
+        <pre><code>sf rec w --input ./Input</code></pre>
       </div>
       <div class="hub-card">
         <h3>Mode 2 — Canary only</h3>
         <p>Upload an audible pip on an interval so the hub knows the recorder is alive. Minimum interval is 30s.</p>
-        <pre style="margin-top:0.75rem;font-size:0.72rem;"><code>sf rec w --canary --canary-interval 2m</code></pre>
+        <pre><code>sf rec w --canary --canary-interval 2m</code></pre>
       </div>
       <div class="hub-card">
         <h3>Mode 3 — Folder + canary</h3>
         <p>Real traffic from the folder plus a periodic heartbeat. Use <strong>sf rec stop</strong> to end a watch session cleanly.</p>
-        <pre style="margin-top:0.75rem;font-size:0.72rem;"><code>sf rec w --input ./Input --canary --canary-interval 2m</code></pre>
+        <pre><code>sf rec w --input ./Input \
+  --canary --canary-interval 2m</code></pre>
       </div>
       <div class="hub-card">
         <h3>Beacon (optional)</h3>
         <p>Re-upload a fixed audio clip on a schedule (separate from the canary pip). Handy for scheduled check-ins.</p>
-        <pre style="margin-top:0.75rem;font-size:0.72rem;"><code>sf rec w --beacon --beacon-file ./beacon.wav --beacon-interval 30m</code></pre>
+        <pre><code>sf rec w --beacon \
+  --beacon-file ./beacon.wav \
+  --beacon-interval 30m</code></pre>
       </div>
     </div>
 
