@@ -40,6 +40,7 @@
       '</div></details>' +
       '<details class="nav-group"><summary>Operate</summary><div class="nav-panel">' +
       '<a href="' + home('#run') + '">Run Your Own Hub</a>' +
+      '<a href="' + home('#retention') + '">Call Retention</a>' +
       '<a href="' + home('#offgrid') + '">Off-Grid Cells</a>' +
       '<a href="source.html"' + activeAttr('source') + '>Source &amp; Build Notes</a>' +
       '<a href="' + home('#transcription') + '">Transcription</a>' +
@@ -70,6 +71,7 @@
       '<a href="mobile.html"' + activeAttr('mobile') + '>Mobile App</a></div>' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">Operate</div>' +
       '<a href="' + home('#run') + '">Run Your Own Hub</a>' +
+      '<a href="' + home('#retention') + '">Call Retention</a>' +
       '<a href="' + home('#offgrid') + '">Off-Grid Cells</a>' +
       '<a href="source.html"' + activeAttr('source') + '>Source &amp; Build Notes</a>' +
       '<a href="' + home('#transcription') + '">Transcription</a>' +

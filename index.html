@@ -819,8 +819,71 @@ curl http://localhost:8080/api/v1/health</code></pre>
     </div>
     <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
       <a href="#offgrid" class="btn btn-primary">Off-Grid Cells</a>
+      <a href="#retention" class="btn btn-ghost">Call Retention</a>
       <a href="source.html#fastest-operator-path" class="btn btn-ghost">Install Notes</a>
       <a href="https://github.com/CptPlastic/signalforge-node" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Hub Source GitHub</a>
+    </div>
+  </section>
+
+  <!-- CALL RETENTION -->
+  <section id="retention">
+    <div class="section-label">// storage</div>
+    <h2>Call Retention &amp; Archive</h2>
+    <p>
+      Call audio lives inside PostgreSQL. High-traffic hubs can log a million calls in a month —
+      without a retention policy the database volume fills up and the hub stops accepting new traffic.
+    </p>
+    <div class="callout">
+      SignalForge hubs export calls older than your retention window to day folders on disk,
+      optionally sync them to S3-compatible object storage (DigitalOcean Spaces, MinIO, AWS S3),
+      delete them from Postgres, and run <strong>VACUUM FULL</strong> when a sweep finishes so
+      freed space returns to the operating system.
+    </div>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>Automatic Sweeps</h3>
+        <p>Set <strong>CALL_RETENTION_DAYS</strong> and <strong>CALL_ARCHIVE_DIR</strong> in the stack
+          environment. The hub archives on a six-hour schedule — no cron job required.</p>
+      </div>
+      <div class="hub-card">
+        <h3>One-Click Catch-Up</h3>
+        <p>Hub admins open <strong>Account → Call Storage &amp; Retention</strong> in the web console.
+          <strong>Archive Now</strong> runs in batches until the backlog is cleared, with live progress.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Object Storage Offload</h3>
+        <p>Point <strong>CALL_ARCHIVE_S3_URI</strong> at an S3-compatible bucket. Day folders sync via
+          <strong>s3cmd</strong> before rows are deleted from the database.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Export Layout</h3>
+        <p>Each archived call becomes a JSON manifest plus audio file under
+          <code>YYYY-MM-DD/call-{id}.mp3</code> — easy to browse, back up, or replay outside the hub.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.2rem;">
+      Minimal retention setup for a Compose stack:
+    </p>
+    <div class="install-panel">
+      <pre><code># Keep 14 days in Postgres; export older calls to a mounted volume
+CALL_RETENTION_DAYS=14
+CALL_ARCHIVE_DIR=/data/call-archive
+
+# Optional: DigitalOcean Spaces (bucket name is the Space, not a subfolder)
+CALL_ARCHIVE_S3_URI=s3://your-space/signalforge-hub/call-archive
+SPACES_ACCESS_KEY=your-key
+SPACES_SECRET_KEY=your-secret
+SPACES_ENDPOINT=ams3.digitaloceanspaces.com
+CALL_ARCHIVE_DELETE_LOCAL_AFTER_S3=true</code></pre>
+    </div>
+    <p>
+      Mount a spacious volume at <strong>CALL_ARCHIVE_DIR</strong> if you are not offloading to object
+      storage immediately. Use <strong>DRY RUN</strong> in the Account panel first to see how many calls
+      and how much audio would move before anything is deleted.
+    </p>
+    <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
+      <a href="api.html#retention" class="btn btn-primary">Retention API</a>
+      <a href="https://p7hub.projectseven.us/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Hosted Hub</a>
     </div>
   </section>
 

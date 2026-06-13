@@ -104,7 +104,7 @@
       <tbody>
         <tr><td>Public</td><td>Health, version, update check, recorder ingest, public player routes.</td></tr>
         <tr><td>User session</td><td>Call browsing, radio sets, talkgroup preferences, readable sources.</td></tr>
-        <tr><td>Admin session</td><td>Users, audit logs, hub identity, federation peers, source management, directory refresh.</td></tr>
+        <tr><td>Admin session</td><td>Users, audit logs, hub identity, federation peers, source management, call retention and archive, directory refresh.</td></tr>
         <tr><td>Source key</td><td>Recorder upload through <code>POST /api/call-upload</code>.</td></tr>
       </tbody>
     </table>
@@ -182,6 +182,50 @@
         <tr><td>POST</td><td><code>/api/v1/radio-sets/{id}/share</code></td><td>Generate a public player share token.</td></tr>
       </tbody>
     </table>
+
+    <h2 id="retention">Call Retention And Archive (Admin)</h2>
+    <p>
+      Call audio is stored in PostgreSQL. Operators configure a retention window so older calls are
+      exported to disk (and optionally S3-compatible object storage) before deletion. Sweeps run
+      automatically every six hours, or on demand from the web console <strong>Account</strong> tab.
+      A single <strong>Archive Now</strong> action batches through the full backlog until
+      <code>remainingOld</code> reaches zero.
+    </p>
+    <table>
+      <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>GET</td><td><code>/api/v1/admin/calls/storage</code></td><td>Call count, total audio bytes, oldest/newest timestamps, retention and archive config.</td></tr>
+        <tr><td>POST</td><td><code>/api/v1/admin/calls/archive</code></td><td>Export then delete calls older than N days. <code>dryRun: true</code> reports the backlog without changes. Real runs batch up to 500 calls at a time and continue until empty by default (<code>untilEmpty: true</code>).</td></tr>
+      </tbody>
+    </table>
+    <p>Key environment variables on the <strong>api</strong> service:</p>
+    <table>
+      <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>CALL_RETENTION_DAYS</code></td><td>Delete calls older than this many days when archiving (also drives the six-hour scheduler).</td></tr>
+        <tr><td><code>CALL_ARCHIVE_DIR</code></td><td>Host path for exported day folders (mount a volume here).</td></tr>
+        <tr><td><code>CALL_ARCHIVE_S3_URI</code></td><td>Optional <code>s3://space-name/prefix</code> destination for object storage sync.</td></tr>
+        <tr><td><code>SPACES_ACCESS_KEY</code> / <code>SPACES_SECRET_KEY</code> / <code>SPACES_ENDPOINT</code></td><td>DigitalOcean Spaces credentials; entrypoint writes <code>s3cmd</code> config at container start.</td></tr>
+        <tr><td><code>CALL_ARCHIVE_DELETE_LOCAL_AFTER_S3</code></td><td>Remove local day folders after a successful upload.</td></tr>
+        <tr><td><code>CALL_ARCHIVE_VACUUM_FULL</code></td><td>When <code>true</code> (default), run <code>VACUUM FULL</code> on <code>calls</code> after a sweep clears the backlog.</td></tr>
+      </tbody>
+    </table>
+    <p>Archive export layout:</p>
+    <pre><code>/data/call-archive/
+  2026-06-01/
+    call-12345.json
+    call-12345.mp3</code></pre>
+    <p>
+      Example archive request:
+    </p>
+    <pre><code>POST /api/v1/admin/calls/archive
+{
+  "olderThanDays": 14,
+  "dryRun": true
+}</code></pre>
+    <p>
+      See <a href="index.html#retention">Call Retention &amp; Archive</a> on the main site for operator setup notes.
+    </p>
 
     <h2>Recorder Upload</h2>
     <p>
