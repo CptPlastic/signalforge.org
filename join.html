@@ -22,8 +22,8 @@
   <script src="assets/site-nav.js" defer></script>
   <script src="assets/display-modes.js" defer></script>
   <style>
-    main a { color: var(--amber); text-decoration: none; }
-    main a:hover { text-decoration: underline; }
+    main a:not(.btn):not(.btn-callout) { color: var(--amber); text-decoration: none; }
+    main a:not(.btn):not(.btn-callout):hover { text-decoration: underline; }
     main {
       max-width: 720px;
       margin: 0 auto;
@@ -197,15 +197,18 @@
     </ol>
 
     <div class="callout">
-      <strong>Running your own hub?</strong>
-      <a href="register-hub.html">Register Hub</a> lists your cell in the public directory for
-      mobile discovery — that is separate from creating a listener account here.
+      <p style="margin-bottom:0;"><strong>Running your own hub?</strong> Register your cell in the public directory for mobile discovery — separate from creating a listener account here.</p>
+      <div class="callout-actions">
+        <a href="register-hub.html" class="btn-callout btn-callout-accent">Register hub</a>
+      </div>
     </div>
 
     <div class="callout">
-      <strong>Need help?</strong>
-      <a href="feedback.html">Send feedback</a> (opens a support ticket) or email
-      <a href="mailto:info@projectseven.us">info@projectseven.us</a>.
+      <p style="margin-bottom:0;"><strong>Need help?</strong> Open a support ticket or email the team directly.</p>
+      <div class="callout-actions">
+        <a href="feedback.html" class="btn-callout btn-callout-accent">Send feedback</a>
+        <a href="mailto:info@projectseven.us" class="btn-callout">Email support</a>
+      </div>
     </div>
 
     <p class="note">

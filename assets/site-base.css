@@ -9,3 +9,46 @@ body {
   min-height: 100vh;
   line-height: 1.6;
 }
+
+.callout-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
+a.btn-callout,
+a.btn-callout:visited {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+a.btn-callout:hover {
+  border-color: var(--amber);
+  color: var(--text);
+  text-decoration: none;
+}
+
+a.btn-callout-accent,
+a.btn-callout-accent:visited {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+a.btn-callout-accent:hover {
+  background: var(--amber);
+  color: var(--sf-btn-on-accent, #0a0a0a);
+  border-color: var(--amber);
+}

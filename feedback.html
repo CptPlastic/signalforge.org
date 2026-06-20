@@ -23,8 +23,8 @@
   <script src="assets/display-modes.js" defer></script>
   <script src="assets/directory-api.js"></script>
   <style>
-    main a { color: var(--amber); text-decoration: none; }
-    main a:hover { text-decoration: underline; }
+    main a:not(.btn):not(.btn-callout) { color: var(--amber); text-decoration: none; }
+    main a:not(.btn):not(.btn-callout):hover { text-decoration: underline; }
     main {
       max-width: 720px;
       margin: 0 auto;
@@ -140,8 +140,11 @@
     </p>
 
     <div class="callout">
-      For hub directory registration, use <a href="register-hub.html">Register Hub</a>.
-      Urgent hosted hub outages: email <a href="mailto:info@projectseven.us">info@projectseven.us</a>.
+      <p style="margin-bottom:0;">For hub directory registration, use Register Hub. Urgent hosted hub outages: email support directly.</p>
+      <div class="callout-actions">
+        <a href="register-hub.html" class="btn-callout btn-callout-accent">Register hub</a>
+        <a href="mailto:info@projectseven.us" class="btn-callout">Email support</a>
+      </div>
     </div>
 
     <form id="feedback-form" novalidate>

@@ -22,8 +22,8 @@
   <script src="assets/display-modes.js" defer></script>
   <script src="assets/directory-api.js"></script>
   <style>
-    main a { color: var(--amber); text-decoration: none; }
-    main a:hover { text-decoration: underline; }
+    main a:not(.btn):not(.btn-callout) { color: var(--amber); text-decoration: none; }
+    main a:not(.btn):not(.btn-callout):hover { text-decoration: underline; }
     main {
       max-width: 720px;
       margin: 0 auto;
@@ -136,8 +136,10 @@
     </p>
 
     <div class="callout">
-      Looking for a <strong>listener account</strong> on the hosted hub? Use
-      <a href="join.html">Join the Hub</a> — this page is for operators listing their own hub in the directory.
+      <p style="margin-bottom:0;">Looking for a <strong>listener account</strong> on the hosted hub? Use Join the Hub — this page is for operators listing their own hub in the directory.</p>
+      <div class="callout-actions">
+        <a href="join.html" class="btn-callout btn-callout-accent">Join the hub</a>
+      </div>
     </div>
 
     <div class="callout">
