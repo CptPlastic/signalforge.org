@@ -32,3 +32,7 @@ SignalForge is the public community surface for P7 Scanner operators, documentat
 ## Community Norms
 
 Be practical, respectful, and safety-minded. This project is about community radio resilience and operator-owned infrastructure.
+
+## Discord
+
+Operator chat lives on Discord — see [discord/README.md](./discord/README.md) for server layout and bot setup.

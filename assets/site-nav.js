@@ -1,4 +1,9 @@
 (function () {
+  window.SF_DISCORD = window.SF_DISCORD || {
+    invite: 'https://discord.gg/signalforge',
+    label: 'Discord Community',
+  };
+
   var MODE_BAR =
     '<div class="sf-mode-bar" aria-label="Display mode">' +
     '<button type="button" class="sf-mode-btn" data-sf-mode-btn="dark" title="Select DARK · tap again to cycle DARK→NITE→NVG · hold for LIGHT (touch)">◑ DARK</button>' +
@@ -37,6 +42,7 @@
       '<a href="join.html"' + activeAttr('join') + '>Join the Hub</a>' +
       '<a href="' + home('#recorder') + '">Install CLI</a>' +
       '<a href="mobile.html"' + activeAttr('mobile') + '>SignalForgeHub</a>' +
+      '<a href="' + (window.SF_DISCORD && window.SF_DISCORD.invite ? window.SF_DISCORD.invite : 'https://discord.gg/signalforge') + '" target="_blank" rel="noopener noreferrer">Discord</a>' +
       '</div></details>' +
       '<details class="nav-group"><summary>Operate</summary><div class="nav-panel">' +
       '<a href="' + home('#run') + '">Run Your Own Hub</a>' +
@@ -69,7 +75,8 @@
       '<a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>' +
       '<a href="join.html"' + activeAttr('join') + '>Join the Hub</a>' +
       '<a href="' + home('#recorder') + '">Install CLI</a>' +
-      '<a href="mobile.html"' + activeAttr('mobile') + '>SignalForgeHub</a></div>' +
+      '<a href="mobile.html"' + activeAttr('mobile') + '>SignalForgeHub</a>' +
+      '<a href="' + (window.SF_DISCORD && window.SF_DISCORD.invite ? window.SF_DISCORD.invite : 'https://discord.gg/signalforge') + '" target="_blank" rel="noopener noreferrer">Discord</a></div>' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">Operate</div>' +
       '<a href="' + home('#run') + '">Run Your Own Hub</a>' +
       '<a href="' + home('#retention') + '">Call Retention</a>' +

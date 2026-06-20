@@ -109,6 +109,7 @@ cd signalforge-mobile && npm run icons:refresh
 | Repo | Token source | Icons |
 |------|--------------|-------|
 | `signalforge.org` | `:root` in each `.html` | `icon.svg`, `LOGO.svg` |
+| `signalforge.org/discord` | [discord/SERVER.md](./discord/SERVER.md) | `discord/assets/icon-512.png` |
 | `signalforge-mobile` | `src/theme.ts` | `assets/source-icon*.svg` → PNG |
 | `p7-scanner` | `client/tailwind.config.ts` + `index.css` | `client/public/pwa/icon.svg`, `manifest.webmanifest` |
 
