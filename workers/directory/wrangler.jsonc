@@ -7,7 +7,9 @@
 		"GITHUB_REPO": "CptPlastic/signalforge.org",
 		"PUBLIC_SITE_ORIGIN": "https://signalforge.org",
 		"MAIL_FROM": "directory@signalforge.org",
-		"MAIL_FROM_NAME": "SignalForge Directory"
+		"MAIL_FROM_NAME": "SignalForge Directory",
+		"SCHEDKIT_URL": "https://schedkit.net",
+		"PORTAL_ORG_SLUG": "projectseven"
 	},
 	"kv_namespaces": [
 		{

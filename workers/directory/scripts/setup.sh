@@ -29,6 +29,13 @@ if ! grep -q '"id": "efb6e5d9bd1b4bacb5427f5c0471fd0e"' wrangler.jsonc; then
   echo "     Then paste the id into wrangler.jsonc kv_namespaces[0].id"
 fi
 
+if ! npx wrangler secret list 2>/dev/null | grep -q PORTAL_INBOUND_SECRET; then
+  echo "==> Set SchedKit inbound secret (same as projectseven.us / SchedKit container)"
+  npx wrangler secret put PORTAL_INBOUND_SECRET
+else
+  echo "OK: PORTAL_INBOUND_SECRET secret present"
+fi
+
 if ! npx wrangler secret list 2>/dev/null | grep -q GITHUB_TOKEN; then
   echo "==> Set GitHub token (issues:write on CptPlastic/signalforge.org)"
   npx wrangler secret put GITHUB_TOKEN
@@ -50,3 +57,4 @@ echo "==> Verify"
 echo "curl -s https://directory.signalforge.org/v1/health"
 echo ""
 echo "Then test: https://signalforge.org/register-hub.html"
+echo "Feedback: https://signalforge.org/feedback.html"

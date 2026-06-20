@@ -3,12 +3,14 @@
 Cloudflare Worker for one-click hub directory registration:
 
 - `POST /v1/submit` — validate listing, probe hub health, open a GitHub issue, store tracking token, send receipt email
+- `POST /v1/feedback` — SignalForge site feedback → SchedKit inbound ticket (Incidents)
 - `GET /v1/listings/:token` — public listing status (synced from GitHub issue labels)
 - `GET /v1/health` — worker health
 
 Public site routes:
 
 - Submit form: `https://signalforge.org/register-hub.html`
+- Feedback form: `https://signalforge.org/feedback.html`
 - Status tracker: `https://signalforge.org/listing.html?token=…`
 - API host: `https://signalforge-directory.jason-johnson-633.workers.dev` (see `assets/directory-api.js`)
 - Optional pretty URL: CNAME `directory.signalforge.org` → that `workers.dev` host (DNS stays wherever you manage it)
@@ -84,6 +86,9 @@ GITHUB_TOKEN=ghp_...
 | `MAIL_FROM_NAME` | var | Default `SignalForge Directory` |
 | `LISTINGS` | KV binding | Listing + rate-limit storage |
 | `EMAIL` | send_email binding | Receipt mail |
+| `PORTAL_INBOUND_SECRET` | secret | Same value as SchedKit — feedback → `/v1/portal/inbound/ticket` |
+| `SCHEDKIT_URL` | var | Default `https://schedkit.net` |
+| `PORTAL_ORG_SLUG` | var | Default `projectseven` |
 
 ## Two JSON shapes (important)
 

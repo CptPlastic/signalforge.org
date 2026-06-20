@@ -36,7 +36,7 @@
       '<a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>' +
       '<a href="' + home('#onboarding') + '">Create an Account</a>' +
       '<a href="' + home('#recorder') + '">Install CLI</a>' +
-      '<a href="mobile.html"' + activeAttr('mobile') + '>Mobile App</a>' +
+      '<a href="mobile.html"' + activeAttr('mobile') + '>SignalForgeHub</a>' +
       '</div></details>' +
       '<details class="nav-group"><summary>Operate</summary><div class="nav-panel">' +
       '<a href="' + home('#run') + '">Run Your Own Hub</a>' +
@@ -55,6 +55,7 @@
       '<a href="' + home('#network') + '">The Vision</a>' +
       '</div></details>' +
       '<a class="nav-direct" href="about.html"' + activeAttr('about') + '>About</a>' +
+      '<a class="nav-direct" href="feedback.html"' + activeAttr('feedback') + '>Feedback</a>' +
       '<a class="nav-direct" href="BRAND.md">Brand</a>' +
       '<a class="nav-direct" href="' + home('#mission') + '">Mission</a>' +
       '<a class="nav-direct' + (pageId() === 'api' ? ' is-active' : '') + '" href="api.html">API</a>' +
@@ -68,7 +69,7 @@
       '<a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>' +
       '<a href="' + home('#onboarding') + '">Create an Account</a>' +
       '<a href="' + home('#recorder') + '">Install CLI</a>' +
-      '<a href="mobile.html"' + activeAttr('mobile') + '>Mobile App</a></div>' +
+      '<a href="mobile.html"' + activeAttr('mobile') + '>SignalForgeHub</a></div>' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">Operate</div>' +
       '<a href="' + home('#run') + '">Run Your Own Hub</a>' +
       '<a href="' + home('#retention') + '">Call Retention</a>' +
@@ -86,6 +87,7 @@
       '<div class="nav-mobile-section"><div class="nav-mobile-title">Display</div>' + MODE_BAR + '</div>' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">More</div>' +
       '<a href="about.html"' + activeAttr('about') + '>About</a>' +
+      '<a href="feedback.html"' + activeAttr('feedback') + '>Feedback</a>' +
       '<a href="BRAND.md">Brand Guide</a>' +
       '<a href="DISPLAY-MODES.md">Display Modes</a>' +
       '<a href="' + home('#mission') + '">Mission</a>' +

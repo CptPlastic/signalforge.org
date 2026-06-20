@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Send SignalForge feedback — mobile app, hub operator, and directory support tickets." />
+  <title>Feedback — SignalForge</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <script>
+    (function () {
+      try {
+        var m = localStorage.getItem('sf-display-mode');
+        if (m === 'dark' || m === 'nite' || m === 'nvg' || m === 'light') {
+          document.documentElement.setAttribute('data-sf-mode', m);
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/display-modes.css" />
+  <link rel="stylesheet" href="assets/site-base.css" />
+  <link rel="stylesheet" href="assets/site-nav.css" />
+  <script src="assets/site-nav.js" defer></script>
+  <script src="assets/display-modes.js" defer></script>
+  <script src="assets/directory-api.js"></script>
+  <style>
+    main a { color: var(--amber); text-decoration: none; }
+    main a:hover { text-decoration: underline; }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 5rem;
+    }
+    .label {
+      color: var(--amber-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    h1 {
+      font-size: clamp(1.4rem, 5vw, 2.2rem);
+      color: var(--heading);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+    p { color: var(--muted); margin-bottom: 1rem; line-height: 1.65; font-size: 0.9rem; }
+    strong { color: var(--text); }
+    label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin: 1rem 0 0.35rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.82rem;
+      padding: 0.65rem 0.75rem;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--amber);
+    }
+    textarea {
+      min-height: 9rem;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    @media (max-width: 560px) { .row-2 { grid-template-columns: 1fr; } }
+    .hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.25rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.1rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid;
+      background: transparent;
+      color: var(--muted);
+      border-color: var(--border);
+    }
+    .btn:hover { border-color: var(--amber); color: var(--text); }
+    .btn-primary {
+      background: var(--amber);
+      color: var(--sf-btn-on-accent, #0a0a0a);
+      border-color: var(--amber);
+      font-weight: 700;
+    }
+    .btn-primary:hover { opacity: 0.92; color: var(--sf-btn-on-accent, #0a0a0a); }
+    .callout {
+      border-left: 3px solid var(--amber);
+      background: var(--bg2);
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      color: var(--text);
+      font-size: 0.86rem;
+      line-height: 1.65;
+    }
+    .status {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--amber-dim);
+      margin-top: 0.75rem;
+    }
+    .status.ok { color: var(--amber); }
+    .status.err { color: var(--red, #c44); }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  </style>
+</head>
+<body data-sf-page="feedback">
+
+  <div id="sf-site-nav"></div>
+
+  <main>
+    <div class="label">// support</div>
+    <h1>Feedback</h1>
+    <p>
+      Bug in SignalForgeHub, hub console question, directory listing help, or an idea for the platform —
+      send it here. We open a support ticket and follow up by email when needed.
+    </p>
+
+    <div class="callout">
+      For hub directory registration, use <a href="register-hub.html">Register Hub</a>.
+      Urgent hosted hub outages: email <a href="mailto:info@projectseven.us">info@projectseven.us</a>.
+    </div>
+
+    <form id="feedback-form" novalidate>
+      <label for="name">Your name</label>
+      <input id="name" name="name" required autocomplete="name" placeholder="Jane Operator" />
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="mobile-app">Mobile app (SignalForgeHub)</option>
+        <option value="hub-operator">Hub operator / console</option>
+        <option value="directory">Directory listing</option>
+        <option value="bug">Bug report</option>
+        <option value="feature">Feature request</option>
+        <option value="other">Other</option>
+      </select>
+
+      <div class="row-2">
+        <div>
+          <label for="platform">Platform (optional)</label>
+          <select id="platform" name="platform">
+            <option value="">—</option>
+            <option value="ios">iOS</option>
+            <option value="android">Android</option>
+            <option value="web">Web / PWA</option>
+            <option value="cli">CLI recorder</option>
+          </select>
+        </div>
+        <div>
+          <label for="appVersion">App / hub version (optional)</label>
+          <input id="appVersion" name="appVersion" placeholder="e.g. 1.0.3" />
+        </div>
+      </div>
+
+      <label for="hubUrl">Hub URL (optional)</label>
+      <input id="hubUrl" name="hubUrl" type="url" placeholder="https://p7hub.projectseven.us" />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required placeholder="What happened? Steps to reproduce, screenshots, or what you were trying to do…"></textarea>
+
+      <label class="hp" for="website">Website</label>
+      <input class="hp" id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary" id="submit-feedback">Send Feedback</button>
+        <a class="btn" href="mobile.html#download">Get the App</a>
+        <a class="btn" href="index.html#onboarding">Onboarding</a>
+      </div>
+      <p class="status" id="status" aria-live="polite"></p>
+    </form>
+  </main>
+
+  <script>
+    (function () {
+      var API = window.SF_DIRECTORY_API || 'https://signalforge-directory.jason-johnson-633.workers.dev';
+      var form = document.getElementById('feedback-form');
+      var statusEl = document.getElementById('status');
+      var submitBtn = document.getElementById('submit-feedback');
+      var busy = false;
+
+      var params = new URLSearchParams(window.location.search);
+      var presetCategory = params.get('category');
+      var presetPlatform = params.get('platform');
+      if (presetCategory && document.querySelector('#category option[value="' + presetCategory + '"]')) {
+        document.getElementById('category').value = presetCategory;
+      }
+      if (presetPlatform && document.querySelector('#platform option[value="' + presetPlatform + '"]')) {
+        document.getElementById('platform').value = presetPlatform;
+      }
+
+      function setStatus(msg, kind) {
+        statusEl.textContent = msg || '';
+        statusEl.className = 'status' + (kind ? ' ' + kind : '');
+      }
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (busy) return;
+        if (document.getElementById('website').value) return;
+
+        var payload = {
+          name: document.getElementById('name').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          category: document.getElementById('category').value,
+          message: document.getElementById('message').value.trim(),
+        };
+        var platform = document.getElementById('platform').value;
+        var appVersion = document.getElementById('appVersion').value.trim();
+        var hubUrl = document.getElementById('hubUrl').value.trim();
+        if (platform) payload.platform = platform;
+        if (appVersion) payload.appVersion = appVersion;
+        if (hubUrl) payload.hubUrl = hubUrl;
+
+        if (!payload.name || !payload.email || !payload.message) {
+          setStatus('Name, email, and message are required.', 'err');
+          return;
+        }
+        if (payload.message.length < 10) {
+          setStatus('Please add a bit more detail (at least 10 characters).', 'err');
+          return;
+        }
+
+        busy = true;
+        submitBtn.disabled = true;
+        setStatus('Sending…', '');
+
+        fetch(API + '/v1/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+          .then(function (res) { return res.json().then(function (data) { return { res: res, data: data }; }); })
+          .then(function (_ref) {
+            var res = _ref.res;
+            var data = _ref.data;
+            if (!res.ok || !data.ok) {
+              throw new Error((data && data.error) || 'Could not send feedback');
+            }
+            form.reset();
+            setStatus(data.message || 'Feedback received — thank you.', 'ok');
+          })
+          .catch(function (err) {
+            setStatus(err.message || 'Something went wrong. Email info@projectseven.us instead.', 'err');
+          })
+          .finally(function () {
+            busy = false;
+            submitBtn.disabled = false;
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -52,4 +52,7 @@ export type Env = {
   PUBLIC_SITE_ORIGIN: string
   MAIL_FROM: string
   MAIL_FROM_NAME: string
+  PORTAL_INBOUND_SECRET?: string
+  SCHEDKIT_URL?: string
+  PORTAL_ORG_SLUG?: string
 }

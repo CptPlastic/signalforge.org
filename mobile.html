@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SignalForge Mobile — native iOS and Android app for hub monitoring, push-to-talk, and dispatcher broadcast." />
-  <title>SignalForge Mobile — Voice in the Storm</title>
+  <meta name="description" content="SignalForgeHub — native iOS and Android app for hub monitoring, push-to-talk, dispatcher broadcast, and hub directory." />
+  <title>SignalForgeHub — Mobile App</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -107,6 +107,28 @@
       cursor: default;
       opacity: 0.85;
     }
+    .btn-store {
+      background: var(--bg2);
+      color: var(--text);
+      border-color: var(--amber-dim);
+      font-weight: 700;
+      min-width: 11rem;
+      text-align: center;
+    }
+    .btn-store:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+      box-shadow: 0 0 12px var(--sf-panel-glow);
+    }
+    .btn-store-ios { border-color: var(--amber); color: var(--amber); }
+    .store-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      max-width: 34rem;
+      margin: 0.85rem auto 0;
+      line-height: 1.55;
+    }
+    .store-note strong { color: var(--text); }
     section {
       max-width: 900px;
       margin: 0 auto;
@@ -192,24 +214,31 @@
 
   <div class="hero">
     <img class="app-icon" src="icon.svg" width="120" height="120" alt="SignalForge app icon" />
-    <h1>SignalForge Mobile</h1>
+    <h1>SignalForgeHub</h1>
     <div class="hero-sub">Voice in the Storm — in your pocket</div>
-    <div class="version-pill">v1.0.1</div>
+    <div class="version-pill">v1.0.3 · iOS live · Android open testing</div>
     <p class="hero-desc">
       Native iOS and Android client for SignalForge hubs: live monitor playback, push-to-talk,
-      dispatcher broadcast, and background listening while locked — built for the same community
-      network as the web console.
+      dispatcher broadcast, hub directory, and background listening while locked — built for the same
+      community network as the web console.
     </p>
+    <div class="btn-row" id="download">
+      <a href="https://apps.apple.com/us/app/signalforgehub/id6776479853" class="btn btn-store btn-store-ios" target="_blank" rel="noopener noreferrer">Download on App Store</a>
+      <a href="https://play.google.com/apps/testing/us.projectseven.signalforge.app" class="btn btn-store" target="_blank" rel="noopener noreferrer">Android — Join Testing</a>
+    </div>
     <div class="btn-row">
+      <a href="https://play.google.com/store/apps/details?id=us.projectseven.signalforge.app" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Google Play listing</a>
       <a href="https://p7hub.projectseven.us/" class="btn btn-glow" target="_blank" rel="noopener noreferrer">Connect to Hub</a>
       <a href="index.html#onboarding" class="btn btn-ghost">Create Account</a>
     </div>
-    <div class="btn-row">
-      <span class="btn btn-soon">App Store — coming soon</span>
-      <span class="btn btn-soon">Google Play — coming soon</span>
-    </div>
-    <p style="font-size:0.78rem; margin-top:0.75rem;">
-      Early access via TestFlight and internal Android builds. Public store listings are next.
+    <p class="store-note">
+      <strong>iPhone / iPad:</strong> SignalForgeHub is live on the
+      <a href="https://apps.apple.com/us/app/signalforgehub/id6776479853" style="color:var(--amber);">App Store</a>.
+      <strong>Android:</strong> join the
+      <a href="https://play.google.com/apps/testing/us.projectseven.signalforge.app" style="color:var(--amber);">open testing program</a>
+      first, then install from
+      <a href="https://play.google.com/store/apps/details?id=us.projectseven.signalforge.app" style="color:var(--amber);">Google Play</a>.
+      Public Play release follows once testing is complete.
     </p>
   </div>
 
@@ -230,12 +259,16 @@
         <p>Broadcast one keying to many radio sets at once. Incoming dispatches show an amber <strong>DISPATCH</strong> badge in the call log.</p>
       </div>
       <div class="hub-card">
-        <h3>Magic-link sign-in</h3>
-        <p>Point the app at your hub URL, paste the token from email, and you're on the air — no separate mobile account system.</p>
+        <h3>Sign-in</h3>
+        <p>Point the app at your hub URL. Use magic-link email, password login (off-grid hubs), or paste a token from the inbox — same accounts as the web console.</p>
+      </div>
+      <div class="hub-card">
+        <h3>Hub directory</h3>
+        <p>Browse listed hubs from the in-app directory, or enter any hub URL directly — hosted hub, your Compose stack, or a peer cell.</p>
       </div>
       <div class="hub-card">
         <h3>Radio log</h3>
-        <p>In-app diagnostics for PTT and playback events — share logs from TestFlight builds when you need to debug in the field.</p>
+        <p>In-app diagnostics for PTT and playback events — share logs when you need to debug in the field.</p>
       </div>
       <div class="hub-card">
         <h3>iPad + phone</h3>
@@ -277,6 +310,24 @@
     </div>
   </section>
 
+  <section id="community">
+    <div class="section-label">// community</div>
+    <h2>Get help &amp; contribute</h2>
+    <p>
+      Running a hub, joining Yukon live traffic, or testing the mobile app?
+      Reach the team via <a href="feedback.html">Feedback</a> (support ticket) or
+      <a href="mailto:info@projectseven.us">info@projectseven.us</a> —
+      especially if you want to list a cell in the
+      <a href="register-hub.html" style="color:var(--amber);">SignalForge directory</a>
+      or federate with the hosted hub.
+    </p>
+    <div class="callout">
+      Operator docs live on <a href="index.html" style="color:var(--amber);">signalforge.org</a>:
+      CLI install, off-grid cells, PTT, retention, and SignalHub federation.
+      Hosted hub: <a href="https://p7hub.projectseven.us/" style="color:var(--amber);">p7hub.projectseven.us</a>.
+    </div>
+  </section>
+
   <section id="requirements">
     <div class="section-label">// operator notes</div>
     <h2>Hub requirements</h2>
@@ -291,7 +342,7 @@
   </section>
 
   <footer>
-    <p>SignalForge Mobile · v1.0.1</p>
+    <p>SignalForgeHub · v1.0.3</p>
     <p style="margin-top:0.5rem;">
       <a href="index.html">signalforge.org</a> · Yukon, Oklahoma — projectseven co ltd
     </p>

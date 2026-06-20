@@ -1,4 +1,5 @@
 import { sendReceiptEmail } from './email'
+import { submitFeedbackToSchedkit, validateFeedbackRequest } from './feedback'
 import { buildFeedEntry } from './feedEntry'
 import {
   buildIssueBody,
@@ -36,6 +37,10 @@ export default {
         return await handleSubmit(request, env, cors)
       }
 
+      if (request.method === 'POST' && url.pathname === '/v1/feedback') {
+        return await handleFeedback(request, env, cors)
+      }
+
       const listingMatch = url.pathname.match(/^\/v1\/listings\/([a-f0-9]{32})$/)
       if (request.method === 'GET' && listingMatch) {
         return await handleGetListing(listingMatch[1], env, cors)
@@ -47,6 +52,41 @@ export default {
       return json({ ok: false, error: message }, 500, cors)
     }
   },
+}
+
+async function handleFeedback(request: Request, env: Env, cors: HeadersInit): Promise<Response> {
+  const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown'
+  if (!(await feedbackRateLimitOk(env, ip))) {
+    return json({ ok: false, error: 'rate limit exceeded — try again later' }, 429, cors)
+  }
+
+  let body: unknown
+  try {
+    body = await request.json()
+  } catch {
+    return json({ ok: false, error: 'invalid JSON body' }, 400, cors)
+  }
+
+  const validated = validateFeedbackRequest(body)
+  if (!validated.ok) {
+    return json({ ok: false, error: validated.error }, 400, cors)
+  }
+
+  const result = await submitFeedbackToSchedkit(validated.value, env)
+  if (!result.ok) {
+    const status = result.status === 403 ? 503 : result.status
+    return json({ ok: false, error: result.error }, status, cors)
+  }
+
+  return json(
+    {
+      ok: true,
+      ticketId: result.ticketId,
+      message: 'Feedback received. We will follow up by email if needed.',
+    },
+    201,
+    cors,
+  )
 }
 
 async function handleSubmit(request: Request, env: Env, cors: HeadersInit): Promise<Response> {
@@ -169,6 +209,15 @@ async function handleGetListing(token: string, env: Env, cors: HeadersInit): Pro
   }
 
   return json({ ok: true, listing: view }, 200, cors)
+}
+
+async function feedbackRateLimitOk(env: Env, ip: string): Promise<boolean> {
+  const hour = new Date().toISOString().slice(0, 13)
+  const key = `feedback-rate:${ip}:${hour}`
+  const current = Number(await env.LISTINGS.get(key)) || 0
+  if (current >= 5) return false
+  await env.LISTINGS.put(key, String(current + 1), { expirationTtl: 3600 })
+  return true
 }
 
 async function rateLimitOk(env: Env, ip: string): Promise<boolean> {
