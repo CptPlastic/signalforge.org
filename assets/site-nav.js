@@ -34,7 +34,7 @@
       '<nav class="nav-desktop" aria-label="Primary">' +
       '<details class="nav-group"><summary>Get Started</summary><div class="nav-panel">' +
       '<a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>' +
-      '<a href="' + home('#onboarding') + '">Create an Account</a>' +
+      '<a href="join.html"' + activeAttr('join') + '>Join the Hub</a>' +
       '<a href="' + home('#recorder') + '">Install CLI</a>' +
       '<a href="mobile.html"' + activeAttr('mobile') + '>SignalForgeHub</a>' +
       '</div></details>' +
@@ -67,7 +67,7 @@
       '<div class="nav-mobile" id="nav-mobile">' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">Get Started</div>' +
       '<a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>' +
-      '<a href="' + home('#onboarding') + '">Create an Account</a>' +
+      '<a href="join.html"' + activeAttr('join') + '>Join the Hub</a>' +
       '<a href="' + home('#recorder') + '">Install CLI</a>' +
       '<a href="mobile.html"' + activeAttr('mobile') + '>SignalForgeHub</a></div>' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">Operate</div>' +

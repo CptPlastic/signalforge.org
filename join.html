@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create a free account on the hosted SignalForge hub — listen live, join radio sets, and use the mobile app." />
+  <title>Join the Hub — SignalForge</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <script>
+    (function () {
+      try {
+        var m = localStorage.getItem('sf-display-mode');
+        if (m === 'dark' || m === 'nite' || m === 'nvg' || m === 'light') {
+          document.documentElement.setAttribute('data-sf-mode', m);
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/display-modes.css" />
+  <link rel="stylesheet" href="assets/site-base.css" />
+  <link rel="stylesheet" href="assets/site-nav.css" />
+  <script src="assets/site-nav.js" defer></script>
+  <script src="assets/display-modes.js" defer></script>
+  <style>
+    main a { color: var(--amber); text-decoration: none; }
+    main a:hover { text-decoration: underline; }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 5rem;
+    }
+    .label {
+      color: var(--amber-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    h1 {
+      font-size: clamp(1.4rem, 5vw, 2.2rem);
+      color: var(--heading);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 0.95rem;
+      color: var(--heading);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 2rem 0 0.75rem;
+    }
+    p { color: var(--muted); margin-bottom: 1rem; line-height: 1.65; font-size: 0.9rem; }
+    strong { color: var(--text); }
+    .steps {
+      list-style: none;
+      margin: 1.5rem 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 2.25rem 1fr;
+      gap: 0.75rem 1rem;
+      align-items: start;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 1rem 1.1rem;
+    }
+    .step-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border: 1px solid var(--amber);
+      color: var(--amber);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .step-body { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+    .step-body strong { color: var(--text); }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin: 1.5rem 0;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.1rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid;
+      background: transparent;
+      color: var(--muted);
+      border-color: var(--border);
+    }
+    .btn:hover { border-color: var(--amber); color: var(--text); text-decoration: none; }
+    .btn-primary {
+      background: var(--amber);
+      color: var(--sf-btn-on-accent, #0a0a0a);
+      border-color: var(--amber);
+      font-weight: 700;
+    }
+    .btn-primary:hover { opacity: 0.92; color: var(--sf-btn-on-accent, #0a0a0a); }
+    .callout {
+      border-left: 3px solid var(--amber);
+      background: var(--bg2);
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      color: var(--text);
+      font-size: 0.86rem;
+      line-height: 1.65;
+    }
+    .note {
+      font-size: 0.78rem;
+      color: var(--amber-dim);
+      letter-spacing: 0.04em;
+      line-height: 1.55;
+    }
+    code {
+      font-size: 0.82em;
+      color: var(--text);
+      background: var(--bg2);
+      padding: 0.1em 0.35em;
+      border: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body data-sf-page="join">
+
+  <div id="sf-site-nav"></div>
+
+  <main>
+    <div class="label">// get started</div>
+    <h1>Join the Hosted Hub</h1>
+    <p>
+      Create a free listener account on the main SignalForge hub at
+      <strong>p7hub.projectseven.us</strong>. No invite code — enter your email, verify a
+      6-digit code, and you're in. Same account works in the web console and
+      <a href="mobile.html">SignalForgeHub</a> mobile app.
+    </p>
+
+    <div class="actions">
+      <a
+        href="https://p7hub.projectseven.us/?view=account"
+        class="btn btn-primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Create account on hub</a>
+      <a href="mobile.html#download" class="btn">Get the mobile app</a>
+    </div>
+
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li class="step">
+        <span class="step-num">1</span>
+        <div class="step-body">
+          <strong>Open the hub account screen.</strong>
+          Click the button above — it opens the hosted hub directly on the sign-up form
+          (<code>?view=account</code>).
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">2</span>
+        <div class="step-body">
+          <strong>Enter your email and request a code.</strong>
+          If this is your first time, the hub creates your account automatically when you
+          submit your email. You do not need an existing login.
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">3</span>
+        <div class="step-body">
+          <strong>Check your inbox.</strong>
+          Enter the 6-digit code on the hub screen, or tap the link in the email. Codes expire
+          after about 15 minutes — request a fresh one if needed.
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">4</span>
+        <div class="step-body">
+          <strong>Listen live.</strong>
+          Open <strong>Radio Sets</strong> in the console to hear live traffic, or sign in on
+          mobile with the same email at
+          <code>https://p7hub.projectseven.us</code>.
+        </div>
+      </li>
+    </ol>
+
+    <div class="callout">
+      <strong>Running your own hub?</strong>
+      <a href="register-hub.html">Register Hub</a> lists your cell in the public directory for
+      mobile discovery — that is separate from creating a listener account here.
+    </div>
+
+    <div class="callout">
+      <strong>Need help?</strong>
+      <a href="feedback.html">Send feedback</a> (opens a support ticket) or email
+      <a href="mailto:info@projectseven.us">info@projectseven.us</a>.
+    </div>
+
+    <p class="note">
+      Off-grid or private hubs may use password login instead of email codes. The hosted hub uses
+      magic-link email sign-in only.
+    </p>
+  </main>
+
+</body>
+</html>
