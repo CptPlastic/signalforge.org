@@ -1,20 +1,20 @@
 {
   "product": "p7-scanner",
   "channel": "stable",
-  "version": "9652b4d",
-  "commit": "9652b4da1d3dc6c4c9e607e6bc1b68f5efdac70b",
-  "shortCommit": "9652b4d",
+  "version": "7b61b07",
+  "commit": "7b61b07fb1da1734a3147ff45c0b7478d002898f",
+  "shortCommit": "7b61b07",
   "imageRegistry": "ghcr.io",
   "imageNamespace": "signalforge-org",
-  "imageTag": "9652b4d",
-  "publishedAt": "2026-06-21T22:45:12Z",
+  "imageTag": "7b61b07",
+  "publishedAt": "2026-06-21T23:04:06Z",
   "images": {
-    "api": "ghcr.io/signalforge-org/signalforge-hub-api:9652b4d",
-    "web": "ghcr.io/signalforge-org/signalforge-hub-web:9652b4d",
-    "mockCallSender": "ghcr.io/signalforge-org/signalforge-hub-mock-call-sender:9652b4d",
-    "transcriber": "ghcr.io/signalforge-org/signalforge-hub-transcriber:9652b4d",
-    "discordBot": "ghcr.io/signalforge-org/signalforge-discord-bot:9652b4d",
-    "legacyServer": "ghcr.io/signalforge-org/p7-scanner-server:9652b4d",
-    "legacyClient": "ghcr.io/signalforge-org/p7-scanner-client:9652b4d"
+    "api": "ghcr.io/signalforge-org/signalforge-hub-api:7b61b07",
+    "web": "ghcr.io/signalforge-org/signalforge-hub-web:7b61b07",
+    "mockCallSender": "ghcr.io/signalforge-org/signalforge-hub-mock-call-sender:7b61b07",
+    "transcriber": "ghcr.io/signalforge-org/signalforge-hub-transcriber:7b61b07",
+    "discordBot": "ghcr.io/signalforge-org/signalforge-discord-bot:7b61b07",
+    "legacyServer": "ghcr.io/signalforge-org/p7-scanner-server:7b61b07",
+    "legacyClient": "ghcr.io/signalforge-org/p7-scanner-client:7b61b07"
   }
 }
