@@ -32,6 +32,12 @@ Community Discord for hub operators, Yukon live-traffic listeners, and mobile PT
 
 ### 3. Run the bot
 
+**Production (Portainer — recommended):** add to your **existing hub stack** — see **[bot/DEPLOY-PORTAINER.md](./bot/DEPLOY-PORTAINER.md)** (same `docker-compose.plesk.yml`, set `COMPOSE_PROFILES=discord`)
+
+**Standalone stack:** `discord/bot/docker-compose.yml` if you are not running a hub on that host
+
+**Local test (laptop):**
+
 ```bash
 cd discord/bot
 cp .env.example .env
@@ -39,10 +45,14 @@ cp .env.example .env
 
 npm install
 npm run register   # register slash commands to your guild
-npm run dev        # local run
+npm run dev        # stop before starting the server stack — one token, one instance
 ```
 
-Production: run `npm run build && npm start` under systemd, Docker, or any always-on host. The bot needs a persistent WebSocket (not Cloudflare Workers).
+Quick Portainer summary: deploy stack from `discord/bot/docker-compose.yml`, set the four env vars, then once:
+
+```bash
+docker compose --profile register run --rm register
+```
 
 ### 4. Wire the invite link on the site
 
@@ -85,8 +95,9 @@ Optional:
 
 | Host | Notes |
 |------|-------|
-| **Same VPS as hub** | systemd unit, low overhead |
-| **Fly.io / Railway** | `docker build` from `bot/Dockerfile` |
-| **Home lab** | `npm start` in tmux — fine for early community size |
+| **Portainer** | [bot/DEPLOY-PORTAINER.md](./bot/DEPLOY-PORTAINER.md) + `bot/docker-compose.yml` |
+| **Same VPS as hub** | Good default — no extra ports, tiny footprint |
+| **systemd** | `npm run build && npm start` if you prefer bare Node |
+| **Laptop** | `npm run dev` for setup only — not 24/7 |
 
 Keep the bot token in secrets — never commit `.env`.

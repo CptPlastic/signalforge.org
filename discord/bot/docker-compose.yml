@@ -1,0 +1,51 @@
+# SignalForge Discord bot — Portainer stack
+#
+# Deploy:
+#   1. Set env vars in Portainer (see .env.production.example) or create .env beside this file
+#   2. Deploy stack — build context is this directory (discord/bot/)
+#   3. One time: run the register service (see DEPLOY-PORTAINER.md)
+#
+# No host ports — bot only makes outbound connections to Discord.
+
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: signalforge-discord-bot:${IMAGE_TAG:-local}
+    container_name: signalforge-discord-bot
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN:?set DISCORD_TOKEN}
+      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID:?set DISCORD_CLIENT_ID}
+      DISCORD_GUILD_ID: ${DISCORD_GUILD_ID:?set DISCORD_GUILD_ID}
+      WELCOME_CHANNEL_ID: ${WELCOME_CHANNEL_ID:?set WELCOME_CHANNEL_ID}
+      DIRECTORY_FEED_URL: ${DIRECTORY_FEED_URL:-https://signalforge.org/directory/hubs.json}
+      HOSTED_HUB_URL: ${HOSTED_HUB_URL:-https://p7hub.projectseven.us}
+      SITE_URL: ${SITE_URL:-https://signalforge.org}
+
+  # One-shot slash-command registration — not started by default.
+  # Portainer: Stacks → signalforge-discord-bot → register → Start
+  # CLI: docker compose --profile register run --rm register
+  register:
+    profiles: [register]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: signalforge-discord-bot:${IMAGE_TAG:-local}
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN:?set DISCORD_TOKEN}
+      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID:?set DISCORD_CLIENT_ID}
+      DISCORD_GUILD_ID: ${DISCORD_GUILD_ID:?set DISCORD_GUILD_ID}
+      WELCOME_CHANNEL_ID: ${WELCOME_CHANNEL_ID:-}
+      DIRECTORY_FEED_URL: ${DIRECTORY_FEED_URL:-https://signalforge.org/directory/hubs.json}
+      HOSTED_HUB_URL: ${HOSTED_HUB_URL:-https://p7hub.projectseven.us}
+      SITE_URL: ${SITE_URL:-https://signalforge.org}
+    command: ["node", "dist/register-commands.js"]
+    restart: "no"
