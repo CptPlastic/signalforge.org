@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="assets/display-modes.css" />
   <link rel="stylesheet" href="assets/site-base.css" />
   <link rel="stylesheet" href="assets/site-nav.css" />
+  <script src="assets/discord-config.js"></script>
   <script src="assets/site-nav.js" defer></script>
   <script src="assets/display-modes.js" defer></script>
   <style>
@@ -227,6 +228,59 @@
       transition: color 0.15s;
     }
     .hero-story-link:hover { color: var(--amber); }
+
+    /* ── HERO INCIDENTS ── */
+    .hero-incidents {
+      margin-top: 0.75rem;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      z-index: 6;
+      position: relative;
+    }
+    .hero-incidents.is-visible { display: flex; }
+    .incidents-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+    }
+    .incident-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.22rem 0.6rem;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--muted);
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      line-height: 1.4;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .incident-pill:hover {
+      border-color: var(--amber-dim);
+      color: var(--text);
+    }
+    .incident-pill .pri-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .incident-pill .pri-urgent { background: #ff4444; box-shadow: 0 0 5px #ff4444; }
+    .incident-pill .pri-high   { background: #ff8800; box-shadow: 0 0 5px #ff8800; }
+    .incident-pill .pri-normal { background: var(--amber-dim); }
+    .incident-pill .pri-low    { background: var(--muted); }
+    .incident-pill .inc-type {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.55;
+    }
+    .hero-incidents .section-label { margin-bottom: 0; }
 
     /* ── LIVE PLAYER (embedded hub share) ── */
     .live-section {
@@ -622,6 +676,11 @@
         <span aria-hidden="true"> · </span>
         <a href="#mission" class="hero-story-link">Why we're building this ↓</a>
       </p>
+
+      <div class="hero-incidents" id="hero-incidents" aria-live="polite">
+        <div class="section-label">// active incidents</div>
+        <div class="incidents-row" id="incidents-row"></div>
+      </div>
     </div>
   </div>
 
@@ -1320,8 +1379,35 @@ multipart: audio, duration, clientId, radioSetIds=id1,id2,id3</code></pre>
       SignalForge is community infrastructure — and you're the infrastructure.
     </p>
     <div style="margin-top: 1.5rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
-      <a href="https://discord.gg/signalforge" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord</a>
+      <a href="#" class="btn btn-primary" id="discord-footer-link" target="_blank" rel="noopener noreferrer">Join Discord</a>
       <a href="mailto:info@projectseven.us" class="btn btn-ghost">Get Involved</a>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section id="community">
+    <div class="section-label">// community</div>
+    <h2>SignalForge Discord</h2>
+    <p>
+      The community Discord is where hub operators, listeners, and contributors meet. Ask setup questions,
+      share radio set links, coordinate off-grid cells, or just follow live traffic discussion.
+    </p>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>// operators</h3>
+        <p>Hub setup, CLI recorder, Docker Compose, off-grid cells, PTT &amp; mobile app channels.</p>
+      </div>
+      <div class="hub-card">
+        <h3>// live</h3>
+        <p>Regional traffic threads and general operator chat — follow what's happening on the network.</p>
+      </div>
+      <div class="hub-card">
+        <h3>// dev &amp; feedback</h3>
+        <p>Platform updates, bug reports, feature ideas, and directory listing support.</p>
+      </div>
+    </div>
+    <div class="hero-cta" style="margin-top: 1.2rem;">
+      <a href="#" class="btn btn-glow" id="discord-community-link" target="_blank" rel="noopener noreferrer">Join Discord</a>
     </div>
   </section>
 
@@ -1333,6 +1419,43 @@ multipart: audio, duration, clientId, radioSetIds=id1,id2,id3</code></pre>
       <a href="mailto:info@projectseven.us">info@projectseven.us</a>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      var invite = window.SF_DISCORD && window.SF_DISCORD.invite;
+      if (!invite) return;
+      document.querySelectorAll('[id^="discord-"]').forEach(function(el) {
+        el.href = invite;
+      });
+    })();
+  </script>
+
+  <script>
+    (async function() {
+      var container = document.getElementById('hero-incidents');
+      var row = document.getElementById('incidents-row');
+      try {
+        var res = await fetch('https://p7hub.projectseven.us/api/v1/public/incidents');
+        if (!res.ok) throw new Error(String(res.status));
+        var incidents = await res.json();
+        if (!incidents || incidents.length === 0) { container.classList.remove('is-visible'); return; }
+        row.innerHTML = incidents.map(function(inc) {
+          var pri = inc.priority || 'normal';
+          var href = inc.playerUrl || '#';
+          var label = inc.title || 'Untitled';
+          var type = inc.type || '';
+          return '<a class="incident-pill" href="' + href + '" target="_blank" rel="noopener noreferrer">' +
+            '<span class="pri-dot pri-' + pri + '"></span>' +
+            '<span>' + label + '</span>' +
+            (type ? '<span class="inc-type">' + type + '</span>' : '') +
+            '</a>';
+        }).join('');
+        container.classList.add('is-visible');
+      } catch (e) {
+        container.classList.remove('is-visible');
+      }
+    })();
+  </script>
 
   <script type="module">
     const RELEASES_REPO = 'CptPlastic/signalforge.org';
