@@ -42,7 +42,6 @@
       '<a href="join.html"' + activeAttr('join') + '>Join the Hub</a>' +
       '<a href="' + home('#recorder') + '">Install CLI</a>' +
       '<a href="mobile.html"' + activeAttr('mobile') + '>SignalForgeHub</a>' +
-      '<a href="' + (window.SF_DISCORD && window.SF_DISCORD.invite ? window.SF_DISCORD.invite : 'https://discord.gg/signalforge') + '" target="_blank" rel="noopener noreferrer">Discord</a>' +
       '</div></details>' +
       '<details class="nav-group"><summary>Operate</summary><div class="nav-panel">' +
       '<a href="' + home('#run') + '">Run Your Own Hub</a>' +
@@ -62,10 +61,11 @@
       '</div></details>' +
       '<a class="nav-direct" href="about.html"' + activeAttr('about') + '>About</a>' +
       '<a class="nav-direct" href="feedback.html"' + activeAttr('feedback') + '>Feedback</a>' +
-      '<a class="nav-direct" href="BRAND.md">Brand</a>' +
+      '<a class="nav-direct" href="brand.html"' + activeAttr('brand') + '>Brand</a>' +
       '<a class="nav-direct" href="' + home('#mission') + '">Mission</a>' +
       '<a class="nav-direct' + (pageId() === 'api' ? ' is-active' : '') + '" href="api.html">API</a>' +
       '<a class="nav-direct nav-hub-cta" href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Hub</a>' +
+      '<a class="nav-direct nav-discord-cta" href="' + (window.SF_DISCORD && window.SF_DISCORD.invite ? window.SF_DISCORD.invite : '#') + '" target="_blank" rel="noopener noreferrer">Discord</a>' +
       '</nav>' +
       MODE_BAR +
       '<button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile">Menu</button>' +
@@ -75,8 +75,7 @@
       '<a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>' +
       '<a href="join.html"' + activeAttr('join') + '>Join the Hub</a>' +
       '<a href="' + home('#recorder') + '">Install CLI</a>' +
-      '<a href="mobile.html"' + activeAttr('mobile') + '>SignalForgeHub</a>' +
-      '<a href="' + (window.SF_DISCORD && window.SF_DISCORD.invite ? window.SF_DISCORD.invite : 'https://discord.gg/signalforge') + '" target="_blank" rel="noopener noreferrer">Discord</a></div>' +
+      '<a href="mobile.html"' + activeAttr('mobile') + '>SignalForgeHub</a></div>' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">Operate</div>' +
       '<a href="' + home('#run') + '">Run Your Own Hub</a>' +
       '<a href="' + home('#retention') + '">Call Retention</a>' +
@@ -95,10 +94,11 @@
       '<div class="nav-mobile-section"><div class="nav-mobile-title">More</div>' +
       '<a href="about.html"' + activeAttr('about') + '>About</a>' +
       '<a href="feedback.html"' + activeAttr('feedback') + '>Feedback</a>' +
-      '<a href="BRAND.md">Brand Guide</a>' +
+      '<a href="brand.html"' + activeAttr('brand') + '>Brand Guide</a>' +
       '<a href="DISPLAY-MODES.md">Display Modes</a>' +
       '<a href="' + home('#mission') + '">Mission</a>' +
-      '<a href="api.html"' + activeAttr('api') + '>API Docs</a></div>' +
+      '<a href="api.html"' + activeAttr('api') + '>API Docs</a>' +
+      '<a href="' + (window.SF_DISCORD && window.SF_DISCORD.invite ? window.SF_DISCORD.invite : '#') + '" target="_blank" rel="noopener noreferrer">Discord</a></div>' +
       '</div></header>';
 
     var navToggle = document.getElementById('nav-toggle');

@@ -49,7 +49,7 @@ Operator-facing **DARK / NITE / NVG / LIGHT** palettes for field use (SchedKit-s
 
 ## Typography
 
-- **Face:** JetBrains Mono (web), system monospace (mobile/PWA)
+- **Face:** Fira Code (web), system monospace (mobile/PWA)
 - **Style:** ALL CAPS for chrome; `letter-spacing: 0.08em–0.15em` on labels
 - **Weights:** 400 body, 700 headers / nav brand
 

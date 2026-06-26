@@ -5,7 +5,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+  font-family: 'Fira Code', ui-monospace, 'Courier New', monospace;
   min-height: 100vh;
   line-height: 1.6;
 }

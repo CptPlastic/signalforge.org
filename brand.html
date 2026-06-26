@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SignalForge brand guidelines — amber phosphor on black glass. Logo, palette, typography, and design system." />
+  <title>Brand — SignalForge</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&amp;display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      try {
+        var m = localStorage.getItem('sf-display-mode');
+        if (m === 'dark' || m === 'nite' || m === 'nvg' || m === 'light') {
+          document.documentElement.setAttribute('data-sf-mode', m);
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/display-modes.css" />
+  <link rel="stylesheet" href="assets/site-base.css" />
+  <link rel="stylesheet" href="assets/site-nav.css" />
+  <script src="assets/discord-config.js"></script>
+  <script src="assets/site-nav.js" defer></script>
+  <script src="assets/display-modes.js" defer></script>
+  <style>
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(2.5rem, 6vh, 4rem) 1.5rem 3rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-logo {
+      width: min(110px, 28vw);
+      height: auto;
+      margin: 0 auto 1.25rem;
+      opacity: 0.96;
+      filter: drop-shadow(0 0 20px var(--sf-logo-glow-white)) drop-shadow(0 0 32px var(--sf-logo-glow-accent));
+    }
+    h1 {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--heading);
+      margin-bottom: 0.35rem;
+    }
+    .hero-sub {
+      color: var(--amber);
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      max-width: 40rem;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--heading);
+      margin-bottom: 1rem;
+    }
+    p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.85rem; line-height: 1.65; }
+    p strong { color: var(--text); }
+    section a { color: var(--amber); text-decoration: none; }
+    section a:hover { text-decoration: underline; }
+    .callout {
+      border-left: 3px solid var(--amber);
+      padding: 1rem 1.25rem;
+      background: var(--bg2);
+      margin: 1.25rem 0;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+    .hub-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 1rem;
+    }
+    .hub-card h3 {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.45rem;
+    }
+    .hub-card p { font-size: 0.8rem; margin-bottom: 0; }
+    .surface-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.25rem;
+      font-size: 0.8rem;
+    }
+    .surface-table th,
+    .surface-table td {
+      border: 1px solid var(--border);
+      padding: 0.65rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .surface-table th {
+      background: var(--bg2);
+      color: var(--amber);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .surface-table td { color: var(--muted); }
+    .surface-table code { color: var(--text); }
+    .brand-swatches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    .swatch {
+      flex: 1 1 130px;
+      border: 1px solid var(--border);
+      padding: 0.85rem;
+      background: var(--bg2);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .swatch-chip {
+      width: 100%;
+      height: 2.5rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid var(--border);
+    }
+    .swatch-name {
+      display: block;
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .swatch-code {
+      display: block;
+      font-size: 0.7rem;
+    }
+    .code-block {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.8rem;
+      line-height: 1.55;
+      overflow-x: auto;
+    }
+    .code-block code { color: var(--text); }
+    .dont-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .dont-list li {
+      padding: 0.5rem 0.75rem;
+      margin-bottom: 0.4rem;
+      border-left: 3px solid var(--muted);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .dont-list li::before {
+      content: "✗ ";
+      color: var(--muted);
+    }
+    .ascii-box {
+      font-size: 0.78rem;
+      line-height: 1.4;
+      color: var(--amber);
+      margin: 1rem 0;
+    }
+    footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem 3rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+    footer a { color: var(--amber); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-brand { color: var(--amber); font-weight: 700; margin-bottom: 0.4rem; font-size: 0.85rem; }
+  </style>
+</head>
+<body data-sf-page="brand">
+  <div id="sf-site-nav"></div>
+
+  <div class="hero">
+    <svg class="hero-logo sf-logo-mark" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="SignalForge">
+      <path class="logo-mast" d="M60,15L60,88" stroke-width="2.5"/>
+      <path class="logo-mast" d="M60,36L38,55" stroke-width="2"/>
+      <path class="logo-mast" d="M60,36L82,55" stroke-width="2"/>
+      <path class="logo-mast" d="M60,55L22,80" stroke-width="2"/>
+      <path class="logo-mast" d="M60,55L98,80" stroke-width="2"/>
+      <path class="logo-mast" d="M22,80L98,80" stroke-width="1.5"/>
+      <g transform="translate(0,8)"><path class="logo-signal" d="M46,28C55.333,18.667 64.667,18.667 74,28" stroke-width="2"/></g>
+      <g transform="translate(0,2)"><path class="logo-signal" d="M46,28C55.333,18.667 64.667,18.667 74,28" stroke-width="2"/></g>
+      <g transform="translate(0,-4)"><path class="logo-signal" d="M46,28C55.333,18.667 64.667,18.667 74,28" stroke-width="2"/></g>
+    </svg>
+    <h1>SignalForge Brand</h1>
+    <div class="hero-sub">Amber Phosphor on Black Glass</div>
+    <p class="hero-desc">
+      Retro terminal aesthetic: monospace type, ASCII borders, minimal chrome.
+      The mark is a radio mast with three beacon arcs — white structure, amber signal emission.
+    </p>
+  </div>
+
+  <section id="palette">
+    <div class="section-label">// palette</div>
+    <h2>Core Colors</h2>
+    <p>
+      All SignalForge surfaces share a neutral base. The marketing site and mobile app use
+      <strong>amber</strong> accent; the hub PWA uses a warmer <strong>hub amber</strong>
+      so operators can tell the console from the native app at a glance.
+    </p>
+    <div class="brand-swatches">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#0a0a0a;"></div>
+        <span class="swatch-name">Console black</span>
+        <span class="swatch-code">--bg &mdash; #0a0a0a</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#111111;"></div>
+        <span class="swatch-name">Raised panel</span>
+        <span class="swatch-code">--bg2 &mdash; #111111</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#c9c9c9;"></div>
+        <span class="swatch-name">Body copy</span>
+        <span class="swatch-code">--text &mdash; #c9c9c9</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#555555;"></div>
+        <span class="swatch-name">Muted</span>
+        <span class="swatch-code">--muted &mdash; #555555</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#1f1f1f;"></div>
+        <span class="swatch-name">Border</span>
+        <span class="swatch-code">--border &mdash; #1f1f1f</span>
+      </div>
+    </div>
+    <div class="brand-swatches">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#ffc700;"></div>
+        <span class="swatch-name">Signal amber</span>
+        <span class="swatch-code">--amber &mdash; #ffc700</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#997700;"></div>
+        <span class="swatch-name">Amber dim</span>
+        <span class="swatch-code">--amber-dim &mdash; #997700</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#ffda47;"></div>
+        <span class="swatch-name">Amber bright</span>
+        <span class="swatch-code">--amber-bright &mdash; #ffda47</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#ffaa00;"></div>
+        <span class="swatch-name">Hub amber (PWA)</span>
+        <span class="swatch-code">--hub-amber &mdash; #ffaa00</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="logos">
+    <div class="section-label">// logo</div>
+    <h2>Mast Mark</h2>
+    <p>
+      The mark is a radio mast with three beacon arcs, guy wires, and base line.
+      Always rendered with white structure and amber arcs on a dark field.
+    </p>
+    <div class="hub-grid">
+      <div class="hub-card" style="text-align:center;">
+        <h3>Mark (site)</h3>
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:80px;height:auto;margin:0.5rem auto;display:block;">
+          <path d="M60,15L60,88" stroke="#ffffff" stroke-width="2.5"/>
+          <path d="M60,36L38,55" stroke="#ffffff" stroke-width="2"/>
+          <path d="M60,36L82,55" stroke="#ffffff" stroke-width="2"/>
+          <path d="M60,55L22,80" stroke="#ffffff" stroke-width="2"/>
+          <path d="M60,55L98,80" stroke="#ffffff" stroke-width="2"/>
+          <path d="M22,80L98,80" stroke="#ffffff" stroke-width="1.5"/>
+          <g transform="translate(0,8)"><path d="M46,28C55.333,18.667 64.667,18.667 74,28" stroke="#ffc700" stroke-width="2"/></g>
+          <g transform="translate(0,2)"><path d="M46,28C55.333,18.667 64.667,18.667 74,28" stroke="#ffc700" stroke-width="2"/></g>
+          <g transform="translate(0,-4)"><path d="M46,28C55.333,18.667 64.667,18.667 74,28" stroke="#ffc700" stroke-width="2"/></g>
+        </svg>
+        <p>White mast + amber arcs on <code>#0a0a0a</code></p>
+      </div>
+      <div class="hub-card" style="text-align:center;">
+        <h3>App icon</h3>
+        <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" style="width:80px;height:auto;margin:0.5rem auto;display:block;">
+          <rect width="256" height="256" fill="#0a0a0a"/>
+          <g transform="translate(48,48) scale(1.333)">
+            <line x1="60" y1="15" x2="60" y2="88" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="60" y1="36" x2="38" y2="55" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="60" y1="36" x2="82" y2="55" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="60" y1="55" x2="22" y2="80" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="60" y1="55" x2="98" y2="80" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="22" y1="80" x2="98" y2="80" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M46,36 C55.333,26.667 64.667,26.667 74,36" fill="none" stroke="#ffc700" stroke-width="2" stroke-linecap="round"/>
+            <path d="M46,30 C55.333,20.667 64.667,20.667 74,30" fill="none" stroke="#ffc700" stroke-width="2" stroke-linecap="round"/>
+            <path d="M46,24 C55.333,14.667 64.667,14.667 74,24" fill="none" stroke="#ffc700" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <p><code>icon.svg</code> &mdash; 256x256 with field</p>
+      </div>
+      <div class="hub-card" style="text-align:center;">
+        <h3>Hub PWA icon</h3>
+        <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" style="width:80px;height:auto;margin:0.5rem auto;display:block;">
+          <rect width="256" height="256" fill="#0a0a0a"/>
+          <g transform="translate(48,48) scale(1.333)">
+            <line x1="60" y1="15" x2="60" y2="88" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="60" y1="36" x2="38" y2="55" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="60" y1="36" x2="82" y2="55" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="60" y1="55" x2="22" y2="80" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="60" y1="55" x2="98" y2="80" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="22" y1="80" x2="98" y2="80" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M46,36 C55.333,26.667 64.667,26.667 74,36" fill="none" stroke="#ffaa00" stroke-width="2" stroke-linecap="round"/>
+            <path d="M46,30 C55.333,20.667 64.667,20.667 74,30" fill="none" stroke="#ffaa00" stroke-width="2" stroke-linecap="round"/>
+            <path d="M46,24 C55.333,14.667 64.667,14.667 74,24" fill="none" stroke="#ffaa00" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <p>Hub variant &mdash; warmer <code>#ffaa00</code> arcs</p>
+      </div>
+    </div>
+    <table class="surface-table" aria-label="Logo mark element colors">
+      <thead>
+        <tr>
+          <th scope="col">Element</th>
+          <th scope="col">Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Mast, arms, base</td><td><code>#ffffff</code> &mdash; always white on dark field</td></tr>
+        <tr><td>Beacon arcs (site / mobile)</td><td><code>#ffc700</code> &mdash; signal amber</td></tr>
+        <tr><td>Beacon arcs (hub PWA)</td><td><code>#ffaa00</code> &mdash; hub variant</td></tr>
+        <tr><td>App icon field</td><td><code>#0a0a0a</code> &mdash; square, no gradient</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1rem;">
+      Source vectors: <a href="LOGO.svg">LOGO.svg</a> (transparent),
+      <a href="icon.svg">icon.svg</a> (with field).
+    </p>
+  </section>
+
+  <section id="typography">
+    <div class="section-label">// type</div>
+    <h2>Typography</h2>
+    <p>
+      <strong>Fira Code</strong> is the primary typeface across all SignalForge surfaces.
+      Chrome uses ALL CAPS with generous letter-spacing. Body copy stays at normal case
+      with standard monospace spacing.
+    </p>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>Face</h3>
+        <p>Fira Code (web), system monospace (mobile / PWA)</p>
+      </div>
+      <div class="hub-card">
+        <h3>Weights</h3>
+        <p>400 body, 700 headers / nav brand</p>
+      </div>
+      <div class="hub-card">
+        <h3>Style</h3>
+        <p>ALL CAPS for chrome; <code>letter-spacing: 0.08em–0.15em</code> on labels</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ui-patterns">
+    <div class="section-label">// patterns</div>
+    <h2>UI Patterns</h2>
+    <p>Terminal chrome with ASCII-box section headers, amber accents, and minimal decoration.</p>
+    <div class="ascii-box">
+      ┌─────────────────────────────┐<br />
+      │  SECTION TITLE &mdash; amber   │<br />
+      ├─────────────────────────────┤<br />
+      │  body copy in --text        │<br />
+      └─────────────────────────────┘
+    </div>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>Section headers</h3>
+        <p><code>--amber</code> (or <code>--hub-amber</code> in the PWA)</p>
+      </div>
+      <div class="hub-card">
+        <h3>Borders</h3>
+        <p><code>1px solid var(--border)</code></p>
+      </div>
+      <div class="hub-card">
+        <h3>Active / selected</h3>
+        <p><code>--amber</code> border + <code>rgba(255,199,0,0.10)</code> fill</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2rem;">PTT states</h3>
+    <table class="surface-table" aria-label="Push-to-talk state colors">
+      <thead>
+        <tr>
+          <th scope="col">State</th>
+          <th scope="col">Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Idle / ready</td><td><code>--amber-bright</code> border</td></tr>
+        <tr><td>Recording / TX</td><td><code>--error</code> (<code>#ff4444</code>)</td></tr>
+        <tr><td>Uploading</td><td><code>--muted</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout" style="margin-top:1.25rem;">
+      Dispatch badge: <strong><code>◎ DISPATCH</code></strong> uses <code>--amber-bright</code> (mobile) &mdash;
+      high-visibility without TX red.
+    </div>
+  </section>
+
+  <section id="do-not">
+    <div class="section-label">// avoid</div>
+    <h2>Do Not</h2>
+    <ul class="dont-list">
+      <li>Reintroduce <code>#00ff41</code> matrix green as primary (legacy; removed in amber pivot)</li>
+      <li>Use cyan (<code>#3dcfcf</code>) &mdash; old marketing palette, deprecated</li>
+      <li>Mix green-tinted surfaces (<code>#0a0f0a</code>, <code>#1f3a26</code>)</li>
+      <li>Put text directly on pure <code>#ffc700</code> &mdash; use amber for strokes, labels, and accents only</li>
+    </ul>
+  </section>
+
+  <section id="implementation">
+    <div class="section-label">// map</div>
+    <h2>Implementation Map</h2>
+    <table class="surface-table" aria-label="Brand token source locations">
+      <thead>
+        <tr>
+          <th scope="col">Repo</th>
+          <th scope="col">Token source</th>
+          <th scope="col">Icons</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--text);">signalforge.org</strong></td>
+          <td><code>:root</code> in each <code>.html</code></td>
+          <td><a href="icon.svg">icon.svg</a>, <a href="LOGO.svg">LOGO.svg</a></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text);">Discord</strong></td>
+          <td><a href="discord/SERVER.md">discord/SERVER.md</a></td>
+          <td><code>discord/assets/icon-512.png</code></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text);">signalforge-mobile</strong></td>
+          <td><code>src/theme.ts</code></td>
+          <td><code>assets/source-icon*.svg</code> → PNG</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text);">p7-scanner</strong></td>
+          <td><code>client/tailwind.config.ts</code> + <code>index.css</code></td>
+          <td><code>client/public/pwa/icon.svg</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="display-modes">
+    <div class="section-label">// display</div>
+    <h2>Display Modes</h2>
+    <p>
+      Operator-facing <strong>DARK / NITE / NVG / LIGHT</strong> palettes for field use.
+      The tactical display cycle never passes through full brightness, so it won't flash-blind
+      NVG or night-adapted eyes mid-op.
+    </p>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3>◑ DARK</h3>
+        <p>Default amber phosphor on CRT black — console monitoring and PTT.</p>
+      </div>
+      <div class="hub-card">
+        <h3>▌ NITE</h3>
+        <p>Dim red palette for naked-eye dark adaptation between screen checks.</p>
+      </div>
+      <div class="hub-card">
+        <h3>◈ NVG</h3>
+        <p>Ultra-low luminance blue-grey — minimum software glow for Gen III tubes.</p>
+      </div>
+      <div class="hub-card">
+        <h3>☀ LIGHT</h3>
+        <p>Daylight paper terminal — click <strong>☀ LIGHT</strong> in the nav.</p>
+      </div>
+    </div>
+    <p style="margin-top:1rem;">
+      Full reference: <a href="DISPLAY-MODES.md">DISPLAY-MODES.md</a> for palette tokens and
+      per-product implementation notes.
+    </p>
+  </section>
+
+  <footer>
+    <div class="footer-brand">SignalForge</div>
+    <div>Yukon, Oklahoma &mdash; projectseven co ltd</div>
+    <div style="margin-top:0.5rem;">
+      <a href="mailto:info@projectseven.us">info@projectseven.us</a>
+    </div>
+  </footer>
+</body>
+</html>
