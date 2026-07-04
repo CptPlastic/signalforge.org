@@ -26,6 +26,10 @@
     return pageId() === id ? ' class="is-active"' : '';
   }
 
+  function discordHref() {
+    return window.SF_DISCORD && window.SF_DISCORD.invite ? window.SF_DISCORD.invite : '#';
+  }
+
   function renderNav() {
     var mount = document.getElementById('sf-site-nav');
     if (!mount) return;
@@ -60,12 +64,8 @@
       '<a href="' + home('#network') + '">The Vision</a>' +
       '</div></details>' +
       '<a class="nav-direct" href="about.html"' + activeAttr('about') + '>About</a>' +
-      '<a class="nav-direct" href="feedback.html"' + activeAttr('feedback') + '>Feedback</a>' +
-      '<a class="nav-direct" href="brand.html"' + activeAttr('brand') + '>Brand</a>' +
-      '<a class="nav-direct" href="' + home('#mission') + '">Mission</a>' +
-      '<a class="nav-direct' + (pageId() === 'api' ? ' is-active' : '') + '" href="api.html">API</a>' +
       '<a class="nav-direct nav-hub-cta" href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Hub</a>' +
-      '<a class="nav-direct nav-discord-cta" href="' + (window.SF_DISCORD && window.SF_DISCORD.invite ? window.SF_DISCORD.invite : '#') + '" target="_blank" rel="noopener noreferrer">Discord</a>' +
+      '<a class="nav-direct nav-discord-cta" href="' + discordHref() + '" target="_blank" rel="noopener noreferrer">Discord</a>' +
       '</nav>' +
       MODE_BAR +
       '<button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile">Menu</button>' +
@@ -90,15 +90,12 @@
       '<a href="register-hub.html"' + activeAttr('register-hub') + '>Register Hub</a>' +
       '<a href="' + home('#roadmap') + '">Roadmap</a>' +
       '<a href="' + home('#network') + '">The Vision</a></div>' +
+      '<div class="nav-mobile-section"><div class="nav-mobile-title">About</div>' +
+      '<a href="about.html"' + activeAttr('about') + '>About SignalForge</a></div>' +
+      '<div class="nav-mobile-section nav-mobile-cta">' +
+      '<a class="nav-mobile-hub" href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Open Hub</a>' +
+      '<a class="nav-mobile-discord" href="' + discordHref() + '" target="_blank" rel="noopener noreferrer">Discord</a></div>' +
       '<div class="nav-mobile-section"><div class="nav-mobile-title">Display</div>' + MODE_BAR + '</div>' +
-      '<div class="nav-mobile-section"><div class="nav-mobile-title">More</div>' +
-      '<a href="about.html"' + activeAttr('about') + '>About</a>' +
-      '<a href="feedback.html"' + activeAttr('feedback') + '>Feedback</a>' +
-      '<a href="brand.html"' + activeAttr('brand') + '>Brand Guide</a>' +
-      '<a href="DISPLAY-MODES.md">Display Modes</a>' +
-      '<a href="' + home('#mission') + '">Mission</a>' +
-      '<a href="api.html"' + activeAttr('api') + '>API Docs</a>' +
-      '<a href="' + (window.SF_DISCORD && window.SF_DISCORD.invite ? window.SF_DISCORD.invite : '#') + '" target="_blank" rel="noopener noreferrer">Discord</a></div>' +
       '</div></header>';
 
     var navToggle = document.getElementById('nav-toggle');
@@ -136,9 +133,67 @@
     document.dispatchEvent(new Event('sf-nav-mounted'));
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderNav);
-  } else {
+  function footerColumn(title, linksHtml) {
+    return (
+      '<div class="site-footer-col">' +
+      '<div class="site-footer-col-title">' + title + '</div>' +
+      '<nav class="site-footer-col-links" aria-label="' + title + '">' +
+      linksHtml +
+      '</nav></div>'
+    );
+  }
+
+  function renderFooter() {
+    var mount = document.getElementById('sf-site-footer');
+    if (!mount) return;
+
+    var operateLinks =
+      '<a href="' + home('#run') + '">Run Your Own Hub</a>' +
+      '<a href="' + home('#retention') + '">Call Retention</a>' +
+      '<a href="' + home('#offgrid') + '">Off-Grid Cells</a>' +
+      '<a href="source.html"' + activeAttr('source') + '>Source &amp; Build Notes</a>' +
+      '<a href="' + home('#transcription') + '">Transcription</a>' +
+      '<a href="' + home('#ptt') + '">Push-to-Talk</a>' +
+      '<a href="' + home('#display-modes') + '">Display Modes</a>' +
+      '<a href="api.html"' + activeAttr('api') + '>API Docs</a>';
+
+    var networkLinks =
+      '<a href="' + home('#signalhub') + '">SignalHub Federation</a>' +
+      '<a href="' + home('#directory') + '">Directory &amp; Trust</a>' +
+      '<a href="register-hub.html"' + activeAttr('register-hub') + '>Register Hub</a>' +
+      '<a href="' + home('#roadmap') + '">Roadmap</a>' +
+      '<a href="' + home('#network') + '">The Vision</a>';
+
+    var communityLinks =
+      '<a href="join.html"' + activeAttr('join') + '>Join the Hub</a>' +
+      '<a href="https://p7hub.projectseven.us/" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>' +
+      '<a href="feedback.html"' + activeAttr('feedback') + '>Feedback</a>' +
+      '<a href="brand.html"' + activeAttr('brand') + '>Brand Guide</a>' +
+      '<a href="' + home('#mission') + '">Mission</a>' +
+      '<a href="' + discordHref() + '" target="_blank" rel="noopener noreferrer">Discord</a>';
+
+    mount.innerHTML =
+      '<footer class="site-footer">' +
+      '<div class="site-footer-inner">' +
+      '<div class="site-footer-brand">SignalForge</div>' +
+      '<div class="site-footer-grid">' +
+      footerColumn('Operate', operateLinks) +
+      footerColumn('Network', networkLinks) +
+      footerColumn('Community', communityLinks) +
+      '</div>' +
+      '<div class="site-footer-meta">Yukon, Oklahoma &mdash; projectseven co ltd</div>' +
+      '<div class="site-footer-meta"><a href="mailto:info@projectseven.us">info@projectseven.us</a></div>' +
+      '</div></footer>';
+  }
+
+  function init() {
     renderNav();
+    renderFooter();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();
