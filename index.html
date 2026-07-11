@@ -229,61 +229,8 @@
     }
     .hero-story-link:hover { color: var(--amber); }
 
-    /* ── HERO INCIDENTS ── */
-    .hero-incidents {
-      margin-top: 0.75rem;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-      z-index: 6;
-      position: relative;
-    }
-    .hero-incidents.is-visible { display: flex; }
-    .incidents-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      justify-content: center;
-    }
-    .incident-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.22rem 0.6rem;
-      border: 1px solid var(--border);
-      background: var(--bg2);
-      color: var(--muted);
-      font-size: 0.68rem;
-      letter-spacing: 0.04em;
-      text-decoration: none;
-      line-height: 1.4;
-      transition: border-color 0.15s, color 0.15s;
-    }
-    .incident-pill:hover {
-      border-color: var(--amber-dim);
-      color: var(--text);
-    }
-    .incident-pill .pri-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .incident-pill .pri-urgent { background: #ff4444; box-shadow: 0 0 5px #ff4444; }
-    .incident-pill .pri-high   { background: #ff8800; box-shadow: 0 0 5px #ff8800; }
-    .incident-pill .pri-normal { background: var(--amber-dim); }
-    .incident-pill .pri-low    { background: var(--muted); }
-    .incident-pill .inc-type {
-      font-size: 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      opacity: 0.55;
-    }
-    .hero-incidents .section-label { margin-bottom: 0; }
-
-    /* ── LIVE PLAYER (embedded hub share) ── */
-    .live-section {
+    /* ── ACTIVE INCIDENTS (hosted hub) ── */
+    .incidents-section {
       max-width: none;
       margin: 0;
       padding: clamp(2rem, 5vh, 3.5rem) 1.5rem clamp(2.5rem, 6vh, 4rem);
@@ -292,17 +239,17 @@
         linear-gradient(180deg, transparent 0%, var(--bg2) 18%, var(--bg) 100%);
       scroll-margin-top: 4rem;
     }
-    .live-section-inner {
-      max-width: 560px;
+    .incidents-section-inner {
+      max-width: 640px;
       margin: 0 auto;
       text-align: center;
     }
-    .live-section .section-label { margin-bottom: 0.5rem; }
-    .live-section h2 {
+    .incidents-section .section-label { margin-bottom: 0.5rem; }
+    .incidents-section h2 {
       font-size: clamp(1.1rem, 3.5vw, 1.55rem);
       margin-bottom: 0.65rem;
     }
-    .live-section .live-lead {
+    .incidents-section .incidents-lead {
       font-size: 0.82rem;
       color: var(--muted);
       line-height: 1.65;
@@ -311,71 +258,95 @@
       margin-left: auto;
       margin-right: auto;
     }
-    .live-player-shell {
-      position: relative;
-      width: min(520px, 100%);
-      margin: 0 auto;
-      aspect-ratio: 1 / 1;
-      border: 1px solid var(--border);
-      background: var(--bg2);
-      box-shadow:
-        0 0 0 1px var(--sf-glow-mid),
-        0 0 28px 4px var(--sf-glow-strong),
-        0 12px 40px rgba(0, 0, 0, 0.35);
-    }
-    .live-player-shell::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      pointer-events: none;
-      border: 1px solid transparent;
-      background: linear-gradient(135deg, var(--sf-glow-mid), transparent 45%, var(--sf-glow-strong)) border-box;
-      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0.55;
-    }
-    .live-player-frame {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      background: #0a0a0a;
-    }
-    .live-player-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-      justify-content: center;
-      align-items: center;
-      margin-top: 1rem;
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
+    .incidents-status {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
+      margin-bottom: 1rem;
     }
-    .live-player-meta .live-dot {
+    .incidents-status .status-dot {
+      display: inline-block;
       width: 6px;
       height: 6px;
       border-radius: 50%;
       background: var(--amber);
       box-shadow: 0 0 8px var(--sf-glow-strong);
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+    .incidents-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      text-align: left;
+    }
+    .incident-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.55rem 0.85rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    a.incident-row:hover {
+      border-color: var(--amber-dim);
+      background: color-mix(in srgb, var(--bg2) 85%, var(--amber) 15%);
+    }
+    .incident-row .pri-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
       flex-shrink: 0;
     }
-    .live-player-actions {
-      margin-top: 1.1rem;
+    .incident-row .pri-urgent { background: #ff4444; box-shadow: 0 0 6px #ff4444; }
+    .incident-row .pri-high   { background: #ff8800; box-shadow: 0 0 6px #ff8800; }
+    .incident-row .pri-normal { background: var(--amber-dim); }
+    .incident-row .pri-low    { background: var(--muted); }
+    .incident-row .inc-body {
+      flex: 1 1 12rem;
+      min-width: 0;
+    }
+    .incident-row .inc-title {
+      font-size: 0.88rem;
+      color: var(--amber);
+      letter-spacing: 0.03em;
+      line-height: 1.35;
+    }
+    .incident-row .inc-meta {
+      margin-top: 0.2rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .incident-row .inc-action {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      white-space: nowrap;
+    }
+    a.incident-row:hover .inc-action { color: var(--amber); }
+    .incidents-empty {
+      padding: 1.5rem 1rem;
+      border: 1px dashed var(--border);
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      line-height: 1.55;
+    }
+    .incidents-actions {
+      margin-top: 1.25rem;
       display: flex;
       flex-wrap: wrap;
       gap: 0.55rem;
       justify-content: center;
       align-items: center;
-    }
-    .live-hint {
-      margin-top: 0.85rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      color: var(--amber-dim);
     }
 
     .btn {
@@ -672,51 +643,29 @@
         <a href="#recorder" class="btn btn-ghost">Install CLI</a>
       </div>
       <p class="hero-story-links">
-        <a href="#live" class="hero-story-link">Listen live ↓</a>
+        <a href="#incidents" class="hero-story-link">Active incidents ↓</a>
         <span aria-hidden="true"> · </span>
         <a href="#mission" class="hero-story-link">Why we're building this ↓</a>
       </p>
-
-      <div class="hero-incidents" id="hero-incidents" aria-live="polite">
-        <div class="section-label">// active incidents</div>
-        <div class="incidents-row" id="incidents-row"></div>
-      </div>
     </div>
   </div>
 
-  <!-- LIVE PLAYER — hosted hub public share -->
-  <section id="live" class="live-section" aria-labelledby="live-heading">
-    <div class="live-section-inner">
-      <div class="section-label">// live</div>
-      <h2 id="live-heading">Yukon Cell — Live Monitor</h2>
-      <p class="live-lead">
-        Real traffic from the hosted SignalForge hub. Tap <strong>LIVE ON</strong> in the console below
-        to hear calls as they land — same embeddable player operators share from any radio set.
+  <!-- ACTIVE INCIDENTS — hosted hub -->
+  <section id="incidents" class="incidents-section" aria-labelledby="incidents-heading">
+    <div class="incidents-section-inner">
+      <div class="section-label">// incidents</div>
+      <h2 id="incidents-heading">Active Incidents</h2>
+      <p class="incidents-lead">
+        Community incidents currently open on the hosted SignalForge hub. Open one to listen
+        when a public link is available, or jump into the hub console.
       </p>
-      <div class="live-player-shell">
-        <iframe
-          class="live-player-frame"
-          src="https://p7hub.projectseven.us/public/player/share_660c65e7922137ac53ed0167667e104299a25efa139b6d97d6c33bbf08c6f7cb"
-          title="SignalForge live public player — Yukon cell"
-          loading="lazy"
-          allow="autoplay"
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
-      </div>
-      <div class="live-player-meta" aria-hidden="true">
-        <span><span class="live-dot"></span> WebSocket feed</span>
-        <span>No login</span>
-        <span>Embeddable share link</span>
-      </div>
-      <p class="live-hint">Browsers require a click inside the player to start audio — use LIVE ON.</p>
-      <div class="live-player-actions">
-        <a
-          href="https://p7hub.projectseven.us/public/player/share_660c65e7922137ac53ed0167667e104299a25efa139b6d97d6c33bbf08c6f7cb"
-          class="btn btn-glow"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Open Full Player</a>
-        <a href="https://p7hub.projectseven.us/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Hosted Hub</a>
+      <p class="incidents-status" id="incidents-status" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span>Checking hub…
+      </p>
+      <div class="incidents-list" id="incidents-list" role="list"></div>
+      <div class="incidents-actions">
+        <a href="https://p7hub.projectseven.us/" class="btn btn-glow" target="_blank" rel="noopener noreferrer">Open Hosted Hub</a>
+        <a href="https://p7hub.projectseven.us/public/incidents" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Hub Incident Board</a>
       </div>
     </div>
   </section>
@@ -1426,27 +1375,72 @@ multipart: audio, duration, clientId, radioSetIds=id1,id2,id3</code></pre>
 
   <script>
     (async function() {
-      var container = document.getElementById('hero-incidents');
-      var row = document.getElementById('incidents-row');
+      var HUB = 'https://p7hub.projectseven.us';
+      var list = document.getElementById('incidents-list');
+      var status = document.getElementById('incidents-status');
+      if (!list || !status) return;
+
+      function escapeHtml(s) {
+        return String(s)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function formatOpened(ts) {
+        if (!ts) return '';
+        try {
+          return new Date(ts * 1000).toLocaleString(undefined, {
+            month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
+          });
+        } catch (e) {
+          return '';
+        }
+      }
+
+      function renderEmpty(message) {
+        list.innerHTML = '<div class="incidents-empty" role="status">' + escapeHtml(message) + '</div>';
+      }
+
       try {
-        var res = await fetch('https://p7hub.projectseven.us/api/v1/public/incidents');
+        var res = await fetch(HUB + '/api/v1/public/incidents');
         if (!res.ok) throw new Error(String(res.status));
         var incidents = await res.json();
-        if (!incidents || incidents.length === 0) { container.classList.remove('is-visible'); return; }
-        row.innerHTML = incidents.map(function(inc) {
-          var pri = inc.priority || 'normal';
-          var href = inc.playerUrl || '#';
-          var label = inc.title || 'Untitled';
-          var type = inc.type || '';
-          return '<a class="incident-pill" href="' + href + '" target="_blank" rel="noopener noreferrer">' +
-            '<span class="pri-dot pri-' + pri + '"></span>' +
-            '<span>' + label + '</span>' +
-            (type ? '<span class="inc-type">' + type + '</span>' : '') +
+        if (!Array.isArray(incidents) || incidents.length === 0) {
+          status.innerHTML = '<span class="status-dot" aria-hidden="true"></span>No active community incidents';
+          renderEmpty('No active incidents on the hosted hub right now. Check back during weather or ops activity, or open the hub console.');
+          return;
+        }
+
+        status.innerHTML =
+          '<span class="status-dot" aria-hidden="true"></span>' +
+          incidents.length + ' active incident' + (incidents.length === 1 ? '' : 's');
+
+        list.innerHTML = incidents.map(function(inc) {
+          var pri = escapeHtml(inc.priority || 'normal');
+          var title = escapeHtml(inc.title || 'Untitled incident');
+          var type = escapeHtml(inc.type || 'incident');
+          var opened = formatOpened(inc.openedAt);
+          var meta = type + (opened ? ' · opened ' + escapeHtml(opened) : '');
+          if (Array.isArray(inc.talkgroups) && inc.talkgroups.length) {
+            meta += ' · TG ' + escapeHtml(inc.talkgroups.join(', '));
+          }
+          var href = inc.playerUrl || (HUB + '/public/incidents');
+          var action = inc.playerUrl ? 'Listen' : 'View on hub';
+          return '<a class="incident-row" role="listitem" href="' + escapeHtml(href) +
+            '" target="_blank" rel="noopener noreferrer">' +
+            '<span class="pri-dot pri-' + pri + '" aria-hidden="true"></span>' +
+            '<span class="inc-body">' +
+              '<span class="inc-title">' + title + '</span>' +
+              '<span class="inc-meta">' + meta + '</span>' +
+            '</span>' +
+            '<span class="inc-action">' + action + ' →</span>' +
             '</a>';
         }).join('');
-        container.classList.add('is-visible');
       } catch (e) {
-        container.classList.remove('is-visible');
+        status.textContent = 'Hub unavailable';
+        renderEmpty('Could not reach the hosted hub. Try the hub console directly.');
       }
     })();
   </script>
